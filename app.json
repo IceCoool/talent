@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/Index/index",
+    "pages/Invite/index",
+    "pages/Mine/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#1C7DDF",
+    "navigationBarTitleText": "快来人",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "selectedColor": "#22bf86",
+    "list": [
+      {
+        "pagePath": "pages/Index/index",
+        "text": "首页",
+        "iconPath": "images/tabIcon1.png",
+        "selectedIconPath": "images/tabIcon1-on.png"
+      },
+      {
+        "pagePath": "pages/Invite/index",
+        "text": "邀约",
+        "iconPath": "images/tabIcon2.png",
+        "selectedIconPath": "images/tabIcon2-on.png"
+      },
+      {
+        "pagePath": "pages/Mine/index",
+        "text": "我的",
+        "iconPath": "images/tabIcon3.png",
+        "selectedIconPath": "images/tabIcon3-on.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-popup": "/@vant/weapp/popup/index"
+  },
+  "sitemapLocation": "sitemap.json"
+}

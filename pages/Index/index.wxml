@@ -1,0 +1,27 @@
+<view class="index-top posr">
+  <image class="top-bg" style="height: 358rpx;" src="/images/index-banner.png"></image>
+  <image class="top-bg" style="height: 428rpx;" src="/images/index-banner2.png"></image>
+  <view class="top-info">
+    <text style="margin-left: 28rpx;">在线即约即面 7天无理由换人</text>
+    <navigator class="find" url="">发布用人需求 找人才</navigator>
+    <view class="top-mod">
+      <navigator class="item" url="">
+          <image></image>
+          <text>岗位外包</text>
+          <text>岗位外包，随叫随到</text>
+      </navigator>
+      <navigator class="item" url="">
+          <text>岗位外包</text>
+          <text>岗位外包，随叫随到</text>
+      </navigator>
+      <navigator class="item" url="">
+          <text>岗位外包</text>
+          <text>岗位外包，随叫随到</text>
+      </navigator>
+      <navigator class="item" url="">
+          <text>岗位外包</text>
+          <text>岗位外包，随叫随到</text>
+      </navigator>
+    </view>
+  </view>
+</view>
