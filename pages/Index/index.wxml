@@ -1,27 +1,41 @@
 <view class="index-top posr">
   <image class="top-bg" style="height: 358rpx;" src="/images/index-banner.png"></image>
-  <image class="top-bg" style="height: 428rpx;" src="/images/index-banner2.png"></image>
+  <image class="top-bg" style="height: 428rpx;" src="/images/banner-bg.png"></image>
   <view class="top-info">
     <text style="margin-left: 28rpx;">在线即约即面 7天无理由换人</text>
     <navigator class="find" url="">发布用人需求 找人才</navigator>
     <view class="top-mod">
       <navigator class="item" url="">
-          <image></image>
+        <image src="/images/top-modbg1.png"></image>
+        <view>
           <text>岗位外包</text>
           <text>岗位外包，随叫随到</text>
+        </view>
       </navigator>
       <navigator class="item" url="">
-          <text>岗位外包</text>
-          <text>岗位外包，随叫随到</text>
+        <image src="/images/top-modbg2.png"></image>
+        <view>
+          <text>短期用工</text>
+          <text>短期支援，即用即停</text>
+        </view>
       </navigator>
       <navigator class="item" url="">
-          <text>岗位外包</text>
-          <text>岗位外包，随叫随到</text>
+        <image src="/images/top-modbg3.png"></image>
+        <view>
+          <text>财税优化</text>
+          <text>灵活招聘，即约即面</text>
+        </view>
       </navigator>
       <navigator class="item" url="">
-          <text>岗位外包</text>
-          <text>岗位外包，随叫随到</text>
+        <image src="/images/top-modbg4.png"></image>
+        <view>
+          <text>团队外包</text>
+          <text>整团招聘，极速开发</text>
+        </view>
       </navigator>
     </view>
   </view>
+</view>
+<view>
+
 </view>
