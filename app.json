@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/Index/index",
-    "pages/Invite/index",
+        "pages/Index/index",
+        "pages/Invite/index",
+
+
     "pages/Mine/index"
   ],
   "window": {
@@ -11,8 +13,9 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "borderStyle": "white",
-    "selectedColor": "#22bf86",
+    "borderStyle": "black",
+    "color": "999",
+    "selectedColor": "#333",
     "list": [
       {
         "pagePath": "pages/Index/index",

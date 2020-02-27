@@ -36,6 +36,195 @@
     </view>
   </view>
 </view>
-<view>
+<view class="container">
+  <!-- 我的需求 -->
+  <view class="request-mod">
+    <view class="req-title">
+      <text>我的需求</text>
+      <navigator class="rt" url="">
+        <text></text>
+        <text>管理需求</text>
+      </navigator>
+    </view>
+    <view class="Mtp20 req-list boxSh">
+      <view class="item">
+        <view class="job">
+          <text>UI设计师</text>
+          <text class="attr">岗位外包</text>
+          <text class="tj-num">2 顾问推荐</text>
+        </view>
+        <text class="Mtp20 addr">北京 | 不限行业</text>
+        <text class="Mtp20 time">2020年1月 至 2020年2月</text>
+      </view>
+      <view class="item">
+        <view class="job">
+          <text>UI设计师</text>
+          <text class="attr">岗位外包</text>
+          <text class="tj-num">2 顾问推荐</text>
+        </view>
+        <text class="Mtp20 addr">北京 | 不限行业</text>
+        <text class="Mtp20 time">2020年1月 至 2020年2月</text>
+      </view>
+    </view>
+  </view>
+  <!-- 广告位 -->
+  <view class="Mtp40 index-ad">
+    <image src="/images/index-ad.png"></image>
+  </view>
+  <!-- 推荐 最新 -->
+  <van-sticky offset-top="{{ 68 }}">
+    <view id="staff-filter" class="staff-filter">
+      <view class="lf">
+        <text class="on Mrt30">推荐</text>
+        <text>最新</text>
+        <text class="num"></text>
+      </view>
+      <view class="rt">
+        <view class="fil-type">
+          <text>排序</text>
+          <text class="icon"></text>
+        </view>
+        <view class="fil-type">
+          <text>北京</text>
+          <text class="icon"></text>
+        </view>
+        <view class="fil-type">
+          <text>筛选</text>
+          <text class="icon"></text>
+        </view>
+      </view>
+    </view>
+  </van-sticky>
 
+  <view class="staff-list">
+    <view class="boxSh item">
+      <text class="status">已邀</text>
+      <view class="posr">
+        <view class="head">
+          <image></image>
+        </view>
+        <text class="similar">88%匹配</text>
+      </view>
+      <view class="info">
+        <view class="mod">
+          <text class="name">王女士</text>
+          <text class="job">UI设计</text>
+          <text class="tj">顾问推荐</text>
+          <text class="price">15K</text>
+        </view>
+        <view class="Mtp20 mod">
+          <text>3年经验 | 本科 | 26岁</text>
+          <text class="rate">竞争力 4.5</text>
+          <text></text>
+        </view>
+        <view class="Mtp20 mod">
+          <text class="tag">Java工程师</text>
+          <text class="tag">架构师</text>
+          <text class="tag">项目管理</text>
+        </view>
+      </view>
+    </view>
+    <view class="boxSh item">
+      <text class="status">已邀</text>
+      <view class="posr">
+        <view class="head">
+          <image></image>
+        </view>
+        <text class="similar">88%匹配</text>
+      </view>
+      <view class="info">
+        <view class="mod">
+          <text class="name">王女士</text>
+          <text class="job">UI设计</text>
+          <text class="tj">顾问推荐</text>
+          <text class="price">15K</text>
+        </view>
+        <view class="Mtp20 mod">
+          <text>3年经验 | 本科 | 26岁</text>
+          <text class="rate">竞争力 4.5</text>
+          <text></text>
+        </view>
+        <view class="Mtp20 mod">
+          <text class="tag">Java工程师</text>
+          <text class="tag">架构师</text>
+          <text class="tag">项目管理</text>
+        </view>
+      </view>
+    </view>
+    <view class="boxSh item">
+      <text class="status">已邀</text>
+      <view class="posr">
+        <view class="head">
+          <image></image>
+        </view>
+        <text class="similar">88%匹配</text>
+      </view>
+      <view class="info">
+        <view class="mod">
+          <text class="name">王女士</text>
+          <text class="job">UI设计</text>
+          <text class="tj">顾问推荐</text>
+          <text class="price">15K</text>
+        </view>
+        <view class="Mtp20 mod">
+          <text>3年经验 | 本科 | 26岁</text>
+          <text class="rate">竞争力 4.5</text>
+          <text></text>
+        </view>
+        <view class="Mtp20 mod">
+          <text class="tag">Java工程师</text>
+          <text class="tag">架构师</text>
+          <text class="tag">项目管理</text>
+        </view>
+      </view>
+    </view>
+    <view class="boxSh item">
+      <text class="status">已邀</text>
+      <view class="posr">
+        <view class="head">
+          <image></image>
+        </view>
+        <text class="similar">88%匹配</text>
+      </view>
+      <view class="info">
+        <view class="mod">
+          <text class="name">王女士</text>
+          <text class="job">UI设计</text>
+          <text class="tj">顾问推荐</text>
+          <text class="price">15K</text>
+        </view>
+        <view class="Mtp20 mod">
+          <text>3年经验 | 本科 | 26岁</text>
+          <text class="rate">竞争力 4.5</text>
+          <text></text>
+        </view>
+        <view class="Mtp20 mod">
+          <text class="tag">Java工程师</text>
+          <text class="tag">架构师</text>
+          <text class="tag">项目管理</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 滚动显示发布需求 -->
+<view class="fixed-btn" id="fxq" wx:if="{{showFxq}}">
+  <navigator class="find">发布用人需求，找人才</navigator>
+</view>
+
+<!-- 滚动显示已发的需求 -->
+<view class="fixed-btn" id="my-xq" wx:if="{{showMyXq}}">
+  <navigator class="my-xq">
+    <image src="/images/my-xq.png"></image>
+    <view class="posa">
+      <view>
+        <text>我的需求</text>
+        <text></text>
+      </view>
+      <view class="btm">
+        <text>JAVA开发后台系统外包项目需求（5人）</text>
+        <text></text>
+      </view>
+    </view>
+  </navigator>
 </view>
