@@ -1,0 +1,2 @@
+/* pages/SelCity/selCity.wxss */
+@import './filter.wxss';

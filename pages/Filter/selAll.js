@@ -1,13 +1,11 @@
-// page/index/index.js
+// pages/Filter/selAll.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    staffFilterTop: Number,
-    showFxq: false,
-    showMyXq: false
+
   },
 
   /**
@@ -16,39 +14,19 @@ Page({
   onLoad: function(options) {
 
   },
-
+  onChange(event) {
+    this.setData({
+      sortValue: event.detail
+    });
+    console.log(this.data.sortValue)
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    wx.createSelectorQuery().select('#staff-filter').boundingClientRect().exec((res) => {
-      this.setData({
-        staffFilterTop: res[0].top
-      })
-    })
+
   },
-  // 页面滚动事件
-  onPageScroll: function(e) {
-    const staffFilterTop = this.data.staffFilterTop
-    if (e.scrollTop >= staffFilterTop - 68) {
-      this.setData({
-        showFxq: true
-      })
-    } else {
-      this.setData({
-        showFxq: false
-      })
-    }
-    // if (e.scrollTop >= staffFilterTop - 104) {
-    //   this.setData({
-    //     showMyXq: true
-    //   })
-    // } else {
-    //   this.setData({
-    //     showMyXq: false
-    //   })
-    // }
-  },
+
   /**
    * 生命周期函数--监听页面显示
    */

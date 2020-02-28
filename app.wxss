@@ -22,6 +22,7 @@ image {
 .container{
   padding: 0 20rpx 10rpx;
 }
+.input-placeholder{color: #CCCCCC;font-size: 34rpx;font-weight: normal;}
 .posr{position: relative;}.posa{position: absolute;}.center{text-align: center;}
 .Mtp5{margin-top: 5rpx;}.Mtp10{margin-top: 10rpx;}.Mtp15{margin-top: 15rpx;}.Mtp20{margin-top: 20rpx;}.Mtp25{margin-top: 25rpx;}.Mtp30{margin-top: 30rpx;}.Mtp35{margin-top: 35rpx;}.Mtp40{margin-top: 40rpx;}
 .Mrt5{margin-right: 5rpx;}.Mrt10{margin-right: 10rpx;}.Mrt15{margin-right: 15rpx;}.Mrt20{margin-right: 20rpx;}.Mrt25{margin-right: 25rpx;}.Mrt30{margin-right: 30rpx;}.Mrt35{margin-right: 35rpx;}.Mrt40{margin-right: 40rpx;}

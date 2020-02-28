@@ -80,18 +80,18 @@
         <text class="num"></text>
       </view>
       <view class="rt">
-        <view class="fil-type">
+        <navigator class="fil-type" url="/pages/Filter/selSort">
           <text>排序</text>
           <text class="icon"></text>
-        </view>
-        <view class="fil-type">
+        </navigator>
+        <navigator class="fil-type" url="/pages/Filter/selCity">
           <text>北京</text>
           <text class="icon"></text>
-        </view>
-        <view class="fil-type">
+        </navigator>
+        <navigator class="fil-type" url="/pages/Filter/selAll">
           <text>筛选</text>
           <text class="icon"></text>
-        </view>
+        </navigator>
       </view>
     </view>
   </van-sticky>
@@ -228,6 +228,3 @@
     </view>
   </navigator>
 </view>
-
-<!-- 排序 筛选-->
-<staff-filter staff-filter="{{staffFilter}}"></staff-filter>

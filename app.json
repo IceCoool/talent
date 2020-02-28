@@ -1,6 +1,9 @@
 {
   "pages": [
+    "pages/Filter/selCity",
     "pages/Index/index",
+    "pages/Filter/selAll",
+    "pages/Filter/selSort",
     "pages/Invite/index",
     "pages/Mine/index"
   ],

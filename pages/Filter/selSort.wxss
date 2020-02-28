@@ -1,0 +1,2 @@
+/* pages/Filter/selSort.wxss */
+@import './filter.wxss';
