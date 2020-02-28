@@ -7,7 +7,12 @@ Page({
   data: {
     staffFilterTop: Number,
     showFxq: false,
-    showMyXq: false
+    showMyXq: false,
+    staffFilter: {
+      showSort: false,
+      showAddr: false,
+      showFil: false
+    }
   },
 
   /**
@@ -27,6 +32,7 @@ Page({
       })
     })
   },
+  // 页面滚动事件
   onPageScroll: function(e) {
     const staffFilterTop = this.data.staffFilterTop
     if (e.scrollTop >= staffFilterTop - 68) {

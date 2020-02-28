@@ -228,3 +228,6 @@
     </view>
   </navigator>
 </view>
+
+<!-- 排序 筛选-->
+<staff-filter staff-filter="{{staffFilter}}"></staff-filter>

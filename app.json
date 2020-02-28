@@ -1,9 +1,7 @@
 {
   "pages": [
-        "pages/Index/index",
-        "pages/Invite/index",
-
-
+    "pages/Index/index",
+    "pages/Invite/index",
     "pages/Mine/index"
   ],
   "window": {
