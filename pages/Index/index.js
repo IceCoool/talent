@@ -1,20 +1,25 @@
 // page/index/index.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    staffFilterTop: Number,
+    idleFilterTop: Number,
     showFxq: false,
-    showMyXq: false
+    showMyXq: false,
+    showLogin: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    // 提示用户 授权地理位置
+    
+    app.locaAuthorize()
+    // app.getCityName()
   },
 
   /**
@@ -23,14 +28,14 @@ Page({
   onReady: function() {
     wx.createSelectorQuery().select('#staff-filter').boundingClientRect().exec((res) => {
       this.setData({
-        staffFilterTop: res[0].top
+        idleFilterTop: res[0].top
       })
     })
   },
   // 页面滚动事件
   onPageScroll: function(e) {
-    const staffFilterTop = this.data.staffFilterTop
-    if (e.scrollTop >= staffFilterTop - 68) {
+    const idleFilterTop = this.data.idleFilterTop
+    if (e.scrollTop >= idleFilterTop - 150) {
       this.setData({
         showFxq: true
       })
@@ -39,7 +44,9 @@ Page({
         showFxq: false
       })
     }
-    // if (e.scrollTop >= staffFilterTop - 104) {
+
+
+    // if (e.scrollTop >= idleFilterTop - 190) {
     //   this.setData({
     //     showMyXq: true
     //   })

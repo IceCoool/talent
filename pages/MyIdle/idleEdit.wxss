@@ -1,0 +1,2 @@
+/* pages/MyIdle/idleEdit.wxss */
+@import './idleList.wxss'

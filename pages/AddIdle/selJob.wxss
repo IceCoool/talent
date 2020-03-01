@@ -1,0 +1,2 @@
+/* pages/AddIdle/selJob.wxss */
+@import '../Filter/filter.wxss'

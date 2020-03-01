@@ -1,0 +1,6 @@
+<view class="container">
+  <van-sticky>
+    <idle-filter id="staff-filter"></idle-filter>
+  </van-sticky>
+  <idle-list></idle-list>
+</view>

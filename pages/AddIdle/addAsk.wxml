@@ -1,0 +1,85 @@
+<view class="fil-top posr">
+  <image src="/images/xq-bg.png"></image>
+  <view class="fil-title">
+    <view>用人需求</view>
+    <text class="txt">填写您的招聘需求，快速为您推荐候选人</text>
+  </view>
+</view>
+<view class="boxSh fil-mod" style="min-height: 68%;margin-bottom: 180rpx;">
+  <view class="item">
+    <view class="must-title">
+      <text>招聘职位</text>
+      <text class="icon">*</text>
+    </view>
+    <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
+      <van-radio name="{{1}}" use-icon-slot>
+        <text slot="icon" class="label {{sortValue == '1'?'on':''}}">不限</text>
+      </van-radio>
+      <van-radio name="{{2}}" use-icon-slot>
+        <text slot="icon" class="label {{sortValue == '2'?'on':''}}">岗位外包</text>
+      </van-radio>
+      <van-radio name="{{3}}" use-icon-slot>
+        <text slot="icon" class="label {{sortValue == '3'?'on':''}}">短期驻场</text>
+      </van-radio>
+      <van-radio name="{{4}}" use-icon-slot>
+        <text slot="icon" class="label {{sortValue == '4'?'on':''}}">团队外包</text>
+      </van-radio>
+      <navigator class="label" url="/pages/AddIdle/selJob">其他</navigator>
+    </van-radio-group>
+  </view>
+  <view class="item">
+    <view class="must-title">
+      <text>所在地区</text>
+      <text class="icon">*</text>
+    </view>
+    <view class="fil-inp" style="margin-top: 0;font-size: 28rpx;">
+        <text class="xziconfont xzicon-position Mrt10"></text>
+        <text class="inp">北京</text>
+        <navigator class="xziconfont xzicon-jump" url="/pages/Filter/selCity"></navigator>
+    </view>
+  </view>
+  <view class="item">
+    <view class="must-title">
+      <text>行业类别</text>
+      <text class="icon">*</text>
+    </view>
+    <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
+      <van-radio name="{{1}}" use-icon-slot>
+        <text slot="icon" class="label {{sortValue == '1'?'on':''}}">不限</text>
+      </van-radio>
+      <van-radio name="{{2}}" use-icon-slot>
+        <text slot="icon" class="label {{sortValue == '2'?'on':''}}">岗位外包</text>
+      </van-radio>
+      <van-radio name="{{3}}" use-icon-slot>
+        <text slot="icon" class="label {{sortValue == '3'?'on':''}}">短期驻场</text>
+      </van-radio>
+      <van-radio name="{{4}}" use-icon-slot>
+        <text slot="icon" class="label {{sortValue == '4'?'on':''}}">团队外包</text>
+      </van-radio>
+      <navigator class="label" url="/pages/AddIdle/selJob">其他</navigator>
+    </van-radio-group>
+  </view>
+  <view class="item">
+    <view class="must-title">
+      <text>项目周期</text>
+      <text class="icon">*</text>
+    </view>
+    <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
+      <van-radio name="{{1}}" use-icon-slot>
+        <text slot="icon" class="label {{sortValue == '1'?'on':''}}">不限</text>
+      </van-radio>
+      <van-radio name="{{2}}" use-icon-slot>
+        <text slot="icon" class="label {{sortValue == '2'?'on':''}}">岗位外包</text>
+      </van-radio>
+      <van-radio name="{{3}}" use-icon-slot>
+        <text slot="icon" class="label {{sortValue == '3'?'on':''}}">短期驻场</text>
+      </van-radio>
+      <van-radio name="{{4}}" use-icon-slot>
+        <text slot="icon" class="label {{sortValue == '4'?'on':''}}">团队外包</text>
+      </van-radio>
+    </van-radio-group>
+  </view>
+</view>
+<view class="oper-btns">
+  <text class="btn sure">完成</text>
+</view>

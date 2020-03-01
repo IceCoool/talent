@@ -1,9 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "van-radio": "/@vant/weapp/radio/index",
-    "van-radio-group": "/@vant/weapp/radio-group/index",
-    "van-index-bar": "/@vant/weapp/index-bar/index",
-    "van-index-anchor": "/@vant/weapp/index-anchor/index"
-  }
-}

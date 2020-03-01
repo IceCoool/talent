@@ -1,0 +1,42 @@
+.idle-filter {
+  padding: 48rpx 0 30rpx;
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+}
+
+.idle-filter .lf, .idle-filter .rt {
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.idle-filter .lf .on {
+  font-size: 32rpx;
+  color: #1c7ddf;
+  font-weight: bold;
+}
+
+.idle-filter .fil-type {
+  margin-left: 20rpx;
+  padding: 0 16rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  background: #f8f8f8;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  color: #999;
+}
+
+.idle-filter .fil-type .icon {
+  display: inline-block;
+  margin-left: 8rpx;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  border-right: 6rpx solid #d8d8d8;
+  border-bottom: 6rpx solid #d8d8d8;
+  border-top: 6rpx solid transparent;
+  border-left: 6rpx solid transparent;
+}

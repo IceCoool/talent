@@ -1,0 +1,38 @@
+/* components/login/index.wxss */
+
+.login {
+  position: relative;
+  width: 640rpx;
+  height: 758rpx;
+  border-radius: 52rpx;
+  overflow: hidden;
+}
+
+.login-btn, .getUser-btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 60rpx;
+  width: 440rpx;
+  height: 94rpx;
+  z-index: 3;
+}
+.login-btn{
+  pointer-events: none;
+}
+.getUser-btn {
+  z-index: 2;
+  bottom: 62rpx;
+  width: 380rpx;
+  height: 88rpx;
+}
+
+.close {
+  position: absolute;
+  padding: 0 10rpx;
+  top: 20rpx;
+  right: 30rpx;
+  color: #fff;
+  font-size: 60rpx;
+  line-height: 60rpx;
+}

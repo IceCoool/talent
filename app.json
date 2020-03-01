@@ -1,7 +1,14 @@
 {
   "pages": [
-    "pages/Filter/selCity",
     "pages/Index/index",
+    "pages/Mine/collect",
+    "pages/IdleType/short",
+    "pages/IdleType/epiboly",
+    "pages/Filter/selCity",
+    "pages/AddIdle/selJob",
+    "pages/MyIdle/idleEdit",
+    "pages/MyIdle/idleList",
+    "pages/AddIdle/addAsk",
     "pages/Filter/selAll",
     "pages/Filter/selSort",
     "pages/Invite/index",
@@ -41,5 +48,10 @@
   "usingComponents": {
     "van-popup": "/@vant/weapp/popup/index"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "快来人请求获取您的地理位置"
+    }
+  }
 }

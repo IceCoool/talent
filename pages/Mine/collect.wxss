@@ -1,0 +1,14 @@
+/* pages/Mine/collect.wxss */
+.van-sticky-wrap--fixed{
+  padding: 0 20rpx;
+  background: #fff;
+}
+.idle-filter {
+  padding-top: 30rpx !important;
+}
+.idle-filter .lf{
+  display: none !important;
+}
+.idle-filter .rt .fil-type{
+  margin: 0 20rpx 0 0;
+}

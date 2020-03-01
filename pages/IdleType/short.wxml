@@ -1,0 +1,50 @@
+<view class="container">
+  <van-sticky offset-top="{{ 0 }}">
+    <view class="benefit">
+      <view class="item">
+        <image class="icon" src="/images/renzheng.png"></image>
+        <text>人才认证</text>
+      </view>
+      <view class="item">
+        <image class="icon1" src="/images/quick.png"></image>
+        <text>15分钟快速响应</text>
+      </view>
+      <view class="item">
+        <image class="icon" src="/images/offer.png"></image>
+        <text>1-2周快速入职</text>
+      </view>
+    </view>
+    <view class="hot boxSh">
+      <image src="/images/hot.png"></image>
+      <view class="job">
+        <text>热门岗位</text>
+        <text>java开发</text>
+        <text>新媒体运营</text>
+        <text>UI设计</text>
+      </view>
+    </view>
+    <!-- 显示发布需求 -->
+    <view class="fixed-btn" id="fxq" wx:if="{{showFxq}}">
+      <navigator class="find" url="/pages/AddIdle/addAsk">发布用人需求，找人才</navigator>
+    </view>
+    <!-- 显示已发的需求 -->
+    <view class="fixed-btn" id="my-xq" wx:if="{{showMyXq}}">
+      <navigator class="my-xq">
+        <image src="/images/my-xq.png"></image>
+        <view class="posa">
+          <view>
+            <text>我的需求</text>
+            <text></text>
+          </view>
+          <view class="btm">
+            <text>JAVA开发后台系统外包项目需求（5人）</text>
+            <text></text>
+          </view>
+        </view>
+      </navigator>
+    </view>
+    <!-- 筛选 -->
+    <idle-filter></idle-filter>
+  </van-sticky>
+  <idle-list></idle-list>
+</view>

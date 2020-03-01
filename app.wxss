@@ -1,3 +1,4 @@
+@import "./font/iconfont.wxss";
 page{
   height: 100%;
   font-size: 28rpx;
@@ -19,6 +20,9 @@ image {
   clear: both;
   visibility: hidden;
 }
+.bold{
+  font-weight: bold;
+}
 .container{
   padding: 0 20rpx 10rpx;
 }
@@ -30,4 +34,18 @@ image {
 .Mlf5{margin-left: 5rpx;}.Mlf10{margin-left: 10rpx;}.Mlf15{margin-left: 15rpx;}.Mlf20{margin-left: 20rpx;}.Mlf25{margin-left: 25rpx;}.Mlf30{margin-left: 30rpx;}.Mlf35{margin-left: 35rpx;}.Mlf40{margin-left: 40rpx;}
 .boxSh{
   box-shadow:0px 4rpx 20rpx 4rpx rgba(75,154,232,0.16);
+}
+
+/* 复选框 */
+.idle-checkbox .label{
+  margin-left: 0;
+}
+.idle-checkbox .xziconfont{
+  font-size: 44rpx;
+}
+.idle-checkbox .xzicon-selected{
+  color: #1C7DDF;
+}
+.idle-checkbox .xzicon-unselected{
+  color: #CCCCCC;
 }

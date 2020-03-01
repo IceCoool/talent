@@ -1,0 +1,209 @@
+<wxs module="utils" src="../../utils/utils.wxs"></wxs>
+<view class="container idle-list" style="position: static;">
+  <van-checkbox-group value="{{ result }}" bind:change="onChange">
+    <view class="boxSh item-job {{utils.checkBoxStatus(result,'a')?'on':''}}">
+      <view class="item-top">
+        <view class="lf Mrt20">
+          <van-checkbox use-icon-slot name="a" custom-class="idle-checkbox" label-class="label">
+            <text class="xziconfont {{utils.checkBoxStatus(result,'a')?        'xzicon-selected':'xzicon-unselected'}}"></text>
+          </van-checkbox>
+        </view>
+        <view class="rt">
+          <view class="job-name">
+            <text>设计师</text>
+            <text class="type">岗位外包</text>
+            <text class="tj">2 顾问推荐</text>
+          </view>
+          <view class="Mtp35 job-addr">
+            <text>北京 | 不限行业</text>
+            <text class="time">项目周期：半年内</text>
+          </view>
+        </view>
+      </view>
+      <view class="Mtp30 item-list">
+        <view class="item">
+          <view class="head">
+            <image src="/images/city-bg.png"></image>
+          </view>
+          <view class="info">
+            <text class="bold">王女士</text>
+            <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+            <text class="Mtp5 match">98%匹配</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="head">
+            <image src="/images/city-bg.png"></image>
+          </view>
+          <view class="info">
+            <text class="bold">王女士</text>
+            <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+            <text class="Mtp5 match">98%匹配</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="head">
+            <image src="/images/city-bg.png"></image>
+          </view>
+          <view class="info">
+            <text class="bold">王女士</text>
+            <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+            <text class="Mtp5 match">98%匹配</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="head">
+            <image src="/images/city-bg.png"></image>
+          </view>
+          <view class="info">
+            <text class="bold">王女士</text>
+            <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+            <text class="Mtp5 match">98%匹配</text>
+          </view>
+        </view>
+      </view>
+      <view class="all">
+        <navigator>
+          <text>查看全部</text>
+          <text class="xziconfont xzicon-jump"></text>
+        </navigator>
+      </view>
+    </view>
+    <view class="boxSh item-job {{utils.checkBoxStatus(result,'b')?'on':''}}">
+      <view class="item-top">
+        <view class="lf Mrt20">
+          <van-checkbox use-icon-slot name="b" custom-class="idle-checkbox" label-class="label">
+            <text class="xziconfont {{utils.checkBoxStatus(result,'b')? 'xzicon-selected':'xzicon-unselected'}}"></text>
+          </van-checkbox>
+        </view>
+        <view class="rt">
+          <view class="job-name">
+            <text>设计师</text>
+            <text class="type">岗位外包</text>
+            <text class="tj">2 顾问推荐</text>
+          </view>
+          <view class="Mtp35 job-addr">
+            <text>北京 | 不限行业</text>
+            <text class="time">项目周期：半年内</text>
+          </view>
+        </view>
+      </view>
+      <view class="Mtp30 item-list">
+        <view class="item">
+          <view class="head">
+            <image src="/images/city-bg.png"></image>
+          </view>
+          <view class="info">
+            <text class="bold">王女士</text>
+            <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+            <text class="Mtp5 match">98%匹配</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="head">
+            <image src="/images/city-bg.png"></image>
+          </view>
+          <view class="info">
+            <text class="bold">王女士</text>
+            <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+            <text class="Mtp5 match">98%匹配</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="head">
+            <image src="/images/city-bg.png"></image>
+          </view>
+          <view class="info">
+            <text class="bold">王女士</text>
+            <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+            <text class="Mtp5 match">98%匹配</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="head">
+            <image src="/images/city-bg.png"></image>
+          </view>
+          <view class="info">
+            <text class="bold">王女士</text>
+            <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+            <text class="Mtp5 match">98%匹配</text>
+          </view>
+        </view>
+      </view>
+      <view class="all">
+        <navigator>
+          <text>查看全部</text>
+          <text class="xziconfont xzicon-jump"></text>
+        </navigator>
+      </view>
+    </view>
+    <view class="boxSh item-job {{utils.checkBoxStatus(result,'c')?'on':''}}">
+      <view class="item-top">
+        <view class="lf Mrt20">
+          <van-checkbox use-icon-slot name="c" custom-class="idle-checkbox" label-class="label">
+            <text class="xziconfont {{utils.checkBoxStatus(result,'c')? 'xzicon-selected':'xzicon-unselected'}}"></text>
+          </van-checkbox>
+        </view>
+        <view class="rt">
+          <view class="job-name">
+            <text>设计师</text>
+            <text class="type">岗位外包</text>
+            <text class="tj">2 顾问推荐</text>
+          </view>
+          <view class="Mtp35 job-addr">
+            <text>北京 | 不限行业</text>
+            <text class="time">项目周期：半年内</text>
+          </view>
+        </view>
+      </view>
+      <view class="Mtp30 item-list">
+        <view class="item">
+          <view class="head">
+            <image src="/images/city-bg.png"></image>
+          </view>
+          <view class="info">
+            <text class="bold">王女士</text>
+            <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+            <text class="Mtp5 match">98%匹配</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="head">
+            <image src="/images/city-bg.png"></image>
+          </view>
+          <view class="info">
+            <text class="bold">王女士</text>
+            <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+            <text class="Mtp5 match">98%匹配</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="head">
+            <image src="/images/city-bg.png"></image>
+          </view>
+          <view class="info">
+            <text class="bold">王女士</text>
+            <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+            <text class="Mtp5 match">98%匹配</text>
+          </view>
+        </view>
+        <view class="item">
+          <view class="head">
+            <image src="/images/city-bg.png"></image>
+          </view>
+          <view class="info">
+            <text class="bold">王女士</text>
+            <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+            <text class="Mtp5 match">98%匹配</text>
+          </view>
+        </view>
+      </view>
+      <view class="all">
+        <navigator>
+          <text>查看全部</text>
+          <text class="xziconfont xzicon-jump"></text>
+        </navigator>
+      </view>
+    </view>
+  </van-checkbox-group>
+</view>

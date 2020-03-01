@@ -1,0 +1,110 @@
+.staff-list .item {
+  margin-bottom: 30rpx;
+  position: relative;
+  padding: 50rpx 40rpx;
+  display: flex;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 8rpx;
+  font-size: 26rpx;
+  color: #666;
+  overflow: hidden;
+}
+
+.staff-list .item .status {
+  position: absolute;
+  left: -70rpx;
+  top: -70rpx;
+  padding-top: 100rpx;
+  width: 140rpx;
+  height: 140rpx;
+  font-size: 22rpx;
+  color: #1c7ddf;
+  background: #e6f0ff;
+  text-align: center;
+  box-sizing: border-box;
+  z-index: 1;
+  transform: rotate(-45deg);
+}
+
+.staff-list .item .head {
+  margin: 15rpx 24rpx 0 0;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #eee;
+}
+
+.staff-list .item .similar {
+  position: absolute;
+  left: -8rpx;
+  bottom: -24rpx;
+  width: 116rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  text-align: center;
+  font-size: 22rpx;
+  background: linear-gradient(24deg, rgba(255, 127, 30, 1) 0%, rgba(253, 218, 33, 1) 100%, rgba(255, 153, 39, 1) 100%);
+  border-radius: 2em;
+  color: #fff;
+}
+
+.staff-list .item .info {
+  flex: 1;
+}
+
+.staff-list .item .mod {
+  display: flex;
+  align-items: center;
+}
+
+.staff-list .item .name {
+  margin-right: 20rpx;
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 600;
+}
+
+.staff-list .item .job {
+  margin-right: 20rpx;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.staff-list .item .tj {
+  width: 144rpx;
+  height: 40rpx;
+  text-align: center;
+  line-height: 40rpx;
+  font-size: 22rpx;
+  color: #fff;
+  border-radius: 2em;
+  background: linear-gradient(24deg, rgba(19, 184, 131, 1) 0%, rgba(112, 242, 174, 1) 100%);
+}
+
+.staff-list .item .price {
+  margin-left: auto;
+  font-size: 36rpx;
+  color: #1c7ddf;
+}
+
+.staff-list .item .rate {
+  margin-left: auto;
+  color: #ff9801;
+}
+.staff-list .item .xzicon-star{
+  margin-left: 10rpx;
+  color: #FF9801;
+  font-size: 26rpx;
+}
+.staff-list .item .tag {
+  margin-right: 20rpx;
+  padding: 0 16rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  font-size: 24rpx;
+  color: #999;
+  border-radius: 8rpx;
+  background: #f5f5f5;
+}

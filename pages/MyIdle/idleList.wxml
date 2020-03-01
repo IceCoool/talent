@@ -1,0 +1,130 @@
+<view class="idle-top posr">
+  <image src="/images/idle-xq.png"></image>
+  <view class="idle-title">
+    <view>
+      <text>用人需求</text>
+      <navigator class="edit" url="/pages/MyIdle/idleEdit">管理需求</navigator>
+    </view>
+    <text class="txt">查看需求下的最新简历</text>
+  </view>
+</view>
+<view class="container idle-list">
+  <view class="boxSh item-job">
+    <view class="job-name">
+      <text>设计师</text>
+      <text class="type">岗位外包</text>
+      <text class="tj">2 顾问推荐</text>
+    </view>
+    <view class="Mtp35 job-addr">
+      <text>北京 | 不限行业</text>
+      <text class="time">项目周期：半年内</text>
+    </view>
+    <view class="Mtp30 item-list">
+      <view class="item">
+        <view class="head">
+          <image src="/images/city-bg.png"></image>
+        </view>
+        <view class="info">
+          <text class="bold">王女士</text>
+          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+          <text class="Mtp5 match">98%匹配</text>
+        </view>
+      </view>
+      <view class="item">
+        <view class="head">
+          <image src="/images/city-bg.png"></image>
+        </view>
+        <view class="info">
+          <text class="bold">王女士</text>
+          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+          <text class="Mtp5 match">98%匹配</text>
+        </view>
+      </view>
+      <view class="item">
+        <view class="head">
+          <image src="/images/city-bg.png"></image>
+        </view>
+        <view class="info">
+          <text class="bold">王女士</text>
+          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+          <text class="Mtp5 match">98%匹配</text>
+        </view>
+      </view>
+      <view class="item">
+        <view class="head">
+          <image src="/images/city-bg.png"></image>
+        </view>
+        <view class="info">
+          <text class="bold">王女士</text>
+          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+          <text class="Mtp5 match">98%匹配</text>
+        </view>
+      </view>
+    </view>
+    <view class="all">
+      <navigator>
+        <text>查看全部</text>
+        <text class="xziconfont xzicon-jump"></text>
+      </navigator>
+    </view>
+  </view>
+  <view class="boxSh item-job">
+    <view class="job-name">
+      <text>设计师</text>
+      <text class="type">岗位外包</text>
+      <text class="tj">2 顾问推荐</text>
+    </view>
+    <view class="Mtp35 job-addr">
+      <text>北京 | 不限行业</text>
+      <text class="time">项目周期：半年内</text>
+    </view>
+    <view class="Mtp30 item-list">
+      <view class="item">
+        <view class="head">
+          <image src="/images/city-bg.png"></image>
+        </view>
+        <view class="info">
+          <text class="bold">王女士</text>
+          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+          <text class="Mtp5 match">98%匹配</text>
+        </view>
+      </view>
+      <view class="item">
+        <view class="head">
+          <image src="/images/city-bg.png"></image>
+        </view>
+        <view class="info">
+          <text class="bold">王女士</text>
+          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+          <text class="Mtp5 match">98%匹配</text>
+        </view>
+      </view>
+      <view class="item">
+        <view class="head">
+          <image src="/images/city-bg.png"></image>
+        </view>
+        <view class="info">
+          <text class="bold">王女士</text>
+          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+          <text class="Mtp5 match">98%匹配</text>
+        </view>
+      </view>
+      <view class="item">
+        <view class="head">
+          <image src="/images/city-bg.png"></image>
+        </view>
+        <view class="info">
+          <text class="bold">王女士</text>
+          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
+          <text class="Mtp5 match">98%匹配</text>
+        </view>
+      </view>
+    </view>
+    <view class="all">
+      <navigator>
+        <text>查看全部</text>
+        <text class="xziconfont xzicon-jump"></text>
+      </navigator>
+    </view>
+  </view>
+</view>

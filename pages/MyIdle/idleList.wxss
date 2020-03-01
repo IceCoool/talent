@@ -1,0 +1,173 @@
+.idle-top {
+  height: 268rpx;
+}
+
+.idle-top .idle-title {
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+  left: 40rpx;
+  color: #fff;
+  font-size: 48rpx;
+  font-weight: bold;
+}
+
+.idle-top .idle-title view {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.idle-top .idle-title .txt {
+  margin-top: 20rpx;
+  font-size: 26rpx;
+  font-weight: normal;
+}
+
+.idle-top .edit {
+  width: 176rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #1c7ddf;
+  font-size: 28rpx;
+  font-weight: normal;
+  border-radius: 2em;
+  background: #e5f0ff;
+}
+
+.idle-list {
+  position: relative;
+  top: -70rpx;
+  padding-bottom: 40rpx;
+}
+
+.idle-list .item-job {
+  margin-top: 30rpx;
+  padding: 42rpx 40rpx;
+  background: #fff;
+  border-radius: 8rpx;
+  transition: 0.3s;
+}
+
+.idle-list .item-job.on {
+  box-shadow: 0px 4rpx 20rpx 4rpx rgba(75, 154, 232, 0.4);
+}
+
+.idle-list .item-job .item-top {
+  display: flex;
+}
+
+.idle-list .item-job .lf {
+  padding-top: 8rpx;
+}
+
+.idle-list .item-job .rt {
+  flex: 1;
+}
+
+.idle-list .item-job .all {
+  padding-top: 40rpx;
+  display: flex;
+  justify-content: flex-end;
+  color: #999;
+  font-size: 26rpx;
+}
+
+.idle-list .xzicon-jump{
+  margin-left: 15rpx;
+  color: #CCCCCC;
+  font-size: 28rpx;
+}
+.idle-list .job-name {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #333;
+  font-size: 32rpx;
+}
+
+.idle-list .job-name .type {
+  margin-left: 30rpx;
+  width: 144rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  color: #1c7ddf;
+  background: #e6f0ff;
+  border-radius: 2em;
+  font-size: 24rpx;
+  font-weight: normal;
+}
+
+.idle-list .job-name .tj {
+  margin-left: auto;
+  padding: 0 20rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  color: #fff;
+  background: #ffbf18;
+  border-radius: 2em;
+  font-size: 24rpx;
+  font-weight: normal;
+}
+
+.idle-list .job-addr {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+}
+
+.idle-list .job-addr .time {
+  color: #999;
+}
+
+.idle-list .item-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.idle-list .item-list .item {
+  margin-top: 24rpx;
+  position: relative;
+  padding-left: 32rpx;
+  width: 292rpx;
+  height: 172rpx;
+  box-sizing: border-box;
+}
+
+.idle-list .item-list .head {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.idle-list .item-list .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20rpx 0 60rpx;
+  height: 172rpx;
+  background: #f8f8f8;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  color: #333;
+}
+
+.idle-list .item-list .desc {
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.idle-list .item-list .match {
+  color: #ff9801;
+}

@@ -1,0 +1,21 @@
+    <view id="idle-filter" class="idle-filter">
+      <view class="lf">
+        <text class="on Mrt30">推荐</text>
+        <text>最新</text>
+        <text class="num"></text>
+      </view>
+      <view class="rt">
+        <navigator class="fil-type" url="/pages/Filter/selSort">
+          <text>排序</text>
+          <text class="icon"></text>
+        </navigator>
+        <navigator class="fil-type" url="/pages/Filter/selCity">
+          <text>北京</text>
+          <text class="icon"></text>
+        </navigator>
+        <navigator class="fil-type" url="/pages/Filter/selAll">
+          <text>筛选</text>
+          <text class="icon"></text>
+        </navigator>
+      </view>
+    </view>

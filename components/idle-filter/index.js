@@ -7,18 +7,14 @@ Component({
     addGlobalClass: true,
   },
   properties: {
-    staffFilter: {
-      type: Object,
-      value: {}
-    }
+
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    showSort: false,
-    sortValue: '1'
+
   },
 
   /**
