@@ -17,9 +17,7 @@ Page({
    */
   onLoad: function(options) {
     // 提示用户 授权地理位置
-    
     app.locaAuthorize()
-    // app.getCityName()
   },
 
   /**

@@ -5,14 +5,14 @@
     <!-- <text style="margin-left: 28rpx;">在线即约即面 7天无理由换人</text> -->
     <navigator class="find" url="/pages/AddIdle/addAsk">发布用人需求 找人才</navigator>
     <view class="top-mod">
-      <navigator class="item" url="">
+      <navigator class="item" url="/pages/IdleType/epiboly">
         <image src="/images/top-modbg1.png"></image>
         <view>
           <text>岗位外包</text>
           <text>岗位外包，随叫随到</text>
         </view>
       </navigator>
-      <navigator class="item" url="">
+      <navigator class="item" url="/pages/IdleType/short">
         <image src="/images/top-modbg2.png"></image>
         <view>
           <text>短期用工</text>
