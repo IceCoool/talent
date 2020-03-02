@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/demo/index",
     "pages/Index/index",
     "pages/Mine/collect",
     "pages/IdleType/short",

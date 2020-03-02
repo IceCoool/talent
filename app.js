@@ -110,7 +110,7 @@ App({
     wx.request({
       url: 'https://restapi.amap.com/v3/geocode/regeo',
       data: {
-        key: 'e7a38f5846bfcc1302ee9df69743dbfa',
+        key: '603c6fa808c6283a7aaff2ba2650ee10',
         output: 'json',
         location: lonlat,
         extensions: 'base'
@@ -119,7 +119,6 @@ App({
         console.log(res)
       }
     })
-
 
     // let _this = this;
     // let myAmapFun = new amapFile.AMapWX({

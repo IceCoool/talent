@@ -26,4 +26,5 @@
 > 在自己的文件夹选择新建page 输入名字即可 这种方式会把页面自动加到路由中
 
 ## 高德key
-> cf7f9a6bc988083166ac2d4e06d3bac4
+> cf7f9a6bc988083166ac2d4e06d3bac4  小程序
+> 603c6fa808c6283a7aaff2ba2650ee10  web服务 

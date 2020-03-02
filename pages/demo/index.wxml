@@ -1,0 +1,22 @@
+<view class="fil-top posr">
+  <image src="/images/xq-bg.png"></image>
+  <view class="fil-title">
+    <view>选择面试地点</view>
+    <text class="txt">选择您的面试地点</text>
+  </view>
+</view>
+<view class="boxSh fil-mod" style="min-height: 80%;margin-bottom: 40rpx;">
+  <view class="fil-inp">
+    <input class="inp" type="text" placeholder="请输入城市名称搜索" bindinput="getCity"></input>
+    <text class="xziconfont xzicon-search"></text>
+  </view>
+  <view class="city-list" wx:if="{{cityList.length > 0}}">
+    <view class="city-item" wx:for="{{cityList}}" wx:key="idnex" data-addr="{{item.name}}" bindtap="getTapName">
+      <text class="xziconfont xzicon-position"></text>
+      <view class="city-info">
+        <text>{{item.name}}</text>
+        <text class="addr">{{item.address}}</text>
+      </view>
+    </view>
+  </view>
+</view>
