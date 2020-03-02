@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/demo/index",
+    "pages/demo/map",
     "pages/Index/index",
+    "pages/demo/index",
     "pages/Mine/collect",
     "pages/IdleType/short",
     "pages/IdleType/epiboly",

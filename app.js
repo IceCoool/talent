@@ -1,4 +1,4 @@
-var amapFile = require('./libs/amap-wx.js');
+
 App({
   onLaunch: function() {
 
