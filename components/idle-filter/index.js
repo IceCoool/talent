@@ -7,7 +7,10 @@ Component({
     addGlobalClass: true,
   },
   properties: {
-
+    textOption: {
+      type: Object,
+      value: {}
+    }
   },
 
   /**

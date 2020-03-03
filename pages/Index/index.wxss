@@ -18,6 +18,14 @@
   margin-left: 10rpx;
   width: 412rpx;
   height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 2em;
+  background: linear-gradient(9deg, rgba(219, 238, 253, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  box-shadow: 0px 4rpx 20rpx 8rpx rgba(0, 105, 209, 0.5);
+  color: #0D61B5;
+  font-size: 34rpx;
+  font-weight: bold;
 }
 
 .index-top .top-mod {
@@ -79,10 +87,10 @@
   color: #999;
 }
 
-.request-mod .req-title .xzicon-need{
+.request-mod .req-title .xzicon-need {
   margin-right: 10rpx;
   font-size: 30rpx;
-  color: #CCCCCC;
+  color: #ccc;
 }
 
 .request-mod .req-list {
@@ -167,13 +175,15 @@
   color: #fff;
   font-size: 32rpx;
 }
-.fixed-btn .my-xq{
+
+.fixed-btn .my-xq {
   position: relative;
   width: 100%;
   height: 84px;
   box-sizing: border-box;
 }
-.fixed-btn .my-xq .posa{
+
+.fixed-btn .my-xq .posa {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -183,20 +193,24 @@
   box-sizing: border-box;
   color: #fff;
 }
-.fixed-btn .posa{
+
+.fixed-btn .posa {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.fixed-btn .posa view{
+
+.fixed-btn .posa view {
   display: flex;
   align-items: center;
 }
-.fixed-btn .btm{
+
+.fixed-btn .btm {
   margin-top: 10px;
   font-size: 32rpx;
 }
-.van-sticky-wrap--fixed{
+
+.van-sticky-wrap--fixed {
   padding: 0 20rpx;
   background: #fff;
 }

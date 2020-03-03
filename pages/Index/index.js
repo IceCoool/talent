@@ -1,5 +1,13 @@
 // page/index/index.js
-const app = getApp()
+const app = getApp();
+const IdleHttp = require('../../utils/request.js')
+
+IdleHttp.request('/api', {
+  data: {
+    ab: 'c',
+    dd: 'e'
+  }
+})
 Page({
 
   /**
@@ -9,7 +17,12 @@ Page({
     idleFilterTop: Number,
     showFxq: false,
     showMyXq: false,
-    showLogin: false
+    showLogin: false,
+    textOption: {
+      locaCity: '',
+      sort: '排序',
+      filter: '筛选'
+    }
   },
 
   /**
@@ -17,9 +30,16 @@ Page({
    */
   onLoad: function(options) {
     // 提示用户 授权地理位置
-    app.locaAuthorize()
+    app.promiseLocaAuthorize().then(() => {
+      this.setData({
+        'textOption.locaCity': app.globalData.locaCity
+      })
+    }).catch(() => {
+      this.setData({
+        'textOption.locaCity': app.globalData.locaCity
+      })
+    })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
