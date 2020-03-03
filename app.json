@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/demo/map",
     "pages/Index/index",
     "pages/demo/index",
     "pages/Mine/collect",
