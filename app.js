@@ -1,3 +1,4 @@
+require('./utils/utils.js')
 App({
   onLaunch: function() {
 

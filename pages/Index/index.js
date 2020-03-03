@@ -1,13 +1,6 @@
 // page/index/index.js
 const app = getApp();
 const IdleHttp = require('../../utils/request.js')
-
-IdleHttp.request('/api', {
-  data: {
-    ab: 'c',
-    dd: 'e'
-  }
-})
 Page({
 
   /**

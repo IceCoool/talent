@@ -1,11 +1,11 @@
-import md5 from './md5.js';
+let md5 = require('./md5.js');
 let signAppSecret = '';
 let signAppKey = 'jfidlewechat';
-let baseUrl = 'https://aididle'
+let baseUrl = 'https://apiidle.jfh.com';
+
 __wxConfig.envVersion == 'release' ? signAppSecret = 'prod-br677r5bja4t5eyfu1s8tp25sp9izexl' : signAppSecret = 'it5z9oizcwkazqah1b5dos8iwerynj9x';
 
-
-
+__wxConfig.envVersion == 'develop' ? baseUrl = 'https://apiidledev.jfh.com' : baseUrl = 'https://apiidle.jfh.com';
 
 
 const genSign = (params) => {
@@ -36,7 +36,7 @@ const request = (url, options) => {
   options = genSign(options);
   return new Promise((resolve, reject) => {
     wx.request({
-      url: '' + url,
+      url: baseUrl + url,
       method: 'POST',
       data: options,
       success(res) {
