@@ -14,6 +14,7 @@ Page({
   onLoad: function(options) {
 
   },
+  
   onChange(event) {
     this.setData({
       sortValue: event.detail

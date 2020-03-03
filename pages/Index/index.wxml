@@ -3,7 +3,7 @@
   <image class="top-bg" style="height: 428rpx;" src="/images/banner-bg.png"></image>
   <view class="top-info">
     <!-- <text style="margin-left: 28rpx;">在线即约即面 7天无理由换人</text> -->
-    <navigator class="find" url="/pages/AddIdle/addAsk">发布用人需求 找人才</navigator>
+    <navigator class="find" url="/pages/AddIdle/addAsk">创建需求 找人才</navigator>
     <view class="top-mod">
       <navigator class="item" url="/pages/IdleType/epiboly">
         <image src="/images/top-modbg1.png"></image>
@@ -73,13 +73,13 @@
   </view>
   <!-- 推荐 最新 筛选 -->
   <van-sticky offset-top="{{ 68 }}"> <!-- 68   104 -->
-    <idle-filter id="staff-filter"></idle-filter>
+    <idle-filter text-option="{{textOption}}" id="staff-filter"></idle-filter>
   </van-sticky>
   <idle-list></idle-list>
 </view>
 <!-- 滚动显示发布需求 -->
 <view class="fixed-btn" id="fxq" wx:if="{{showFxq}}">
-  <navigator class="find" url="/pages/AddIdle/addAsk">发布用人需求，找人才</navigator>
+  <navigator class="find" url="/pages/AddIdle/addAsk">创建用人需求，找人才</navigator>
 </view>
 
 <!-- 滚动显示已发的需求 -->

@@ -1,4 +1,3 @@
-
 App({
   onLaunch: function() {
 
@@ -6,7 +5,8 @@ App({
   // 全局数据
   globalData: {
     // 用户是否授权地理位置
-    locaAuthorize: false
+    isLocaAuthorize: false,
+    locaCity: '上海市'
   },
   // 判断用户是否授权登录
   loginAuthorize() {
@@ -23,14 +23,21 @@ App({
       }
     })
   },
+  // promise 解决异步问题
+  promiseLocaAuthorize() {
+    var pro = new Promise((resolve, reject) => {
+      this.locaAuthorize(resolve, reject);
+    })
+    return pro;
+  },
   // 用户地理位置授权
-  locaAuthorize() {
+  locaAuthorize(resolve, reject) {
     let _this = this;
     wx.getSetting({
       success(res) {
         if (res.authSetting['scope.userLocation']) {
           // 已授权 调用地理位置API
-          _this.getLocation()
+          _this.getLocation(resolve)
         } else if (res.authSetting['scope.userLocation'] == false) {
           // 已拒绝授权 引导用户去授权
           wx.showModal({
@@ -42,12 +49,13 @@ App({
                   success(settingRes) {
                     if (settingRes.authSetting['scope.userLocation']) {
                       //引导授权成功 调用地理位置API
-                      _this.getLocation()
+                      _this.getLocation(resolve)
                     } else {
                       wx.showToast({
                         title: '授权失败',
                         icon: 'none'
                       })
+                      reject()
                     }
                   }
                 })
@@ -56,18 +64,19 @@ App({
                   title: '授权失败',
                   icon: 'none'
                 })
+                reject()
               }
             }
           })
         } else if (res.authSetting['scope.userLocation'] == undefined) {
           //初次进入 调用地理位置API
-          _this.getLocation()
+          _this.getLocation(resolve)
         }
       }
     })
   },
   // 获取地理位置
-  getLocation() {
+  getLocation(resolve, reject) {
     let _this = this;
     wx.getLocation({
       type: "gcj02",
@@ -76,7 +85,8 @@ App({
         let latitude = res.latitude;
         let longitude = res.longitude;
         console.log(`纬度${latitude}---经度${longitude}`)
-        _this.getCityName(`${longitude},${latitude}`)
+        _this.globalData.isLocaAuthorize = true;
+        _this.getCityName(`${longitude},${latitude}`, resolve)
       },
       fail(res) {
         if (res.errMsg.indexOf('auth deny') != -1) {
@@ -85,6 +95,7 @@ App({
             title: '拒绝授权',
             icon: 'none'
           })
+          reject()
         } else if (res.errMsg.indexOf('system permission') != -1) {
           // 用户授权，但手机定位服务没开启
           wx.showModal({
@@ -95,18 +106,20 @@ App({
 
             }
           })
+          reject()
         } else {
           wx.showToast({
             title: '授权失败',
             icon: 'none'
           })
+          reject()
         }
       }
     })
   },
-
   // 逆地理编码
-  getCityName(lonlat) {
+  getCityName(lonlat, resolve) {
+    let _this = this;
     wx.request({
       url: 'https://restapi.amap.com/v3/geocode/regeo',
       data: {
@@ -116,7 +129,14 @@ App({
         extensions: 'base'
       },
       success(res) {
-        console.log(res)
+        let addressInfo = res.data.regeocode.addressComponent;
+        let municipality = "北京市上海市重庆市天津市";
+        if (municipality.indexOf(addressInfo.province) != -1) {
+          _this.globalData.locaCity = addressInfo.province
+        } else {
+          _this.globalData.locaCity = addressInfo.province
+        }
+        resolve()
       }
     })
 
