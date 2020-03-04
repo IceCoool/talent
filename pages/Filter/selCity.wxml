@@ -16,128 +16,26 @@
     <text>当前城市：</text>
     <text class="city">北京</text>
   </view>
+
   <view class="item">
     <text class="item-title">热门城市</text>
-    <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
-      <van-radio name="{{1}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '1'?'on':''}}">北京</text>
-      </van-radio>
-      <van-radio name="{{2}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '2'?'on':''}}">上海</text>
-      </van-radio>
-      <van-radio name="{{3}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '3'?'on':''}}">深圳</text>
-      </van-radio>
-      <van-radio name="{{4}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '4'?'on':''}}">杭州</text>
-      </van-radio>
-      <van-radio name="{{5}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '5'?'on':''}}">武汉</text>
-      </van-radio>
-    </van-radio-group>
+    <view class="item-list">
+      <text class="label {{sortValue == '110100'?'on':''}}">北京</text>
+      <text class="label {{sortValue == '310100'?'on':''}}">上海</text>
+      <text class="label {{sortValue == '440300'?'on':''}}">深圳</text>
+      <text class="label {{sortValue == '330100'?'on':''}}">杭州</text>
+      <text class="label {{sortValue == '420100'?'on':''}}">武汉</text>
+    </view>
   </view>
   <van-index-bar scroll-top="{{ scrollTop }}" sticky="{{false}}" highlight-color="#999">
-    <view class="item">
-      <van-index-anchor index="A" />
-      <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
-        <van-radio name="{{1}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '1'?'on':''}}">北京</text>
-        </van-radio>
-        <van-radio name="{{2}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '2'?'on':''}}">上海</text>
-        </van-radio>
-        <van-radio name="{{3}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '3'?'on':''}}">深圳</text>
-        </van-radio>
-        <van-radio name="{{4}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '4'?'on':''}}">杭州</text>
-        </van-radio>
-        <van-radio name="{{5}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '5'?'on':''}}">武汉</text>
-        </van-radio>
-      </van-radio-group>
-    </view>
-    <view class="item">
-      <van-index-anchor index="B" />
-      <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
-        <van-radio name="{{1}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '1'?'on':''}}">北京</text>
-        </van-radio>
-        <van-radio name="{{2}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '2'?'on':''}}">上海</text>
-        </van-radio>
-        <van-radio name="{{3}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '3'?'on':''}}">深圳</text>
-        </van-radio>
-        <van-radio name="{{4}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '4'?'on':''}}">杭州</text>
-        </van-radio>
-        <van-radio name="{{5}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '5'?'on':''}}">武汉</text>
-        </van-radio>
-      </van-radio-group>
-    </view>
-    <view class="item">
-      <van-index-anchor index="C" anchor-class="dddd" />
-      <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
-        <van-radio name="{{1}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '1'?'on':''}}">北京</text>
-        </van-radio>
-        <van-radio name="{{2}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '2'?'on':''}}">上海</text>
-        </van-radio>
-        <van-radio name="{{3}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '3'?'on':''}}">深圳</text>
-        </van-radio>
-        <van-radio name="{{4}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '4'?'on':''}}">杭州</text>
-        </van-radio>
-        <van-radio name="{{5}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '5'?'on':''}}">武汉</text>
-        </van-radio>
-      </van-radio-group>
-    </view>
-    <view class="item">
-      <van-index-anchor index="D" anchor-class="dddd" />
-      <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
-        <van-radio name="{{1}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '1'?'on':''}}">北京</text>
-        </van-radio>
-        <van-radio name="{{2}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '2'?'on':''}}">上海</text>
-        </van-radio>
-        <van-radio name="{{3}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '3'?'on':''}}">深圳</text>
-        </van-radio>
-        <van-radio name="{{4}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '4'?'on':''}}">杭州</text>
-        </van-radio>
-        <van-radio name="{{5}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '5'?'on':''}}">武汉</text>
-        </van-radio>
-      </van-radio-group>
-    </view>
-    <view class="item">
-      <van-index-anchor index="E" />
-      <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
-        <van-radio name="{{1}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '1'?'on':''}}">北京</text>
-        </van-radio>
-        <van-radio name="{{2}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '2'?'on':''}}">上海</text>
-        </van-radio>
-        <van-radio name="{{3}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '3'?'on':''}}">深圳</text>
-        </van-radio>
-        <van-radio name="{{4}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '4'?'on':''}}">杭州</text>
-        </van-radio>
-        <van-radio name="{{5}}" use-icon-slot>
-          <text slot="icon" class="label {{sortValue == '5'?'on':''}}">武汉</text>
-        </van-radio>
-      </van-radio-group>
+    <view class="item" wx:for="{{idleCitys}}" wx:for-index="cty_idx" wx:key="{{cty_idx}}">
+      <van-index-anchor index="{{item.name}}" />
+      <view class="item-list">
+        <text class="label {{sortValue == cityItem.itemCode?'on':''}}" wx:for="{{item.list}}" wx:for-item="cityItem" wx:for-index="cit_index" wx:key="{{cit_index}}" data-code="{{cityItem.itemCode}}" bindtap="onChange">{{cityItem.cnname}}</text>
+      </view>
     </view>
   </van-index-bar>
+
 </view>
 
 <!-- <view class="oper-btns">

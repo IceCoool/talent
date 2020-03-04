@@ -40,10 +40,10 @@
   flex: 1;
 }
 
-.fil-inp .xzicon-search{
+.fil-inp .xzicon-search {
   padding: 5rpx;
   margin-left: 30rpx;
-  color: #CCCCCC;
+  color: #ccc;
   font-size: 36rpx;
 }
 
@@ -95,9 +95,13 @@
 }
 
 .fil-mod .item-list .label {
-  display: inline-block;
   margin: 24rpx 20rpx 0 0;
-  padding: 0 32rpx;
+  padding: 0 15rpx;
+  width: 30%;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   height: 64rpx;
   line-height: 64rpx;
   font-size: 26rpx;

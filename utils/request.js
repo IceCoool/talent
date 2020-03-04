@@ -28,7 +28,6 @@ const genSign = (params) => {
   var orderedString = paramsArray.join('&');
   params['sign'] = md5(orderedString + signAppSecret)
   // console.log('sign:' + params['sign'])
-  // console.log(params)
   return params;
 }
 
@@ -38,6 +37,9 @@ const request = (url, options) => {
     wx.request({
       url: baseUrl + url,
       method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded' // 默认值
+      },
       data: options,
       success(res) {
         resolve(res)
