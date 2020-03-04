@@ -6,7 +6,8 @@ Page({
    */
   data: {
     jobList: [],
-    selCode: ''
+    selTrade: [],
+    selCode: []
   },
 
   /**
@@ -15,7 +16,7 @@ Page({
   onLoad: function(options) {
     wx.showLoading()
     IdleHttp.request('/mobileapi/dictionary/list', {
-      topic: 'WT_HR'
+      topic: 'INDUSTRY_EXPERIENCE'
     }).then(res => {
       wx.hideLoading()
       if (res.data.responseHeader.code == 200) {
@@ -27,9 +28,37 @@ Page({
     })
   },
   onChange(event) {
+    let selTrade = this.data.selTrade;
+    let selCode = this.data.selCode;
+    let itemCode = event.currentTarget.dataset.code;
+    let cnname = event.currentTarget.dataset.name;
+    if (selTrade.findIndex(item => item.itemCode == itemCode) == -1) {
+      if (selTrade.length >= 3) {
+        wx.showToast({
+          title: '最多选择3个',
+          icon: 'none'
+        })
+        return;
+      }
+      selTrade.push({
+        itemCode,
+        cnname
+      })
+      selCode.push(itemCode)
+    } else {
+      selTrade.splice(selTrade.findIndex(item => item.itemCode == itemCode), 1);
+      selCode.splice(selCode.findIndex(item => item == itemCode), 1)
+    }
     this.setData({
-      selCode: event.currentTarget.dataset.code
-    });
+      selTrade,
+      selCode
+    })
+  },
+  clearCode() {
+    this.setData({
+      selTrade: [],
+      selCode: []
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

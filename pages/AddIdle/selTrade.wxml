@@ -1,0 +1,27 @@
+<wxs module="utils" src="../../utils/utils.wxs"></wxs>
+<view class="fil-top posr">
+  <image src="/images/xq-bg.png"></image>
+  <view class="fil-title">
+    <view>选择行业</view>
+    <text class="txt">选择您招聘的行业</text>
+  </view>
+</view>
+<view style="padding-bottom:100rpx;">
+  <view class="boxSh fil-mod">
+    <view class="fil-inp">
+      <input class="inp" type="text" placeholder="输入行业名称搜索"></input>
+      <text class="xziconfont xzicon-search"></text>
+    </view>
+    <view class="item">
+      <view class="item-list">
+        <text class="label" bindtap="clearCode">不限</text>
+        <text class="label {{utils.checkBoxStatus(selCode,item.itemCode)?'on':''}}" wx:for="{{jobList}}" data-code="{{item.itemCode}}" data-name="{{item.cnname}}" bindtap="onChange">{{item.cnname}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="oper-btns">
+  <text class="btn clear">清除</text>
+  <text class="btn sure">完成</text>
+</view>

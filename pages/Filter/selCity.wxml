@@ -27,15 +27,14 @@
       <text class="label {{sortValue == '420100'?'on':''}}">武汉</text>
     </view>
   </view>
-  <van-index-bar scroll-top="{{ scrollTop }}" sticky="{{false}}" highlight-color="#999">
-    <view class="item" wx:for="{{idleCitys}}" wx:for-index="cty_idx" wx:key="{{cty_idx}}">
+  <van-index-bar scroll-top="{{ scrollTop }}" index-list="{{charIndex}}" sticky="{{false}}" highlight-color="#999">
+    <view class="item" wx:if="{{item.list.length>0}}" wx:for="{{idleCitys}}" wx:key="index" style="margin-top: 30rpx;">
       <van-index-anchor index="{{item.name}}" />
       <view class="item-list">
-        <text class="label {{sortValue == cityItem.itemCode?'on':''}}" wx:for="{{item.list}}" wx:for-item="cityItem" wx:for-index="cit_index" wx:key="{{cit_index}}" data-code="{{cityItem.itemCode}}" bindtap="onChange">{{cityItem.cnname}}</text>
+        <text class="label {{sortValue == cityItem.itemCode?'on':''}}" wx:for="{{item.list}}" wx:for-item="cityItem" wx:key="index" data-code="{{cityItem.itemCode}}" bindtap="onChange">{{cityItem.cnname}}</text>
       </view>
     </view>
   </van-index-bar>
-
 </view>
 
 <!-- <view class="oper-btns">

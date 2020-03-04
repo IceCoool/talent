@@ -155,7 +155,7 @@
 }
 
 .van-index-anchor-wrapper .van-index-anchor {
-  padding: 0 !important;
+  padding: 20rpx 0 0 !important;
   font-size: 36rpx;
   line-height: 36rpx;
 }

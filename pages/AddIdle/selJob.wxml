@@ -5,46 +5,25 @@
     <text class="txt">选择您需求的职位名称</text>
   </view>
 </view>
-<view class="boxSh fil-mod" style="min-height: 68%;margin-bottom: 180rpx;">
-  <view class="fil-inp">
-    <input class="inp" type="text" placeholder="请输入职位名称搜索"></input>
-    <text class="xziconfont xzicon-search"></text>
-  </view>
-  <view class="item">
-    <text class="item-title">设计</text>
-    <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
-      <van-radio name="{{1}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '1'?'on':''}}">不限</text>
-      </van-radio>
-      <van-radio name="{{2}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '2'?'on':''}}">岗位外包</text>
-      </van-radio>
-      <van-radio name="{{3}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '3'?'on':''}}">短期驻场</text>
-      </van-radio>
-      <van-radio name="{{4}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '4'?'on':''}}">团队外包</text>
-      </van-radio>
-    </van-radio-group>
-  </view>
-  <view class="item">
-    <text class="item-title">运营</text>
-    <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
-      <van-radio name="{{1}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '1'?'on':''}}">不限</text>
-      </van-radio>
-      <van-radio name="{{2}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '2'?'on':''}}">岗位外包</text>
-      </van-radio>
-      <van-radio name="{{3}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '3'?'on':''}}">短期驻场</text>
-      </van-radio>
-      <van-radio name="{{4}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '4'?'on':''}}">团队外包</text>
-      </van-radio>
-    </van-radio-group>
+<view style="padding-bottom:100rpx;">
+  <view class="boxSh fil-mod">
+    <view class="fil-inp">
+      <input class="inp" type="text" placeholder="请输入职位名称搜索"></input>
+      <text class="xziconfont xzicon-search"></text>
+    </view>
+    <block wx:for="{{jobList}}" wx:key="index">
+      <view class="item" wx:for="{{item.children}}" wx:for-item="itemType" wx:key="index">
+        <text class="item-title">{{itemType.cnname}}</text>
+        <view class="item-list">
+          <text class="label {{selCode == itemType.itemCode?'on':''}}" data-code="{{itemType.itemCode}}" bindtap="onChange">不限</text>
+          <text class="label {{selCode == jobItem.itemCode?'on':''}}" wx:for="{{itemType.children}}" wx:for-item="jobItem" data-code="{{jobItem.itemCode}}" bindtap="onChange" wx:key="index">{{jobItem.cnname}}</text>
+        </view>
+      </view>
+    </block>
+
   </view>
 </view>
+
 <view class="oper-btns">
   <text class="btn sure">完成</text>
 </view>

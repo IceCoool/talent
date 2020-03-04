@@ -6,8 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cityChart: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-    idleCitys: []
+    idleCitys: [],
+    charIndex: []
   },
 
   /**
@@ -19,31 +19,41 @@ Page({
     }).then(res => {
       if (res.data.responseHeader.code == 200) {
         let citys = [];
-        let resList = res.data.data.list[0].list;
+        let resData = res.data.data.list[0].list;
         // 将所有市级单位摘出
-        resList.forEach((provinceItem, provinceIndex) => {
+        resData.forEach((provinceItem, provinceIndex) => {
           provinceItem.children.shift();
           citys = citys.concat(provinceItem.children)
         })
-        const cityChart = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"];
-        let idleCitys = []
-        // for (let i = 0; i < cityChart.length; i++) {
-        //   let char = cityChart[i];
-        //   let obj = {
-        //     name: char,
-        //     list: []
-        //   };
-        //   for (let k = 0; k < citys.length; k++) {
-        //     let cityItem = citys[k];
-        //     if (getFirstLetter(cityItem.cnname).slice(0, 1) == char) {
-        //       obj.list.push(cityItem)
-        //     }
-        //   };
-        //   idleCitys.push(obj)
-        // }
-        console.log(idleCitys)
+        const cityChart = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+        let idleCitys = [];
+        let charIndex = [];
+        for (let i = 0; i < cityChart.length; i++) {
+          let hasChar = false;
+          let char = cityChart[i];
+          let obj = {
+            name: char,
+            list: []
+          };
+          for (let k = 0; k < citys.length; k++) {
+            let cityItem = citys[k];
+            if (cityItem.enname) {
+              if (cityItem.enname.slice(0, 1).toUpperCase() == char) {
+                hasChar = true;
+                obj.list.push(cityItem);
+                // 已分组的城市 不在进入循环
+                citys.splice(k, 1);
+                k--;
+              }
+            }
+          };
+          hasChar ? charIndex.push(char) : '';
+
+          idleCitys.push(obj)
+        }
         this.setData({
-          idleCitys: idleCitys
+          idleCitys: idleCitys,
+          charIndex: charIndex
         })
       }
     })
@@ -56,7 +66,7 @@ Page({
   },
   onPageScroll(event) {
     this.setData({
-      scrollTop: event.scrollTop
+      scrollTop: event.scrollTop + 5
     });
   },
   /**

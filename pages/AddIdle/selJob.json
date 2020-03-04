@@ -1,6 +1,4 @@
 {
-  "usingComponents": {
-    "van-radio": "/@vant/weapp/radio/index",
-    "van-radio-group": "/@vant/weapp/radio-group/index"
-  }
+  "usingComponents": {},
+  "navigationBarTitleText": "选择职位类型"
 }
