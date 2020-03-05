@@ -44,9 +44,9 @@ Page({
     })
   },
   // 页面滚动事件
-  onPageScroll: function(e) {
+  onPageScroll: function(event) {
     const idleFilterTop = this.data.idleFilterTop
-    if (e.scrollTop >= idleFilterTop - 150) {
+    if (event.scrollTop >= idleFilterTop - 150) {
       this.setData({
         showFxq: true
       })
@@ -57,7 +57,7 @@ Page({
     }
 
 
-    // if (e.scrollTop >= idleFilterTop - 190) {
+    // if (event.scrollTop >= idleFilterTop - 190) {
     //   this.setData({
     //     showMyXq: true
     //   })
@@ -66,6 +66,13 @@ Page({
     //     showMyXq: false
     //   })
     // }
+  },
+  isLogin(event) {
+    let url = event.currentTarget.dataset.url;
+    app.loginAuthorize(this, url)
+  },
+  compIsLogin(event) {
+    app.loginAuthorize(this, event.detail.url)
   },
   /**
    * 生命周期函数--监听页面显示

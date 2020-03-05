@@ -1,7 +1,8 @@
 {
   "pages": [
-        "pages/AddIdle/addAsk",
+    "pages/demo/customer",
     "pages/Index/index",
+    "pages/AddIdle/addAsk",
     "pages/AddIdle/selTrade",
     "pages/AddIdle/selJob",
     "pages/Filter/selCity",
@@ -11,7 +12,6 @@
     "pages/IdleType/epiboly",
     "pages/MyIdle/idleEdit",
     "pages/MyIdle/idleList",
-
     "pages/Filter/selAll",
     "pages/Filter/selSort",
     "pages/Invite/index",
@@ -49,7 +49,8 @@
     ]
   },
   "usingComponents": {
-    "van-popup": "/@vant/weapp/popup/index"
+    "van-popup": "/@vant/weapp/popup/index",
+    "user-login": "/components/user-login/index"
   },
   "sitemapLocation": "sitemap.json",
   "permission": {

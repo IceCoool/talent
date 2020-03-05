@@ -21,6 +21,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    tapEvent(event) {
+      let url = event.currentTarget.dataset.url;
+      this.triggerEvent('isLogin', {
+        url: url
+      })
+    }
   }
 })

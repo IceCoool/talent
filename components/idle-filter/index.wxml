@@ -5,17 +5,17 @@
     <text class="num"></text>
   </view>
   <view class="rt">
-    <navigator class="fil-type" url="/pages/Filter/selSort">
+    <view class="fil-type" data-url="/pages/Filter/selSort" bindtap="tapEvent">
       <text>{{textOption.sort}}</text>
       <text class="icon"></text>
-    </navigator>
-    <navigator class="fil-type" url="/pages/Filter/selCity">
+    </view>
+    <view class="fil-type" data-url="/pages/Filter/selCity" bindtap="tapEvent">
       <text>{{textOption.locaCity}}</text>
       <text class="icon"></text>
-    </navigator>
-    <navigator class="fil-type" url="/pages/Filter/selAll">
+    </view>
+    <view class="fil-type" data-url="/pages/Filter/selAll" bindtap="tapEvent">
       <text>{{textOption.filter}}</text>
       <text class="icon"></text>
-    </navigator>
+    </view>
   </view>
 </view>

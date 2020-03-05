@@ -3,36 +3,36 @@
   <image class="top-bg" style="height: 428rpx;" src="/images/banner-bg.png"></image>
   <view class="top-info">
     <!-- <text style="margin-left: 28rpx;">在线即约即面 7天无理由换人</text> -->
-    <navigator class="find" url="/pages/AddIdle/addAsk">创建需求 找人才</navigator>
+    <view class="find" data-url="/pages/AddIdle/addAsk" bindtap="isLogin">创建需求 找人才</view>
     <view class="top-mod">
-      <navigator class="item" url="/pages/IdleType/epiboly">
+      <view class="item" data-url="/pages/IdleType/epiboly" bindtap="isLogin">
         <image src="/images/top-modbg1.png"></image>
         <view>
           <text>岗位外包</text>
           <text>岗位外包，随叫随到</text>
         </view>
-      </navigator>
-      <navigator class="item" url="/pages/IdleType/short">
+      </view>
+      <view class="item" data-url="/pages/IdleType/short" bindtap="isLogin">
         <image src="/images/top-modbg2.png"></image>
         <view>
           <text>短期用工</text>
           <text>短期支援，即用即停</text>
         </view>
-      </navigator>
-      <navigator class="item" url="">
+      </view>
+      <view class="item" data-url="" bindtap="isLogin">
         <image src="/images/top-modbg3.png"></image>
         <view>
           <text>财税优化</text>
           <text>灵活招聘，即约即面</text>
         </view>
-      </navigator>
-      <navigator class="item" url="">
+      </view>
+      <view class="item" data-url="" bindtap="isLogin">
         <image src="/images/top-modbg4.png"></image>
         <view>
           <text>团队外包</text>
           <text>整团招聘，极速开发</text>
         </view>
-      </navigator>
+      </view>
     </view>
   </view>
 </view>
@@ -73,13 +73,13 @@
   </view>
   <!-- 推荐 最新 筛选 -->
   <van-sticky offset-top="{{ 68 }}"> <!-- 68   104 -->
-    <idle-filter text-option="{{textOption}}" id="staff-filter"></idle-filter>
+    <idle-filter text-option="{{textOption}}" id="staff-filter" bindisLogin="compIsLogin"></idle-filter>
   </van-sticky>
-  <idle-list></idle-list>
+  <idle-list bindisLogin="compIsLogin"></idle-list>
 </view>
 <!-- 滚动显示发布需求 -->
 <view class="fixed-btn" id="fxq" wx:if="{{showFxq}}">
-  <navigator class="find" url="/pages/AddIdle/addAsk">创建用人需求，找人才</navigator>
+  <view class="find" data-url="/pages/AddIdle/addAsk" bindtap="isLogin">创建用人需求，找人才</view>
 </view>
 
 <!-- 滚动显示已发的需求 -->

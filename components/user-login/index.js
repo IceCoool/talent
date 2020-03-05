@@ -26,21 +26,11 @@ Component({
         showLogin: false
       });
     },
-    getUserInfo(e) {
+    getPhoneNumber(e) {
       this.setData({
         showLogin: false
       })
-      if (e.detail.errMsg.indexOf('fail') != -1) {
-        wx.showToast({
-          title: '授权失败',
-          icon: 'none'
-        })
-      } else {
-        wx.showToast({
-          title: '授权成功',
-          icon: 'none'
-        })
-      }
+      console.log(e)
     }
   }
 })

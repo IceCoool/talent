@@ -2,7 +2,6 @@
   "usingComponents": {
     "van-sticky": "/@vant/weapp/sticky/index",
     "idle-list": "/components/idle-list/index",
-    "user-login": "/components/user-login/index",
     "idle-filter": "/components/idle-filter/index"
   }
 }

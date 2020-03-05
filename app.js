@@ -7,10 +7,21 @@ App({
       success(res) {
         if (res.code) {
           _this.globalData.loginCode = res.code;
-          IdleHttp.request('/mobileapi/user/getSessionKeyByCode',{
+          IdleHttp.request('/mobileapi/user/getSessionKeyByCode', {
             code: res.code
           }).then(result => {
-            console.log(result)
+            if (result.data.responseHeader.code == 200) {
+              let resData = result.data.data;
+              if (resData.user) {
+                _this.globalData.isLoginAuthorize = true;
+                _this.globalData.openid = resData.openid;
+                _this.globalData.appletCode = resData.appletCode;
+                _this.globalData.user = resData.user
+              } else {
+                _this.globalData.openid = resData.openid;
+                _this.globalData.appletCode = resData.appletCode;
+              }
+            }
           })
         }
       }
@@ -20,23 +31,22 @@ App({
   globalData: {
     // 用户是否授权地理位置
     isLocaAuthorize: false,
+    isLoginAuthorize: false,
     locaCity: '北京市',
     loginCode: ''
   },
   // 判断用户是否授权登录
-  loginAuthorize() {
-    let _this = this;
-    wx.getSetting({
-      success(res) {
-        if (!res.authSetting['scope.userInfo']) {
-          _this.setData({
-            showLogin: true
-          })
-        } else {
-          console.log('用户已授权')
-        }
-      }
-    })
+  loginAuthorize(_this, url) {
+    // _this 为当前页面的this
+    if (this.globalData.isLoginAuthorize) {
+      wx.navigateTo({
+        url: url
+      })
+    } else {
+      _this.setData({
+        showLogin: true
+      })
+    }
   },
   // promise 解决异步问题
   promiseLocaAuthorize() {

@@ -11,21 +11,17 @@
       <text>招聘职位</text>
       <text class="icon">*</text>
     </view>
-    <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
-      <van-radio name="{{1}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '1'?'on':''}}">不限</text>
-      </van-radio>
-      <van-radio name="{{2}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '2'?'on':''}}">岗位外包</text>
-      </van-radio>
-      <van-radio name="{{3}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '3'?'on':''}}">短期驻场</text>
-      </van-radio>
-      <van-radio name="{{4}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '4'?'on':''}}">团队外包</text>
-      </van-radio>
+    <view class="item-list">
+
+      <text slot="icon" class="label {{sortValue == '1'?'on':''}}">不限</text>
+
+      <text slot="icon" class="label">岗位外包</text>
+
+      <text slot="icon" class="label">短期驻场</text>
+
+      <text slot="icon" class="label">团队外包</text>
       <navigator class="label" url="/pages/AddIdle/selJob">其他</navigator>
-    </van-radio-group>
+    </view>
   </view>
   <view class="item">
     <view class="must-title">
@@ -33,9 +29,9 @@
       <text class="icon">*</text>
     </view>
     <view class="fil-inp" style="margin-top: 0;font-size: 28rpx;">
-        <text class="xziconfont xzicon-position Mrt10"></text>
-        <text class="inp">北京</text>
-        <navigator class="xziconfont xzicon-jump" url="/pages/Filter/selCity"></navigator>
+      <text class="xziconfont xzicon-position Mrt10"></text>
+      <text class="inp">北京</text>
+      <navigator class="xziconfont xzicon-jump" url="/pages/Filter/selCity"></navigator>
     </view>
   </view>
   <view class="item">
@@ -43,41 +39,32 @@
       <text>行业类别</text>
       <text class="icon">*</text>
     </view>
-    <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
-      <van-radio name="{{1}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '1'?'on':''}}">不限</text>
-      </van-radio>
-      <van-radio name="{{2}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '2'?'on':''}}">岗位外包</text>
-      </van-radio>
-      <van-radio name="{{3}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '3'?'on':''}}">短期驻场</text>
-      </van-radio>
-      <van-radio name="{{4}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '4'?'on':''}}">团队外包</text>
-      </van-radio>
+    <view class="item-list">
+      <text slot="icon" class="label">不限</text>
+
+      <text slot="icon" class="label">岗位外包</text>
+
+      <text slot="icon" class="label">短期驻场</text>
+
+      <text slot="icon" class="label">团队外包</text>
       <navigator class="label" url="/pages/AddIdle/selJob">其他</navigator>
-    </van-radio-group>
+    </view>
   </view>
   <view class="item">
     <view class="must-title">
       <text>项目周期</text>
       <text class="icon">*</text>
     </view>
-    <van-radio-group class="item-list" value="{{sortValue}}" bind:change="onChange">
-      <van-radio name="{{1}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '1'?'on':''}}">不限</text>
-      </van-radio>
-      <van-radio name="{{2}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '2'?'on':''}}">岗位外包</text>
-      </van-radio>
-      <van-radio name="{{3}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '3'?'on':''}}">短期驻场</text>
-      </van-radio>
-      <van-radio name="{{4}}" use-icon-slot>
-        <text slot="icon" class="label {{sortValue == '4'?'on':''}}">团队外包</text>
-      </van-radio>
-    </van-radio-group>
+    <view class="item-list">
+      <text slot="icon" class="label">不限</text>
+
+      <text slot="icon" class="label">岗位外包</text>
+
+      <text slot="icon" class="label">短期驻场</text>
+
+      <text slot="icon" class="label">团队外包</text>
+      <navigator class="label" url="/pages/AddIdle/selJob">其他</navigator>
+    </view>
   </view>
 </view>
 <view class="oper-btns">

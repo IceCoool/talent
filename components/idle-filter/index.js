@@ -29,6 +29,12 @@ Component({
         sortValue: event.detail
       });
       console.log(this.data.sortValue)
+    },
+    tapEvent(event) {
+      let url = event.currentTarget.dataset.url;
+      this.triggerEvent('isLogin', {
+        url: url
+      })
     }
   }
 })

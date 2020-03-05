@@ -3,6 +3,6 @@
     <image src="/images/login-bg.png"></image>
     <image class="login-btn" src="/images/login-btn.png" bindtap="aaa"></image>
     <text class="close" bindtap="onClose">×</text>
-    <button class="getUser-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"></button>
+    <button class="getUser-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
   </view>
 </van-popup>
