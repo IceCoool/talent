@@ -1,13 +1,27 @@
 require('./utils/utils.js')
+const IdleHttp = require('./utils/request.js');
 App({
   onLaunch: function() {
-
+    let _this = this;
+    wx.login({
+      success(res) {
+        if (res.code) {
+          _this.globalData.loginCode = res.code;
+          IdleHttp.request('/mobileapi/user/getSessionKeyByCode',{
+            code: res.code
+          }).then(result => {
+            console.log(result)
+          })
+        }
+      }
+    })
   },
   // 全局数据
   globalData: {
     // 用户是否授权地理位置
     isLocaAuthorize: false,
-    locaCity: '上海市'
+    locaCity: '北京市',
+    loginCode: ''
   },
   // 判断用户是否授权登录
   loginAuthorize() {
@@ -71,7 +85,7 @@ App({
           })
         } else if (res.authSetting['scope.userLocation'] == undefined) {
           //初次进入 调用地理位置API
-          _this.getLocation(resolve)
+          _this.getLocation(resolve, reject)
         }
       }
     })
@@ -140,26 +154,5 @@ App({
         resolve()
       }
     })
-
-    // let _this = this;
-    // let myAmapFun = new amapFile.AMapWX({
-    //   key: 'cf7f9a6bc988083166ac2d4e06d3bac4'
-    // });
-    // myAmapFun.getRegeo({
-    //   success: function(data) {
-    //     //成功回调
-    //     console.log(data)
-    //     wx.showToast({
-    //       title: '成功'
-    //     })
-    //   },
-    //   fail: function(info) {
-    //     //失败回调
-    //     console.log(info)
-    //     wx.showToast({
-    //       title: '失败'
-    //     })
-    //   }
-    // })
   }
 })

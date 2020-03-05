@@ -1,16 +1,17 @@
 {
   "pages": [
+        "pages/AddIdle/addAsk",
+    "pages/Index/index",
     "pages/AddIdle/selTrade",
     "pages/AddIdle/selJob",
     "pages/Filter/selCity",
-    "pages/Index/index",
     "pages/demo/index",
     "pages/Mine/collect",
     "pages/IdleType/short",
     "pages/IdleType/epiboly",
     "pages/MyIdle/idleEdit",
     "pages/MyIdle/idleList",
-    "pages/AddIdle/addAsk",
+
     "pages/Filter/selAll",
     "pages/Filter/selSort",
     "pages/Invite/index",
