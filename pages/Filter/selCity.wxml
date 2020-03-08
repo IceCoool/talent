@@ -14,24 +14,20 @@
   <view class="local">
     <text class="xziconfont xzicon-position Mrt10"></text>
     <text>当前城市：</text>
-    <text class="city">北京</text>
+    <text class="city">{{cityName}}</text>
   </view>
 
   <view class="item">
     <text class="item-title">热门城市</text>
     <view class="item-list">
-      <text class="label {{sortValue == '110100'?'on':''}}">北京</text>
-      <text class="label {{sortValue == '310100'?'on':''}}">上海</text>
-      <text class="label {{sortValue == '440300'?'on':''}}">深圳</text>
-      <text class="label {{sortValue == '330100'?'on':''}}">杭州</text>
-      <text class="label {{sortValue == '420100'?'on':''}}">武汉</text>
+      <text class="label {{cityCode == item.itemCode?'on':''}}" wx:for="{{hotCity}}" data-name="{{item.cnname}}" data-code="{{item.itemCode}}" bindtap="onChange">{{item.cnname}}</text>
     </view>
   </view>
   <van-index-bar scroll-top="{{ scrollTop }}" index-list="{{charIndex}}" sticky="{{false}}" highlight-color="#999">
     <view class="item" wx:if="{{item.list.length>0}}" wx:for="{{idleCitys}}" wx:key="index" style="margin-top: 30rpx;">
       <van-index-anchor index="{{item.name}}" />
       <view class="item-list">
-        <text class="label {{sortValue == cityItem.itemCode?'on':''}}" wx:for="{{item.list}}" wx:for-item="cityItem" wx:key="index" data-code="{{cityItem.itemCode}}" bindtap="onChange">{{cityItem.cnname}}</text>
+        <text class="label {{cityCode == cityItem.itemCode?'on':''}}" wx:for="{{item.list}}" wx:for-item="cityItem" wx:key="index" data-name="{{cityItem.cnname}}" data-code="{{cityItem.itemCode}}" bindtap="onChange">{{cityItem.cnname}}</text>
       </view>
     </view>
   </van-index-bar>

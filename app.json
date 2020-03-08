@@ -1,8 +1,10 @@
 {
   "pages": [
-    "pages/demo/customer",
-    "pages/Index/index",
+    "pages/enterprise/search",
     "pages/AddIdle/addAsk",
+    "pages/Index/index",
+    "pages/enterprise/authenticate",
+    "pages/demo/customer",
     "pages/AddIdle/selTrade",
     "pages/AddIdle/selJob",
     "pages/Filter/selCity",

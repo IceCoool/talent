@@ -1,4 +1,4 @@
-require('./utils/utils.js')
+const util = require('./utils/utils.js')
 const IdleHttp = require('./utils/request.js');
 App({
   onLaunch: function() {
@@ -32,7 +32,7 @@ App({
     // 用户是否授权地理位置
     isLocaAuthorize: false,
     isLoginAuthorize: false,
-    locaCity: '北京市',
+    cityName: '北京市',
     loginCode: ''
   },
   // 判断用户是否授权登录
@@ -47,6 +47,12 @@ App({
         showLogin: true
       })
     }
+  },
+  showError(title) {
+    wx.showToast({
+      title: title || '不好意思，系统开小差了，请稍后再试',
+      icon: 'none'
+    })
   },
   // promise 解决异步问题
   promiseLocaAuthorize() {
@@ -157,9 +163,9 @@ App({
         let addressInfo = res.data.regeocode.addressComponent;
         let municipality = "北京市上海市重庆市天津市";
         if (municipality.indexOf(addressInfo.province) != -1) {
-          _this.globalData.locaCity = addressInfo.province
+          _this.globalData.cityName = addressInfo.province
         } else {
-          _this.globalData.locaCity = addressInfo.province
+          _this.globalData.cityName = addressInfo.province
         }
         resolve()
       }

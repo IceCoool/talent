@@ -1,5 +1,6 @@
 // pages/SelCity/selCity.js
 const IdleHttp = require('../../utils/request.js');
+const app = getApp();
 Page({
 
   /**
@@ -7,22 +8,52 @@ Page({
    */
   data: {
     idleCitys: [],
-    charIndex: []
+    charIndex: [],
+    cityCode: '',
+    hotCity: [{
+        cnname: '北京',
+        itemCode: '110100'
+      },
+      {
+        cnname: '上海',
+        itemCode: '310100'
+      },
+      {
+        cnname: '深圳',
+        itemCode: '440300'
+      },
+      {
+        cnname: '杭州',
+        itemCode: '330100'
+      },
+      {
+        cnname: '武汉',
+        itemCode: '420100'
+      }
+    ]
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    IdleHttp.request('/mobileapi/dictionary/list', {
+    if (options) {
+      this.setData({
+        cityCode: options.cityCode
+      })
+    }
+    this.setData({
+      cityName: app.globalData.cityName
+    })
+    wx.showLoading()
+    IdleHttp.request('/mobileapi/dictionary/topic', {
       topic: 'LOC'
     }).then(res => {
       if (res.data.responseHeader.code == 200) {
+        wx.hideLoading()
         let citys = [];
         let resData = res.data.data.list[0].list;
         // 将所有市级单位摘出
         resData.forEach((provinceItem, provinceIndex) => {
-          provinceItem.children.shift();
           citys = citys.concat(provinceItem.children)
         })
         const cityChart = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
@@ -48,21 +79,35 @@ Page({
             }
           };
           hasChar ? charIndex.push(char) : '';
-
           idleCitys.push(obj)
         }
         this.setData({
           idleCitys: idleCitys,
           charIndex: charIndex
         })
+      } else {
+        wx.showToast({
+          title: res.data.responseHeader.message,
+          icon: 'none'
+        })
       }
     })
   },
 
   onChange(event) {
+    let cityCode = event.currentTarget.dataset.code;
+    let cityName = event.currentTarget.dataset.name;
     this.setData({
-      sortValue: event.currentTarget.dataset.code
+      cityCode
     });
+
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];
+    prevPage.setData({
+      cityCode,
+      cityName
+    })
+    wx.navigateBack()
   },
   onPageScroll(event) {
     this.setData({

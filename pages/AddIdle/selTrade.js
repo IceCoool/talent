@@ -7,7 +7,7 @@ Page({
   data: {
     jobList: [],
     selTrade: [],
-    selCode: []
+    tradeCode: []
   },
 
   /**
@@ -15,7 +15,7 @@ Page({
    */
   onLoad: function(options) {
     wx.showLoading()
-    IdleHttp.request('/mobileapi/dictionary/list', {
+    IdleHttp.request('/mobileapi/dictionary/topic', {
       topic: 'INDUSTRY_EXPERIENCE'
     }).then(res => {
       wx.hideLoading()
@@ -29,11 +29,11 @@ Page({
   },
   onChange(event) {
     let selTrade = this.data.selTrade;
-    let selCode = this.data.selCode;
+    let tradeCode = this.data.tradeCode;
     let itemCode = event.currentTarget.dataset.code;
     let cnname = event.currentTarget.dataset.name;
     if (selTrade.findIndex(item => item.itemCode == itemCode) == -1) {
-      if (selTrade.length >= 3) {
+      if (tradeCode.length >= 3) {
         wx.showToast({
           title: '最多选择3个',
           icon: 'none'
@@ -41,24 +41,43 @@ Page({
         return;
       }
       selTrade.push({
-        itemCode,
-        cnname
+        cnname,
+        itemCode
       })
-      selCode.push(itemCode)
+      tradeCode.push(itemCode)
     } else {
       selTrade.splice(selTrade.findIndex(item => item.itemCode == itemCode), 1);
-      selCode.splice(selCode.findIndex(item => item == itemCode), 1)
+      tradeCode.splice(tradeCode.findIndex(item => item == itemCode), 1)
     }
     this.setData({
       selTrade,
-      selCode
+      tradeCode
     })
   },
   clearCode() {
     this.setData({
       selTrade: [],
-      selCode: []
+      tradeCode: []
     })
+  },
+  goBack() {
+    let selTrade = this.data.selTrade;
+    let tradeCode = this.data.tradeCode;
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];
+    let tradeList = prevPage.data.tradeList;
+    tradeList = tradeList.concat(selTrade);
+    var hash = {};
+    tradeList = tradeList.reduce(function(arr, current) {
+      hash[current.cnname] ? '' : hash[current.cnname] = true && arr.push(current);
+      return arr
+    }, [])
+    prevPage.setData({
+      tradeList,
+      selTrade,
+      tradeCode: tradeCode
+    });
+    wx.navigateBack()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

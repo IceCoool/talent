@@ -1,3 +1,4 @@
+<wxs module="utils" src="../../utils/utils.wxs"></wxs>
 <view class="fil-top posr">
   <image src="/images/xq-bg.png"></image>
   <view class="fil-title">
@@ -12,14 +13,7 @@
       <text class="icon">*</text>
     </view>
     <view class="item-list">
-
-      <text slot="icon" class="label {{sortValue == '1'?'on':''}}">不限</text>
-
-      <text slot="icon" class="label">岗位外包</text>
-
-      <text slot="icon" class="label">短期驻场</text>
-
-      <text slot="icon" class="label">团队外包</text>
+      <text class="label {{item.itemCode==postType?'on':''}}" wx:for="{{postList}}" wx:key="*this" data-topic="postType" data-code="{{item.itemCode}}" bindtap="selTopic">{{item.cnname}}</text>
       <navigator class="label" url="/pages/AddIdle/selJob">其他</navigator>
     </view>
   </view>
@@ -30,8 +24,8 @@
     </view>
     <view class="fil-inp" style="margin-top: 0;font-size: 28rpx;">
       <text class="xziconfont xzicon-position Mrt10"></text>
-      <text class="inp">北京</text>
-      <navigator class="xziconfont xzicon-jump" url="/pages/Filter/selCity"></navigator>
+      <text class="inp">{{cityName}}</text>
+      <navigator class="xziconfont xzicon-jump" url="/pages/Filter/selCity?cityCode={{cityCode}}"></navigator>
     </view>
   </view>
   <view class="item">
@@ -40,14 +34,9 @@
       <text class="icon">*</text>
     </view>
     <view class="item-list">
-      <text slot="icon" class="label">不限</text>
-
-      <text slot="icon" class="label">岗位外包</text>
-
-      <text slot="icon" class="label">短期驻场</text>
-
-      <text slot="icon" class="label">团队外包</text>
-      <navigator class="label" url="/pages/AddIdle/selJob">其他</navigator>
+      <text class="label {{tradeCode.length == 0?'on':''}}" bindtap="clearCode">不限</text>
+      <text class="label {{utils.checkBoxStatus(tradeCode,item.itemCode)?'on':''}}" wx:for="{{tradeList}}" wx:key="*this" data-code="{{item.itemCode}}" data-name="{{item.cnname}}" bindtap="selTrage">{{item.cnname}}</text>
+      <navigator class="label" url="/pages/AddIdle/selTrade">其他</navigator>
     </view>
   </view>
   <view class="item">
@@ -56,17 +45,10 @@
       <text class="icon">*</text>
     </view>
     <view class="item-list">
-      <text slot="icon" class="label">不限</text>
-
-      <text slot="icon" class="label">岗位外包</text>
-
-      <text slot="icon" class="label">短期驻场</text>
-
-      <text slot="icon" class="label">团队外包</text>
-      <navigator class="label" url="/pages/AddIdle/selJob">其他</navigator>
+      <text class="label {{item.itemCode==projectCycleCode?'on':''}}" wx:for="{{cycleList}}" data-code="{{item.itemCode}}" wx:key="*this" data-topic="projectCycleCode" bindtap="selTopic">{{item.cnname}}</text>
     </view>
   </view>
 </view>
 <view class="oper-btns">
-  <text class="btn sure">完成</text>
+  <text class="btn sure {{postType==''||tradeCode.length==0||projectCycleCode==''?'forbid':''}}" bindtap="cerateRequest">完成</text>
 </view>

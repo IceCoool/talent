@@ -154,6 +154,12 @@
   border: 1px solid rgba(75, 154, 232, 1);
 }
 
+.oper-btns .sure.forbid{
+  background: #e5e5e5;
+  border-color: #e5e5e5;
+  box-shadow: none;
+}
+
 .van-index-anchor-wrapper .van-index-anchor {
   padding: 20rpx 0 0 !important;
   font-size: 36rpx;

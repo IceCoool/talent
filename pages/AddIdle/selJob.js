@@ -6,7 +6,10 @@ Page({
    */
   data: {
     jobList: [],
-    selCode: ''
+    selJob: {
+      cnname: '',
+      itemCode: ''
+    }
   },
 
   /**
@@ -14,7 +17,7 @@ Page({
    */
   onLoad: function(options) {
     wx.showLoading()
-    IdleHttp.request('/mobileapi/dictionary/list', {
+    IdleHttp.request('/mobileapi/dictionary/topic', {
       topic: 'WT_HR'
     }).then(res => {
       wx.hideLoading()
@@ -27,9 +30,37 @@ Page({
     })
   },
   onChange(event) {
+    let cnname = event.currentTarget.dataset.name;
+    let code = event.currentTarget.dataset.code;
     this.setData({
-      selCode: event.currentTarget.dataset.code
+      'selJob.cnname': cnname,
+      'selJob.itemCode': code
     });
+  },
+  goBack() {
+    let selJob = this.data.selJob;
+    if (selJob.cnname == '') {
+      wx.navigateBack()
+      return;
+    }
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];
+    let postList = prevPage.data.postList;
+    let isInclude = postList.find((item, index) => {
+      if (item.itemCode == selJob.itemCode) {
+        return true;
+      } else {
+        return false
+      }
+    })
+    if (!isInclude) {
+      postList.push(selJob);
+    }
+    prevPage.setData({
+      postList,
+      postType: selJob.itemCode
+    });
+    wx.navigateBack()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

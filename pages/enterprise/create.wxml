@@ -1,0 +1,39 @@
+<!--pages/card/create/create.wxml-->
+<view class="cell-item flex-h-center-between">
+  <view>公司名称</view>
+  <view class="cell-item-val">{{info.name}}</view>
+</view>
+
+<view class="cell-item flex-h-center-between">
+  <view>企业法人</view>
+  <view class="cell-item-val">{{info.legalPersonName}}</view>
+</view>
+
+<view class="cell-item flex-h-center-between">
+  <view>注册时间</view>
+  <view class="cell-item-val">{{info.estiblishTime}}</view>
+</view>
+
+<view class="cell-item flex-h-center-between">
+  <view>注册资本</view>
+  <view class="cell-item-val">{{info.regCapital}}</view>
+</view>
+
+<view class="cell-item flex-h-start-between">
+  <view style="flex-shrink:0; margin-right:18px;">注册地址</view>
+  <view class="cell-item-val" style="text-align:left;">{{info.regLocation}}</view>
+</view>
+
+<view class="create-btn" bindtap="create">立即创建</view>
+
+<!-- 创建成功 -->
+<view class="mask flex-v-center" wx:if="{{isSuccess}}">
+  <view class="modal-dialog">
+    <image class="modal-icon-badge" src="/images/common/modal-icon-badge.png"></image>
+    <view class="modal-title">创建成功</view>
+    <view class="modal-btns" style="width: 100%;">
+      <view class="modal-btn modal-cancel" bindtap="completeInfo">完善企业名片信息</view>
+      <view class="modal-btn modal-ok" style="margin-top: 10px;" bindtap="go2Card">查看名片</view>
+    </view>
+  </view>
+</view>

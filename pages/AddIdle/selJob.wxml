@@ -15,8 +15,8 @@
       <view class="item" wx:for="{{item.children}}" wx:for-item="itemType" wx:key="index">
         <text class="item-title">{{itemType.cnname}}</text>
         <view class="item-list">
-          <text class="label {{selCode == itemType.itemCode?'on':''}}" data-code="{{itemType.itemCode}}" bindtap="onChange">不限</text>
-          <text class="label {{selCode == jobItem.itemCode?'on':''}}" wx:for="{{itemType.children}}" wx:for-item="jobItem" data-code="{{jobItem.itemCode}}" bindtap="onChange" wx:key="index">{{jobItem.cnname}}</text>
+          <text class="label {{selJob.itemCode == ''?'on':''}}" data-code="" bindtap="onChange">不限</text>
+          <text class="label {{selJob.itemCode == jobItem.itemCode?'on':''}}" wx:for="{{itemType.children}}" wx:for-item="jobItem" data-code="{{jobItem.itemCode}}" data-name="{{jobItem.cnname}}" bindtap="onChange" wx:key="index">{{jobItem.cnname}}</text>
         </view>
       </view>
     </block>
@@ -25,5 +25,5 @@
 </view>
 
 <view class="oper-btns">
-  <text class="btn sure">完成</text>
+  <text class="btn sure" bindtap="goBack">完成</text>
 </view>

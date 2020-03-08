@@ -1,4 +1,6 @@
 // components/login/index.js
+const app = getApp();
+const IdleHttp = require('../../utils/request.js');
 Component({
   /**
    * 组件的属性列表
@@ -30,7 +32,27 @@ Component({
       this.setData({
         showLogin: false
       })
-      console.log(e)
+      if (e.detail.errMsg.indexOf('ok') != -1) {
+        IdleHttp.request('/mobileapi/user/getUserByMobile', {
+          appletCode: app.globalData.appletCode,
+          openid: app.globalData.openid,
+          encryptedData: e.detail.encryptedData,
+          iv: e.detail.iv
+        }).then(res => {
+          if (res.data.responseHeader.code == 200) {
+            wx.showToast({
+              title: '注册成功',
+              icon: 'none'
+            })
+            app.globalData.user = res.data.data.user;
+          } else {
+            wx.showToast({
+              title: res.data.responseHeader.message,
+              icon: 'none'
+            })
+          }
+        })
+      }
     }
   }
 })

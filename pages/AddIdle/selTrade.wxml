@@ -14,14 +14,14 @@
     </view>
     <view class="item">
       <view class="item-list">
-        <text class="label" bindtap="clearCode">不限</text>
-        <text class="label {{utils.checkBoxStatus(selCode,item.itemCode)?'on':''}}" wx:for="{{jobList}}" data-code="{{item.itemCode}}" data-name="{{item.cnname}}" bindtap="onChange">{{item.cnname}}</text>
+        <text class="label {{tradeCode.length == 0?'on':''}}" bindtap="clearCode">不限</text>
+        <text class="label {{utils.checkBoxStatus(tradeCode,item.itemCode)?'on':''}}" wx:for="{{jobList}}" wx:key="*this" data-code="{{item.itemCode}}" data-name="{{item.cnname}}" bindtap="onChange">{{item.cnname}}</text>
       </view>
     </view>
   </view>
 </view>
 
 <view class="oper-btns">
-  <text class="btn clear">清除</text>
-  <text class="btn sure">完成</text>
+  <text class="btn clear" bindtap="clearCode">清除</text>
+  <text class="btn sure" bindtap="goBack">完成</text>
 </view>

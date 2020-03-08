@@ -1,0 +1,134 @@
+<!-- <view class="auth-blue-bk"></view> -->
+<view wx:if="{{type=='bu'}}" class="company-info">
+  <view class="info-top">
+    <view class="name">
+      <text>{{comBuInfo.buName}}</text>
+      <text class="status">未认证</text>
+    </view>
+    <text class="num">{{comBuInfo.buScale}}</text>
+  </view>
+</view>
+<view wx:else class="company-info">
+  <view class="info-top">
+    <view class="name">
+      <text>{{comSpInfo.name}}</text>
+      <text class="status">未认证</text>
+    </view>
+  </view>
+</view>
+
+
+
+<view class="auth-page-wrap">
+  <!-- 营业执照 -->
+  <view class="auth-section-title" style="margin-top: 14px;">{{mode == 1 ? '请上传' : ''}}营业执照</view>
+  <!-- 图片部分 -->
+  <view class="auth-img-wrap" bindtap="chooseImage" data-type="0">
+    <view wx:if="{{licenseSrc == ''}}" class="auth-img-license">
+      <image class="auth-img-license" src="/images/auth-license-bk.png"></image>
+
+      <image wx:if="{{mode == 1}}" class="auth-add-icon" style="top:calc(100% - 90px)" src="/images/add-icon.png" catchtap="chooseImage" data-type="0"></image>
+
+      <view wx:else class="auth-none-text">暂未上传</view>
+    </view>
+    <image wx:else class="auth-img-license" src="{{licenseSrc}}" mode="aspectFit"></image>
+    <view class="auth-img-title">{{mode == 1 ? (licenseSrc == '' ? '上传' : '编辑') : ''}}营业执照</view>
+  </view>
+  <!-- 注意事项 -->
+  <view class="auth-license-notes auth-text-section" style="padding: 16px 16px 10px;">
+    <view class="auth-license-notes-title">注意事项</view>
+    <view>1、拍摄与所填
+      <text style="color:#007AFF">公司全称一致</text>的营业执照并上</view>
+    <view>2、核准日期为
+      <text style="color:#007AFF">最新</text>
+    </view>
+    <view>3、公章
+      <text style="color:#007AFF">清晰可辨</text>
+    </view>
+  </view>
+  <!-- 信息显示以及人工修正 -->
+  <block wx:if='{{(!!licenseKey) && (!licenseWrong)}}'>
+    <view class="auth-text-section flex-h-center-between">
+      <view class="auth-label">企业名称</view>
+      <input type='text' value='{{licenseInfo.buname}}' class="auth-value" placeholder="请输入企业名称" placeholder-class="auth-placeholder" bindinput='infoInput' data-name='licenseInfo.buname' disabled="{{mode==0}}"></input>
+    </view>
+    <view class="auth-text-section flex-h-center-between">
+      <view class="auth-label">统一社会信用代码</view>
+      <input type='text' value='{{licenseInfo.creditCode}}' class="auth-value" placeholder="请输入统一社会信用代码" placeholder-class="auth-placeholder" bindinput='infoInput' data-name='licenseInfo.creditCode' disabled="{{mode==0}}"></input>
+    </view>
+    <view class="auth-text-section flex-h-start-between">
+      <view class="auth-label" style="margin-top:4px;">公司地址</view>
+      <textarea type='text' value='{{licenseInfo.registAddr}}' class="auth-value textarea" placeholder="请输入公司地址" placeholder-class="auth-placeholder" bindinput='infoInput' data-name='licenseInfo.registAddr' auto-height disabled="{{mode==0}}"></textarea>
+    </view>
+  </block>
+
+  <!-- 法人身份证 -->
+  <view class="auth-section-title">{{mode == 1 ? '请上传' : ''}}企业法人身份证</view>
+  <!-- 图片部分 -->
+  <view class="auth-img-wrap" bindtap="chooseImage" data-type="1">
+    <view wx:if="{{idCardSrc1 == ''}}">
+      <image class="auth-img-idcard" src="/images/auth-idcard-bk1.png"></image>
+      <image wx:if="{{mode == 1}}" class="auth-add-icon" src="/images/add-icon.png" catchtap="chooseImage" data-type="1"></image>
+    </view>
+    <image wx:else class="auth-img-idcard" src="{{idCardSrc1}}" mode="aspectFit"></image>
+    <view class="auth-img-title">{{mode == 1 ? (idCardSrc1 == '' ? '上传' : '编辑') : ''}}人像页</view>
+  </view>
+
+  <view class="auth-img-wrap" bindtap="chooseImage" data-type="2">
+    <view wx:if="{{idCardSrc2 == ''}}">
+      <image class="auth-img-idcard" src="/images/auth-idcard-bk2.png"></image>
+      <image wx:if="{{mode == 1}}" class="auth-add-icon" src="/images/add-icon.png" catchtap="chooseImage" data-type="2"></image>
+    </view>
+    <image wx:else class="auth-img-idcard" src="{{idCardSrc2}}" mode="aspectFit"></image>
+    <view class="auth-img-title">{{mode == 1 ? (idCardSrc2 == '' ? '上传' : '编辑') : ''}}国徽页</view>
+  </view>
+  <!-- 信息显示以及人工修正 -->
+  <block wx:if='{{(!!idCardKey1) && (!idCardWrong1)}}'>
+    <view class="auth-text-section flex-h-center-between">
+      <view class="auth-label">姓名</view>
+      <input type='text' value='{{idCardInfo1.name}}' class="auth-value" placeholder="请输入法人姓名" placeholder-class="auth-placeholder" bindinput='infoInput' data-name='idCardInfo1.name' disabled="{{mode==0}}"></input>
+    </view>
+    <view class="auth-text-section flex-h-center-between">
+      <view class="auth-label">身份证</view>
+      <input type='idcard' value='{{idCardInfo1.idNumber}}' class="auth-value" placeholder="请输入法人身份证号" placeholder-class="auth-placeholder" bindinput='infoInput' data-name='idCardInfo1.idNumber' disabled="{{mode==0}}"></input>
+    </view>
+  </block>
+
+  <!-- 其他资质 -->
+  <view wx:if="{{mode == 1 || others.length > 0}}">
+    <view class="auth-section-title">{{mode == 1 ? '请上传' : ''}}更多资质信息</view>
+    <view class="auth-img-wrap" wx:for="{{others}}" data-type="3" data-index="{{index}}" bindtap="chooseImage" wx:key="*this" style="{{mode == 0 ? 'padding-bottom: 10px' : ''}}">
+      <image class="auth-img-other" src="{{item}}" mode="aspectFit"></image>
+      <image wx:if="{{mode == 1}}" class="auth-delete-icon" src="/images/delete.png" catchtap="deleteOtherImage" data-index="{{index}}"></image>
+      <view wx:if="{{mode == 1}}" class="auth-img-title">点击编辑</view>
+    </view>
+
+    <!-- 添加: 未超过3张且有权限 -->
+    <view class="auth-img-wrap" data-type="3" bindtap="chooseImage" wx:if="{{mode == 1 && others.length < 3}}" data-index="-1">
+      <view class="auth-img-other"></view>
+      <image class="auth-add-icon" src="/images/add-icon.png"></image>
+      <view class="auth-img-title">添加照片</view>
+    </view>
+  </view>
+
+
+  <!-- <view class="auth-text-section flex-h-center-between" style="padding: 12px 16px">
+    <view>邮件上传地址</view>
+    <view class="auth-text-gray">{{email}}</view>
+  </view> -->
+
+  <view wx:if="{{mode == 1}}" class="submit-btn {{btnEnabled ? 'btn-enable' : 'btn-disable'}}" hover-class="{{btnEnabled ? 'btn-hover' : ''}}" bindtap="submit">提交</view>
+</view>
+
+<!-- 弹窗： 提交成功 -->
+<view class="mask flex-v-center" wx:if="{{isSuccess}}">
+  <view class="modal-dialog">
+    <image class="modal-icon-badge" src="/images/modal-icon-badge.png"></image>
+    <view class="modal-title">提交成功，审核中</view>
+    <view class="modal-content">您的资料已提交成功，请耐心等待 审核，大概需要7个工作日左右</view>
+    <view class="modal-btns" style="width: 100%;">
+      <!-- <view class="modal-btn modal-cancel" bindtap="contactCS">联系客服，加速审核</view> -->
+      <view class="modal-btn modal-ok" style="margin-top: 10px;" bindtap="check">查看提交资料</view>
+    </view>
+  </view>
+</view>
