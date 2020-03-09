@@ -7,9 +7,9 @@ Component({
     addGlobalClass: true,
   },
   properties: {
-    textOption: {
-      type: Object,
-      value: {}
+    cityName: {
+      type: String,
+      value: ''
     }
   },
 

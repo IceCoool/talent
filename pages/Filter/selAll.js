@@ -1,24 +1,30 @@
 // pages/Filter/selAll.js
+// 
+let filType = ['SERVICE_TYPE', 'ACADEMIC_REQUIRE', 'INDUSTRY_EXPERIENCE']
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    let arrPro = [];
+    
   },
   onChange(event) {
     this.setData({
       sortValue: event.detail
     });
     console.log(this.data.sortValue)
+  },
+  serviceTypeList() {
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

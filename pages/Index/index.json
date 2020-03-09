@@ -3,5 +3,6 @@
     "van-sticky": "/@vant/weapp/sticky/index",
     "idle-list": "/components/idle-list/index",
     "idle-filter": "/components/idle-filter/index"
-  }
+  },
+  "enablePullDownRefresh": true
 }

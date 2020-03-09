@@ -11,13 +11,9 @@ Page({
     showFxq: false,
     showMyXq: false,
     showLogin: false,
-    textOption: {
-      cityName: '',
-      sort: '排序',
-      filter: '筛选'
-    },
     pageSize: 10,
     pageStart: 1,
+    cityName: '',
     cityCode: '',
     hasRequest: false,
     resumePage: {
@@ -37,16 +33,15 @@ Page({
     this.setData({
       user: app.globalData.user
     })
-    let _this = this;
     // 提示用户 授权地理位置
     app.promiseLocaAuthorize().then(() => {
       this.setData({
-        'textOption.cityName': app.globalData.cityName
+        cityName: app.globalData.cityName
       });
       this.init()
     }).catch(() => {
       this.setData({
-        'textOption.cityName': app.globalData.cityName
+        cityName: app.globalData.cityName
       })
       this.init()
     });
@@ -56,35 +51,21 @@ Page({
       // 已登录
       if (this.data.user.buid) {
         this.getRequestList().then(() => {
-          if (this.data.requestList.length == 0) {
-            this.setData({
-              queryType: 2
+          let queryType;
+          this.data.requestList.length == 0 ? queryType = 2 : queryType = 1;
+          this.setData({
+            queryType
+          })
+          this.getCityCode().then(() => {
+            let param = {};
+            param.workPlaceCode = this.data.cityCode;
+            param.queryType = queryType;
+            param.jfid = this.data.user.jfid;
+            param = Object.assign(param, {
+              ...this.data.resumePage
             })
-            this.getCityCode().then(() => {
-              let param = {};
-              param.workPlaceCode = this.data.cityCode;
-              param.queryType = 2;
-              param.jfid = this.data.user.jfid;
-              param = Object.assign(param, {
-                ...this.data.resumePage
-              })
-              this.getResumeList(param);
-            });
-          } else {
-            this.setData({
-              queryType: 1
-            })
-            this.getCityCode().then(() => {
-              let param = {};
-              param.workPlaceCode = this.data.cityCode;
-              param.queryType = 1;
-              param.jfid = this.data.user.jfid;
-              param = Object.assign(param, {
-                ...this.data.resumePage
-              })
-              this.getResumeList(param);
-            });
-          }
+            this.getResumeList(param);
+          });
         })
       }
     } else {
@@ -147,7 +128,7 @@ Page({
   getCityCode() {
     return new Promise((resolve, reject) => {
       IdleHttp.request('/mobileapi/dictionary/list', {
-        cnname: this.data.textOption.cityName,
+        cnname: this.data.cityName,
         level: 2,
         topic: 'LOC'
       }).then(res => {
@@ -174,7 +155,7 @@ Page({
   // 页面滚动事件
   onPageScroll: function(event) {
     const idleFilterTop = this.data.idleFilterTop
-    if (event.scrollTop >= idleFilterTop - 150) {
+    if (event.scrollTop >= idleFilterTop - 150 && this.requestList.length == 0) {
       this.setData({
         showFxq: true
       })
@@ -184,16 +165,15 @@ Page({
       })
     }
 
-
-    // if (event.scrollTop >= idleFilterTop - 190) {
-    //   this.setData({
-    //     showMyXq: true
-    //   })
-    // } else {
-    //   this.setData({
-    //     showMyXq: false
-    //   })
-    // }
+    if (event.scrollTop >= idleFilterTop - 190 && this.requestList.length != 0) {
+      this.setData({
+        showMyXq: true
+      })
+    } else {
+      this.setData({
+        showMyXq: false
+      })
+    }
   },
   isLogin(event) {
     let url = event.currentTarget.dataset.url;
@@ -201,6 +181,9 @@ Page({
   },
   compIsLogin(event) {
     app.loginAuthorize(this, event.detail.url)
+  },
+  reload() {
+    this.onLoad();
   },
   /**
    * 生命周期函数--监听页面显示
@@ -227,9 +210,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    if (!this.data.finished) {
-
-    }
+    this.onLoad();
   },
 
   /**

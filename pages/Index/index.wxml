@@ -38,7 +38,7 @@
 </view>
 <view class="container">
   <!-- 我的需求 -->
-  <view class="request-mod">
+  <view class="request-mod" wx:if="{{requestList.length != 0}}">
     <view class="req-title">
       <text>我的需求</text>
       <navigator class="rt" url="/pages/MyIdle/idleList">
@@ -72,8 +72,9 @@
     <image src="/images/index-ad.png"></image>
   </view>
   <!-- 推荐 最新 筛选 -->
-  <van-sticky offset-top="{{ 68 }}"> <!-- 68   104 -->
-    <idle-filter text-option="{{textOption}}" id="staff-filter" bindisLogin="compIsLogin"></idle-filter>
+  <van-sticky offset-top="{{ 68 }}">
+    <!-- 68   104 -->
+    <idle-filter city-name="{{cityName}}" id="staff-filter" bindisLogin="compIsLogin"></idle-filter>
   </van-sticky>
   <idle-list bindisLogin="compIsLogin"></idle-list>
 </view>
@@ -100,4 +101,4 @@
 </view>
 
 <!-- 登录 -->
-<user-login show-login="{{showLogin}}"></user-login>
+<user-login show-login="{{showLogin}}" bindreload="reload"></user-login>

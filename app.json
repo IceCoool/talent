@@ -1,8 +1,9 @@
 {
   "pages": [
+    "pages/Index/index",
+    "pages/Filter/selAll",
     "pages/enterprise/search",
     "pages/AddIdle/addAsk",
-    "pages/Index/index",
     "pages/enterprise/authenticate",
     "pages/demo/customer",
     "pages/AddIdle/selTrade",
@@ -14,8 +15,6 @@
     "pages/IdleType/epiboly",
     "pages/MyIdle/idleEdit",
     "pages/MyIdle/idleList",
-    "pages/Filter/selAll",
-    "pages/Filter/selSort",
     "pages/Invite/index",
     "pages/Mine/index"
   ],

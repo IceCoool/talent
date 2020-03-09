@@ -45,6 +45,8 @@ Component({
               icon: 'none'
             })
             app.globalData.user = res.data.data.user;
+            app.globalData.isLoginAuthorize = true;
+            this.triggerEvent('reload')
           } else {
             wx.showToast({
               title: res.data.responseHeader.message,
