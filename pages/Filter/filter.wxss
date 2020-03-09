@@ -118,6 +118,23 @@
   color: #4b9ae8;
 }
 
+.fil-mod .item-list .custom{
+  margin: 24rpx 20rpx 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: #939393;
+}
+
+.item-list .custom .inp{
+  width: 200rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  border: 1px solid #eee;
+  border-radius: 8rpx;
+  text-align: center;
+}
 .oper-btns {
   position: fixed;
   left: 0;
@@ -170,4 +187,7 @@
   top: 60% !important;
   right: 36rpx !important;
   color: #ccc;
+}
+.placeholder{
+  font-size: 24rpx;
 }

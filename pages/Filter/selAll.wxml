@@ -1,3 +1,4 @@
+<wxs module="utils" src="../../utils/utils.wxs"></wxs>
 <view class="fil-top posr">
   <image src="/images/xq-bg.png"></image>
   <view class="fil-title">
@@ -8,20 +9,49 @@
 <view class="boxSh fil-mod" style="min-height: 68%;margin-bottom: 180rpx;">
   <view class="item">
     <text class="item-title">服务类型</text>
-    <view class="item-list" value="{{sortValue}}" bind:change="onChange">
+    <view class="item-list" value="{{sortValue}}">
       <text class="label">不限</text>
       <text class="label">岗位外包</text>
       <text class="label">短期驻场</text>
-      <text class="label">团队外包</text>
     </view>
   </view>
   <view class="item">
     <text class="item-title">学历要求</text>
-    <view class="item-list" value="{{sortValue}}" bind:change="onChange">
+    <view class="item-list" value="{{sortValue}}">
       <text class="label">不限</text>
-      <text class="label ">岗位外包</text>
-      <text class="label">短期驻场</text>
-      <text class="label">团队外包</text>
+      <text class="label ">大专及以下</text>
+      <text class="label">本科及以上</text>
+    </view>
+  </view>
+  <view class="item">
+    <text class="item-title">报价</text>
+    <view class="item-list" value="{{sortValue}}">
+      <text class="label">不限</text>
+      <text class="label ">3K以下</text>
+      <text class="label">3-5K</text>
+    </view>
+  </view>
+  <view class="item">
+    <text class="item-title">经验要求</text>
+    <view class="item-list" value="{{sortValue}}">
+      <text class="label">不限</text>
+      <text class="label ">1年以内</text>
+      <text class="label">1-3年</text>
+      <text class="label">3-5年</text>
+      <text class="label">自定义区间</text>
+      <view class="custom">
+        <text>自定义区间</text>
+        <input class="inp" type="number" placeholder="最低工作经验" placeholder-class="placeholder"></input>
+        <text>-</text>
+        <input class="inp" type="number" placeholder="最高工作经验" placeholder-class="placeholder"></input>
+      </view>
+    </view>
+  </view>
+  <view class="item">
+    <text class="item-title">行业要求</text>
+    <view class="item-list">
+      <text class="label {{tradeCode.length == 0?'on':''}}" bindtap="clearCode">不限</text>
+      <text class="label {{utils.checkBoxStatus(tradeCode,item.itemCode)?'on':''}}" wx:for="{{jobList}}" wx:key="*this" data-code="{{item.itemCode}}" bindtap="selTradeFn">{{item.cnname}}</text>
     </view>
   </view>
 </view>

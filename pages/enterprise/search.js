@@ -2,7 +2,6 @@
 const http = require('../../utils/http.js')
 // const tracker = require('../../utils/tracker.js')
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -24,8 +23,6 @@ Page({
    */
   onLoad: function(options) {
     this.data.searchKey = options.searchKey || ""
-    console.log(this.data.searchKey)
-
     if (this.data.searchKey != "") {
       this.beginSearch()
       wx.setNavigationBarColor({
@@ -152,7 +149,7 @@ Page({
     let type = e.currentTarget.dataset.type;
     let buid = e.currentTarget.dataset.buid;
     wx.navigateTo({
-      url: `./authenticate?comInfo=${item}&buid=${buid}&type=${type}`,
+      url: `./authenticate?comInfo=${item}&buid=${buid}&type=${type}&source=search`,
     })
 
     // // tracker.searchResultClick(name, index)

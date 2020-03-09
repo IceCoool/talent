@@ -1,5 +1,4 @@
 // pages/mine/enterprise/authenticate.js
-const user = require('../../utils/user.js');
 const http = require('../../utils/http.js');
 const util = require('../../utils/utils.js');
 const IdleHttp = require('../../utils/request.js');
@@ -11,7 +10,7 @@ Page({
   data: {
     mode: 0, // 模式 0-查看， 1-编辑
     buid: '',
-
+    jfid: '',
     licenseSrc: '', // 营业执照
     licenseKey: '',
     licenseInfo: '',
@@ -45,6 +44,8 @@ Page({
   onLoad: function(options) {
     this.setData({
       mode: options.mode || 1, // 默认是1编辑模式
+      source: options.source || '',
+      jfid: getApp().globalData.user.jfId
     })
 
     if (options.type == 'bu') {
@@ -53,6 +54,7 @@ Page({
       }).then(res => {
         if (res.data.responseHeader.code == 200) {
           this.setData({
+            buid: options.buid,
             comBuInfo: res.data.data,
             type: 'bu'
           });
@@ -88,41 +90,13 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    // wx.showLoading({
-    //   title: '',
-    // })
-    // this.getInfo()
+    wx.showLoading({
+      title: '',
+    })
+    this.getInfo()
   },
 
   /**
@@ -186,7 +160,7 @@ Page({
   chooseImage: function(e) {
     if (this.data.mode == 0) return
 
-    const type = e.currentTarget.dataset.type // 图片类型：营业资质0、省份证正1反2、其他资质3
+    const type = e.currentTarget.dataset.type // 图片类型：营业资质0、身份证正1反2、其他资质3
     const index = e.currentTarget.dataset.index // 其他资质多图片时的index
     console.log("chooseImage:" + type + "," + index)
     var that = this
@@ -287,8 +261,8 @@ Page({
     if (this.data.licenseSrc != '' && this.data.licenseKey == '' && !util.checkUrl(this.data.licenseSrc)) {
       urls.push('/mobileapi/bu/businessLicense')
       params.push({
-        jfid: user.getJfId(),
-        buid: user.getBuId(),
+        jfid: this.data.jfid,
+        buid: this.data.buid,
       })
       files.push(this.data.licenseSrc)
       types.push('license')
@@ -296,25 +270,27 @@ Page({
     if (this.data.idCardSrc1 != '' && this.data.idCardKey1 == '' && !util.checkUrl(this.data.idCardSrc1) && !this.data.idCardWrong1) {
       urls.push('/mobileapi/bu/idcard')
       params.push({
-        jfid: user.getJfId(),
-        srctype: "front",
+        jfid: this.data.jfid,
+        idCardSide: "front",
       })
+
       files.push(this.data.idCardSrc1)
       types.push('front')
+
     }
     if (this.data.idCardSrc2 != '' && this.data.idCardKey2 == '' && !util.checkUrl(this.data.idCardSrc2) && !this.data.idCardWrong2) {
       urls.push('/mobileapi/bu/idcard')
       params.push({
-        jfid: user.getJfId(),
-        srctype: "back",
+        jfid: this.data.jfid,
+        idCardSide: "back",
       })
       files.push(this.data.idCardSrc2)
       types.push('back')
     }
     // 处理其他资质图片: 非网络图片需要上传
     var data = {
-      jfid: user.getJfId(),
-      buid: user.getBuId(),
+      jfid: this.data.jfid,
+      buid: this.data.buid,
     }
     this.data.others.forEach((item, index) => {
       if (item != '' && this.data.otherKeys[index] == '' && !util.checkUrl(item)) {
@@ -327,7 +303,8 @@ Page({
     if (files.length == 0) {
       return success && success()
     }
-    var that = this
+    var that = this;
+    console.log(params);
     http.uploadFiles(urls, files, 'uploadFile', params, (results) => {
       console.log(results)
       var hasError = false,
@@ -337,6 +314,7 @@ Page({
         if (res.responseHeader && res.responseHeader.code == 200) {
           let newData = {}
           if (type == 'license') {
+            console.log('营业执照')
             newData['licenseKey'] = res.data.ossKey
             // 任何有用信息都没识别出来，则认为图片不正确
             if (!res.data.name && !res.data.creditCode && !res.data.address) {
@@ -351,12 +329,14 @@ Page({
               }
             }
           } else if (type == 'front') {
+            console.log('身份证正面')
             newData['idCardKey1'] = res.data.idenimgpos
             newData['idCardInfo1'] = {
               name: res.data.fullName || '',
               idNumber: res.data.idNumber || '',
             }
           } else if (type == 'back') {
+            console.log('身份证反面')
             this.data.idCardKey2 = res.data.idenimgrev
             this.data.idCardInfo2 = res.data
           } else if (type.indexOf('other') == 0) {
@@ -430,8 +410,8 @@ Page({
     var url = '/mobileapi/bu/buVerify'
     var that = this
     var params = {
-      jfid: user.getJfId(),
-      buid: user.getBuId(),
+      jfid: this.data.jfid,
+      buid: this.data.buid,
       name: this.data.idCardInfo1.name,
       idCardNumber: this.data.idCardInfo1.idNumber,
       idCardFrontImage: this.data.idCardKey1,

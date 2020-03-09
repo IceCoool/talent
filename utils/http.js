@@ -18,7 +18,11 @@ const conf = {
   },
 }
 
-const {baseUrl, signAppKey, signAppSecret} = conf[ENV];
+const {
+  baseUrl,
+  signAppKey,
+  signAppSecret
+} = conf[ENV];
 
 var refreshingToken = false
 var queueWaitingForToken = []
@@ -27,7 +31,13 @@ const setRefreshingToken = (isRefreshing) => {
   refreshingToken = isRefreshing
   if (!isRefreshing) {
     queueWaitingForToken.forEach(item => {
-      let { url, data, success, fail, responseType } = item
+      let {
+        url,
+        data,
+        success,
+        fail,
+        responseType
+      } = item
       post(url, data, success, fail, responseType)
     })
   }
@@ -88,7 +98,9 @@ const genSign = (params) => {
  */
 const getJson = (url, data, success, fail) => {
   if (data != '' && data != undefined) {
-    data = {data: JSON.stringify(data)}
+    data = {
+      data: JSON.stringify(data)
+    }
   }
   data = genSign(data || {})
   // console.log(data)
@@ -96,17 +108,17 @@ const getJson = (url, data, success, fail) => {
     url: fullUrl(url),
     data: data,
     header: {
-      'cookie':'jfterminal=weixin_xcx_card;',
+      'cookie': 'jfterminal=weixin_xcx_card;',
       'Authorization': user.getToken().token
     },
-    success: function (res) {
+    success: function(res) {
       if (success) {
         success(res.data);
       }
     },
-    fail: function (res) {
+    fail: function(res) {
       if (fail) {
-       fail(res);
+        fail(res);
       }
     }
   });
@@ -131,12 +143,12 @@ const post = (url, data, success, fail, responseType) => {
     method: 'POST',
     data: data,
     // responseType: responseType || 'text',
-    success: function (res) {
+    success: function(res) {
       if (success) {
         success(res.data);
       }
     },
-    fail: function (res) {
+    fail: function(res) {
       if (fail) {
         fail(res);
       }
@@ -145,12 +157,14 @@ const post = (url, data, success, fail, responseType) => {
 }
 
 /**
-* post json，目前好像后台接口没有采用这种方式的，此处先有备无患吧
-* 传输到后台的数据会被json序列化
-*/
+ * post json，目前好像后台接口没有采用这种方式的，此处先有备无患吧
+ * 传输到后台的数据会被json序列化
+ */
 const postJson = (url, data, success, fail) => {
   if (data != '' && data != undefined) {
-    data = { data: JSON.stringify(data) }
+    data = {
+      data: JSON.stringify(data)
+    }
   }
   data = genSign(data || {})
   // console.log(data)
@@ -163,12 +177,12 @@ const postJson = (url, data, success, fail) => {
     },
     method: 'POST',
     data: data,
-    success: function (res) {
+    success: function(res) {
       if (success) {
         success(res.data);
       }
     },
-    fail: function (res) {
+    fail: function(res) {
       fail(res);
     }
   });
@@ -181,25 +195,27 @@ const postJson = (url, data, success, fail) => {
  */
 const request = params => {
   return new Promise((resolve, reject) => {
-    let data = params.data !== undefined ? genSign({data: JSON.stringify(params.data)}) : genSign({});
+    let data = params.data !== undefined ? genSign({
+      data: JSON.stringify(params.data)
+    }) : genSign({});
     // console.log(data)
     let task = wx.request({
-        url: fullUrl(params.url),
-        header: Object.assign({
-          'cookie': 'jfterminal=weixin_xcx_card',
-          'content-type': 'application/x-www-form-urlencoded',
-          'Authorization': user.getToken().token
-        }, params.header),
-        method: params.method || 'POST',
-        data,
-        success: function (res) {
-          res._data = res.data.data;
-          resolve(res);
-        },
-        fail: function (res) {
-          reject(res)
-        }
-      });
+      url: fullUrl(params.url),
+      header: Object.assign({
+        'cookie': 'jfterminal=weixin_xcx_card',
+        'content-type': 'application/x-www-form-urlencoded',
+        'Authorization': user.getToken().token
+      }, params.header),
+      method: params.method || 'POST',
+      data,
+      success: function(res) {
+        res._data = res.data.data;
+        resolve(res);
+      },
+      fail: function(res) {
+        reject(res)
+      }
+    });
     params.task.abort = task.abort.bind(task);
   });
 }
@@ -210,18 +226,18 @@ const request = params => {
  * 如果成功，则success中是一个结果数组，如果失败，fail中是最先reject失败状态的值
  * formData: 可能是一个{}对象或者数组。一个时所有文件共享，数组时，一对一按顺序对应
  */
-const uploadFiles = (url, filePaths, name, formData='', success, fail) => {
-  var isFromDataArray = false
+const uploadFiles = (url, filePaths, name, formData = '', success, fail) => {
+  var isFromDataArray = false;
   if (formData != '' && formData != undefined) {
     if (util.isArray(formData)) {
       isFromDataArray = true
-      formData = formData.map((item)=>{
-        return genSign({data: JSON.stringify(item)})
+      formData = formData.map((item) => {
+        return genSign(item)
       })
-    }else{
-      formData = genSign({ data: JSON.stringify(formData) })
+    } else {
+      formData = genSign(formData)
     }
-  }else{
+  } else {
     formData = genSign({})
   }
 
@@ -232,23 +248,23 @@ const uploadFiles = (url, filePaths, name, formData='', success, fail) => {
     url = url.map((item) => {
       return fullUrl(item)
     })
-  }else{
+  } else {
     url = fullUrl(url)
   }
   var promise = Promise.all(filePaths.map((filePath, index) => {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       wx.uploadFile({
         url: isUrlArray ? url[index] : url,
         header: {
-          
+
         },
         filePath: filePath,
         name: name,
         formData: isFromDataArray ? formData[index] : formData,
-        success: function (res) {
+        success: function(res) {
           resolve(JSON.parse(res.data));
         },
-        fail: function (err) {
+        fail: function(err) {
           // 为了保证不影响成功上传的其他文件，走resolve
           resolve({
             responseHeader: {
@@ -261,12 +277,12 @@ const uploadFiles = (url, filePaths, name, formData='', success, fail) => {
       });
     });
   }));
-  return promise.then(function (results) {
+  return promise.then(function(results) {
     if (success) {
       success(results)
     }
     return results;
-  }).catch(function (err) {
+  }).catch(function(err) {
     if (fail) {
       fail(err)
     }
@@ -279,7 +295,9 @@ const uploadFiles = (url, filePaths, name, formData='', success, fail) => {
  */
 const uploadFileWithTask = (url, filePath, name, formData = '', success, fail) => {
   if (formData != '') {
-      formData = genSign({ data: JSON.stringify(formData) })
+    formData = genSign({
+      data: JSON.stringify(formData)
+    })
   } else {
     formData = genSign({})
   }
@@ -294,10 +312,10 @@ const uploadFileWithTask = (url, filePath, name, formData = '', success, fail) =
     filePath: filePath,
     name: name,
     formData: formData,
-    success: function (res) {
+    success: function(res) {
       success && success(JSON.parse(res.data));
     },
-    fail: function (err) {
+    fail: function(err) {
       fail && fail(err)
     }
   })
@@ -316,7 +334,7 @@ const downloadFile = (url, filePath, success, fail) => {
 
       if (res.statusCode == 200) {
         success && success(res)
-      }else{
+      } else {
         fail && fail()
       }
     },

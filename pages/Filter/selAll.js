@@ -1,30 +1,51 @@
 // pages/Filter/selAll.js
 // 
-let filType = ['SERVICE_TYPE', 'ACADEMIC_REQUIRE', 'INDUSTRY_EXPERIENCE']
+const IdleHttp = require('../../utils/request.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    jobList: [],
+    selTrade: [],
+    tradeCode: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let arrPro = [];
-    
+    wx.showLoading()
+    IdleHttp.request('/mobileapi/dictionary/topic', {
+      topic: 'INDUSTRY_EXPERIENCE'
+    }).then(res => {
+      wx.hideLoading()
+      if (res.data.responseHeader.code == 200) {
+        let resData = res.data.data.list[0].list;
+        this.setData({
+          jobList: resData
+        })
+      }
+    })
   },
-  onChange(event) {
+  selTradeFn(event) {
+    let tradeCode = this.data.tradeCode;
+    let itemCode = event.currentTarget.dataset.code;
+    if (tradeCode.indexOf(itemCode) == -1) {
+      tradeCode.push(itemCode)
+    } else {
+      tradeCode.splice(tradeCode.findIndex(item => item == itemCode), 1)
+    }
     this.setData({
-      sortValue: event.detail
-    });
-    console.log(this.data.sortValue)
+      tradeCode
+    })
   },
-  serviceTypeList() {
-
+  clearCode(event) {
+    
+    this.setData({
+      tradeCode: []
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
