@@ -78,6 +78,7 @@
   </van-sticky>
   <idle-list bindisLogin="compIsLogin"></idle-list>
 </view>
+
 <!-- 滚动显示发布需求 -->
 <view class="fixed-btn" id="fxq" wx:if="{{showFxq}}">
   <view class="find" data-url="/pages/AddIdle/addAsk" bindtap="isLogin">创建用人需求，找人才</view>

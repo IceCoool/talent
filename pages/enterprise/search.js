@@ -147,9 +147,8 @@ Page({
   itemClick: function(e) {
     let item = JSON.stringify(e.currentTarget.dataset.item);
     let type = e.currentTarget.dataset.type;
-    let buid = e.currentTarget.dataset.buid;
     wx.navigateTo({
-      url: `./authenticate?comInfo=${item}&buid=${buid}&type=${type}&source=search`,
+      url: `./authenticate?comInfo=${item}&type=${type}&source=search`,
     })
 
     // // tracker.searchResultClick(name, index)

@@ -16,7 +16,7 @@ App({
                 _this.globalData.isLoginAuthorize = true;
                 _this.globalData.openid = resData.openid;
                 _this.globalData.appletCode = resData.appletCode;
-                _this.globalData.user = resData.user
+                _this.globalData.user = resData.user;
               } else {
                 _this.globalData.openid = resData.openid;
                 _this.globalData.appletCode = resData.appletCode;

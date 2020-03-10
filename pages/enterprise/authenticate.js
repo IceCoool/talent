@@ -9,6 +9,7 @@ Page({
    */
   data: {
     mode: 0, // 模式 0-查看， 1-编辑
+    auth: -3,
     buid: '',
     jfid: '',
     licenseSrc: '', // 营业执照
@@ -50,16 +51,17 @@ Page({
 
     if (options.type == 'bu') {
       IdleHttp.request('/mobileapi/bu/getBuInfo', {
-        buid: options.buid
+        buid: JSON.parse(options.comInfo).buid
       }).then(res => {
         if (res.data.responseHeader.code == 200) {
           this.setData({
-            buid: options.buid,
+            buid: JSON.parse(options.comInfo).buid,
             comBuInfo: res.data.data,
             type: 'bu'
           });
+          this.getInfo()
         }
-        this.getInfo()
+
       })
     } else {
       let comSpInfo = JSON.parse(options.comInfo)
@@ -68,6 +70,7 @@ Page({
         comSpInfo,
         type: 'tyc'
       })
+      this.getInfo()
     }
 
     // wx.showLoading({
@@ -111,13 +114,17 @@ Page({
   getInfo: function() {
     var url = '/mobileapi/bu/getBuAuth'
     var params = {
-      buid: this.data.comBuInfo.buid
+      buid: this.data.buid
     }
     var that = this
     http.post(url, params, function(res) {
       if (res.responseHeader && res.responseHeader.code == 200) {
         wx.hideLoading()
+        console.log(res)
         const data = res.data || {}
+        that.setData({
+          auth: data.status
+        })
         var others = [],
           otherKeys = []
         for (var i = 1; i <= 3; i++) {
@@ -447,18 +454,10 @@ Page({
     })
   },
 
-  // 联系客服
-  contactCS: function(e) {
-    wx.navigateTo({
-      url: '/mine/pages/contact-cs',
-    })
-  },
 
   // 查看
   check: function(e) {
-    wx.redirectTo({
-      url: './authenticate?mode=0',
-    })
+    wx.navigateBack()
   },
 
   // 人工输入信息

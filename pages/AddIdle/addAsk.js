@@ -131,7 +131,7 @@ Page({
             title: '创建成功',
             icon: 'none'
           })
-          // wx.navigateBack()
+          wx.navigateBack()
         } else {
           wx.showToast({
             title: res.data.responseHeader.message,

@@ -30,9 +30,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.setData({
-      user: app.globalData.user
-    })
     // 提示用户 授权地理位置
     app.promiseLocaAuthorize().then(() => {
       this.setData({
@@ -47,26 +44,35 @@ Page({
     });
   },
   init() {
-    if (this.data.user) {
+    let user = app.globalData.user;
+    this.setData({
+      user
+    })
+    if (user) {
       // 已登录
-      if (this.data.user.buid) {
-        this.getRequestList().then(() => {
+      let buid;
+      buid = user.buId || user.buList[0].buId
+      if (buid) {
+        this.getRequestList(buid).then(() => {
           let queryType;
-          this.data.requestList.length == 0 ? queryType = 2 : queryType = 1;
+          let param = {};
+          let requestList = this.data.requestList;
+          requestList.length == 0 ? queryType = 2 : (queryType = 1 && (param.requireId = requestList[requestList.length - 1].requireId));
           this.setData({
             queryType
           })
           this.getCityCode().then(() => {
-            let param = {};
             param.workPlaceCode = this.data.cityCode;
             param.queryType = queryType;
-            param.jfid = this.data.user.jfid;
+            param.jfid = this.data.user.jfId;
             param = Object.assign(param, {
               ...this.data.resumePage
             })
             this.getResumeList(param);
           });
         })
+      } else {
+
       }
     } else {
       // 未登录
@@ -83,11 +89,11 @@ Page({
       });
     }
   },
-  getRequestList() {
+  getRequestList(buid) {
     return new Promise((resolve, reject) => {
       let param = {
-        creatorJfid: this.data.user.jfid,
-        creatorBuid: this.data.user.buid
+        creatorJfid: this.data.user.jfId,
+        creatorBuid: buid
       }
       IdleHttp.request('/mobileapi/requirement/queryMobileRequirementList', {
         ...param

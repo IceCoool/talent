@@ -283,13 +283,9 @@ image {
   z-index: 1001;
   background-color: white;
   border-radius: 6px;
-
-  margin: 0 12%;
-
+  margin: 230rpx 12%;
   text-align: center;
-
   padding: 0 8% 24px;
-
   min-width: 60%;
 }
 
