@@ -64,6 +64,7 @@ Page({
     } else {
       let comSpInfo = JSON.parse(options.comInfo)
       this.setData({
+        buid: comSpInfo.id,
         comSpInfo,
         type: 'tyc'
       })
@@ -253,26 +254,22 @@ Page({
 
   // 上传文件
   uploadFiles: function(success) {
-    var params = [],
+    let params = {
+        jfid: this.data.jfid,
+        buid: this.data.buid
+      },
       files = [],
       urls = []
     var types = []
     // 新文件需要上传：非网络文件
     if (this.data.licenseSrc != '' && this.data.licenseKey == '' && !util.checkUrl(this.data.licenseSrc)) {
       urls.push('/mobileapi/bu/businessLicense')
-      params.push({
-        jfid: this.data.jfid,
-        buid: this.data.buid,
-      })
       files.push(this.data.licenseSrc)
       types.push('license')
     }
     if (this.data.idCardSrc1 != '' && this.data.idCardKey1 == '' && !util.checkUrl(this.data.idCardSrc1) && !this.data.idCardWrong1) {
       urls.push('/mobileapi/bu/idcard')
-      params.push({
-        jfid: this.data.jfid,
-        idCardSide: "front",
-      })
+      params.idCardSide = 'front'
 
       files.push(this.data.idCardSrc1)
       types.push('front')
@@ -280,22 +277,14 @@ Page({
     }
     if (this.data.idCardSrc2 != '' && this.data.idCardKey2 == '' && !util.checkUrl(this.data.idCardSrc2) && !this.data.idCardWrong2) {
       urls.push('/mobileapi/bu/idcard')
-      params.push({
-        jfid: this.data.jfid,
-        idCardSide: "back",
-      })
+      params.idCardSide = 'back'
       files.push(this.data.idCardSrc2)
       types.push('back')
     }
     // 处理其他资质图片: 非网络图片需要上传
-    var data = {
-      jfid: this.data.jfid,
-      buid: this.data.buid,
-    }
     this.data.others.forEach((item, index) => {
       if (item != '' && this.data.otherKeys[index] == '' && !util.checkUrl(item)) {
         urls.push('/mobileapi/bu/attachment')
-        params.push(data)
         files.push(item)
         types.push('other,' + index)
       }
@@ -304,9 +293,8 @@ Page({
       return success && success()
     }
     var that = this;
-    console.log(params);
+    console.log(files)
     http.uploadFiles(urls, files, 'uploadFile', params, (results) => {
-      console.log(results)
       var hasError = false,
         errMsg = ''
       results.forEach((res, index) => {
@@ -329,16 +317,14 @@ Page({
               }
             }
           } else if (type == 'front') {
-            console.log('身份证正面')
-            newData['idCardKey1'] = res.data.idenimgpos
+            newData['idCardKey1'] = res.data.cardFront.idenimgpos;
             newData['idCardInfo1'] = {
-              name: res.data.fullName || '',
-              idNumber: res.data.idNumber || '',
+              name: res.data.cardFront.fullName || '',
+              idNumber: res.data.cardFront.idNumber || '',
             }
           } else if (type == 'back') {
-            console.log('身份证反面')
-            this.data.idCardKey2 = res.data.idenimgrev
-            this.data.idCardInfo2 = res.data
+            this.data.idCardKey2 = res.data.cardBack.idenimgrev
+            this.data.idCardInfo2 = res.data.cardBack
           } else if (type.indexOf('other') == 0) {
             var index = type.split(',')[1]
             this.data.otherKeys[index] == res.data.ossKey
@@ -409,19 +395,41 @@ Page({
   saveInfo: function() {
     var url = '/mobileapi/bu/buVerify'
     var that = this
-    var params = {
-      jfid: this.data.jfid,
-      buid: this.data.buid,
-      name: this.data.idCardInfo1.name,
-      idCardNumber: this.data.idCardInfo1.idNumber,
-      idCardFrontImage: this.data.idCardKey1,
-      idCardBackImage: this.data.idCardKey2,
-      buname: this.data.licenseInfo.buname,
-      creditCode: this.data.licenseInfo.creditCode,
-      registAddr: this.data.licenseInfo.registAddr,
-      licimg: this.data.licenseKey,
-      attach: this.data.otherKeys.join(','), //其它证明材料obs地址多个逗号分隔
+    if (this.data.type == 'bu') {
+      var params = {
+        jfid: this.data.jfid,
+        buid: this.data.buid,
+        name: this.data.idCardInfo1.name,
+        idCardNumber: this.data.idCardInfo1.idNumber,
+        idCardFrontImage: this.data.idCardKey1,
+        idCardBackImage: this.data.idCardKey2,
+        buname: this.data.licenseInfo.buname,
+        creditCode: this.data.licenseInfo.creditCode,
+        registAddr: this.data.licenseInfo.registAddr,
+        licimg: this.data.licenseKey,
+        attach: this.data.others.join(','), //其它证明材料obs地址多个逗号分隔
+        verifyBuType: 1
+      }
+    } else {
+      var params = {
+        jfid: this.data.jfid,
+        buid: this.data.buid,
+        corporate: this.data.comSpInfo.legalPersonName,
+        buildTime: this.data.comSpInfo.estiblishTime,
+        rstCapital: this.data.comSpInfo.regCapital,
+        verifyBuType: 2,
+        name: this.data.idCardInfo1.name,
+        idCardNumber: this.data.idCardInfo1.idNumber,
+        idCardFrontImage: this.data.idCardKey1,
+        idCardBackImage: this.data.idCardKey2,
+        buname: this.data.comSpInfo.name,
+        creditCode: this.data.licenseInfo.creditCode,
+        registAddr: this.data.licenseInfo.registAddr,
+        licimg: this.data.licenseKey,
+        attach: this.data.others.join(','), //其它证明材料obs地址多个逗号分隔
+      }
     }
+
     http.post(url, params, function(res) {
       if (res.responseHeader && res.responseHeader.code == 200) {
         wx.hideLoading()

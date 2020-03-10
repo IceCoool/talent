@@ -227,20 +227,7 @@ const request = params => {
  * formData: 可能是一个{}对象或者数组。一个时所有文件共享，数组时，一对一按顺序对应
  */
 const uploadFiles = (url, filePaths, name, formData = '', success, fail) => {
-  var isFromDataArray = false;
-  if (formData != '' && formData != undefined) {
-    if (util.isArray(formData)) {
-      isFromDataArray = true
-      formData = formData.map((item) => {
-        return genSign(item)
-      })
-    } else {
-      formData = genSign(formData)
-    }
-  } else {
-    formData = genSign({})
-  }
-
+  formData = genSign(formData)
   // 处理多URL情况
   var isUrlArray = false
   if (util.isArray(url)) {
@@ -260,7 +247,7 @@ const uploadFiles = (url, filePaths, name, formData = '', success, fail) => {
         },
         filePath: filePath,
         name: name,
-        formData: isFromDataArray ? formData[index] : formData,
+        formData: formData,
         success: function(res) {
           resolve(JSON.parse(res.data));
         },

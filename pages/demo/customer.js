@@ -12,8 +12,7 @@ var customer_info = {
     ["", "2629136779@qq.cn"] //数组 [[邮箱ID, 邮箱]]
   ]
 }
-var nick_name = "张三" // 客户昵称
-var avatar = "https://www.udesk.cn/images/index/logo1124.png" // 客户头像
+
 //转换成字符串
 let customer_info_str = JSON.stringify(customer_info)
 Page({

@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    interviewAddr: '',
     cityList: []
   },
 
@@ -30,10 +31,20 @@ Page({
       }
     })
   },
-  getTapName(e){
-    console.log(e)
+  getTapName(e) {
     let addrName = e.currentTarget.dataset.addr;
-    console.log(addrName)
+    this.setData({
+      interviewAddr: addrName,
+      cityList: []
+    })
+  },
+  goBack() {
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];
+    prevPage.setData({
+      interviewAddr: this.data.interviewAddr
+    })
+    wx.navigateBack()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

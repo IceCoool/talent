@@ -1,15 +1,14 @@
 {
   "pages": [
     "pages/enterprise/search",
-    "pages/Filter/selAll",
     "pages/Index/index",
+    "pages/Filter/selAll",
     "pages/AddIdle/addAsk",
     "pages/enterprise/authenticate",
     "pages/demo/customer",
     "pages/AddIdle/selTrade",
     "pages/AddIdle/selJob",
     "pages/Filter/selCity",
-    "pages/demo/index",
     "pages/Mine/collect",
     "pages/IdleType/short",
     "pages/IdleType/epiboly",

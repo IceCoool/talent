@@ -7,8 +7,8 @@
 </view>
 <view class="boxSh fil-mod" style="min-height: 80%;margin-bottom: 40rpx;">
   <view class="fil-inp">
-    <input class="inp" type="text" placeholder="请输入城市名称搜索" bindinput="getCity"></input>
-    <text class="xziconfont xzicon-search"></text>
+    <input class="inp" type="text" placeholder="请输入城市名称搜索" bindinput="getCity" value="{{interviewAddr}}"></input>
+    <text class="xziconfont xzicon-search" bindtap="goBack"></text>
   </view>
   <view class="city-list" wx:if="{{cityList.length > 0}}">
     <view class="city-item" wx:for="{{cityList}}" wx:key="idnex" data-addr="{{item.name}}" bindtap="getTapName">

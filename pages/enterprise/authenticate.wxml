@@ -18,8 +18,6 @@
 </view>
 
 
-
-
 <view class="auth-error" wx:if="{{source == 'search' && comBuInfo.auth == -1}}">
   <text>【温馨提示】企业认证未通过，请重新提交申请</text>
   <text>原因：企业营业执照图片有误</text>

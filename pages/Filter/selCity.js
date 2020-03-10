@@ -102,6 +102,7 @@ Page({
     });
 
     let pages = getCurrentPages();
+    console.log(pages)
     let prevPage = pages[pages.length - 2];
     prevPage.setData({
       cityCode,
