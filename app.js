@@ -6,7 +6,6 @@ App({
     wx.login({
       success(res) {
         if (res.code) {
-          _this.globalData.loginCode = res.code;
           IdleHttp.request('/mobileapi/user/getSessionKeyByCode', {
             code: res.code
           }).then(result => {
@@ -32,8 +31,7 @@ App({
     // 用户是否授权地理位置
     isLocaAuthorize: false,
     isLoginAuthorize: false,
-    cityName: '北京市',
-    loginCode: ''
+    cityName: '北京市'
   },
   // 判断用户是否授权登录
   loginAuthorize(_this, url) {

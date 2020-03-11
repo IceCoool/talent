@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/enterprise/enterpriseList",
     "pages/enterprise/search",
     "pages/Index/index",
     "pages/Filter/selAll",

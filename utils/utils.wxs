@@ -5,5 +5,16 @@
       } else {
         return true;
       }
+    },
+    getAuthStatus: function(auth) {
+      var authStatus = {
+        '0': '审核中',
+        '1': '已认证',
+        '-1': '认证失败',
+        '-2': '未认证',
+        '-3': '未认证'
+      };
+      var key = '' + auth;
+      return authStatus[key]
     }
   }

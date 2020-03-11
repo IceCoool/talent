@@ -1,0 +1,10 @@
+<wxs module="utils" src="../../utils/utils.wxs"></wxs>
+<view class="company-info" wx:for="{{list}}" wx:key="index" data-buid="{{item.buId}}" bindtap="goEnterprise">
+  <view class="info-top">
+    <view class="name">
+      <text>{{item.buName}}</text>
+      <text class="status {{item.auth == 1 ?'on':''}}">{{utils.getAuthStatus(item.auth)}}</text>
+    </view>
+    <text class="num">{{item.buScale}}</text>
+  </view>
+</view>

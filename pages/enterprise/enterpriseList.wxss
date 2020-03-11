@@ -1,0 +1,5 @@
+/* pages/enterprise/enterpriseList.wxss */
+@import './authenticate.wxss';
+.company-info{
+  margin-bottom: 0;
+}

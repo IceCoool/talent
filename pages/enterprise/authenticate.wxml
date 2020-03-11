@@ -1,9 +1,10 @@
 <!-- <view class="auth-blue-bk"></view> -->
+<wxs module="utils" src="../../utils/utils.wxs"></wxs>
 <view wx:if="{{type=='bu'}}" class="company-info">
   <view class="info-top">
     <view class="name">
       <text>{{comBuInfo.buName}}</text>
-      <text class="status {{auth == 1 ?'on':''}}">{{auth == 1 ?'已认证':'未认证'}}</text>
+      <text class="status {{auth == 1 ?'on':''}}">{{utils.getAuthStatus(auth)}}</text>
     </view>
     <text class="num">{{comBuInfo.buScale}}</text>
   </view>

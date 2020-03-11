@@ -48,20 +48,19 @@ Page({
       source: options.source || '',
       jfid: getApp().globalData.user.jfId
     })
-
+    wx.showLoading()
     if (options.type == 'bu') {
       IdleHttp.request('/mobileapi/bu/getBuInfo', {
-        buid: JSON.parse(options.comInfo).buid
+        buid: options.buid
       }).then(res => {
         if (res.data.responseHeader.code == 200) {
           this.setData({
-            buid: JSON.parse(options.comInfo).buid,
+            buid: options.buid,
             comBuInfo: res.data.data,
             type: 'bu'
           });
           this.getInfo()
         }
-
       })
     } else {
       let comSpInfo = JSON.parse(options.comInfo)
@@ -120,7 +119,6 @@ Page({
     http.post(url, params, function(res) {
       if (res.responseHeader && res.responseHeader.code == 200) {
         wx.hideLoading()
-        console.log(res)
         const data = res.data || {}
         that.setData({
           auth: data.status
@@ -445,6 +443,15 @@ Page({
           btnEnabled: false
         })
       } else {
+        if (that.data.type == 'tyc') {
+          let comSpInfo = that.data.comSpInfo;
+          that.setData({
+            type: 'bu',
+            buid: res.data.buid,
+            'comBuInfo.buName': comSpInfo.name,
+            'comBuInfo.auth': -2
+          })
+        }
         getApp().showError(res.responseHeader ? res.responseHeader.message : '')
       }
       that.isSubmiting = false
