@@ -47,7 +47,8 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      cityName: app.globalData.cityName
+      cityName: app.globalData.cityName,
+      user: app.globalData.user
     })
     let _this = this;
 
@@ -114,14 +115,18 @@ Page({
       tradeCode: []
     })
   },
+  // 创建需求
   cerateRequest() {
     if (this.data.postType == '' || this.data.tradeCode.length == 0 || this.data.projectCycleCode == '') {
       return
     } else {
+      let user = this.data.user;
+      let buid;
+      buid = user.buid || user.buList[0].buId
       IdleHttp.request('/mobileapi/requirement/saveRequirement', {
         cityCode: this.data.cityCode,
-        creatorBuid: 2346869959,
-        creatorJfid: 2346870110,
+        creatorBuid: buid,
+        creatorJfid: user.jfId,
         industryCode: this.data.tradeCode.join(','),
         postType: this.data.postType,
         projectCycleCode: this.data.projectCycleCode
@@ -131,7 +136,7 @@ Page({
             title: '创建成功',
             icon: 'none'
           })
-          wx.navigateBack()
+          // wx.navigateBack()
         } else {
           wx.showToast({
             title: res.data.responseHeader.message,

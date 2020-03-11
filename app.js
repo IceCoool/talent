@@ -2,29 +2,7 @@ const util = require('./utils/utils.js')
 const IdleHttp = require('./utils/request.js');
 App({
   onLaunch: function() {
-    let _this = this;
-    wx.login({
-      success(res) {
-        if (res.code) {
-          IdleHttp.request('/mobileapi/user/getSessionKeyByCode', {
-            code: res.code
-          }).then(result => {
-            if (result.data.responseHeader.code == 200) {
-              let resData = result.data.data;
-              if (resData.user) {
-                _this.globalData.isLoginAuthorize = true;
-                _this.globalData.openid = resData.openid;
-                _this.globalData.appletCode = resData.appletCode;
-                _this.globalData.user = resData.user;
-              } else {
-                _this.globalData.openid = resData.openid;
-                _this.globalData.appletCode = resData.appletCode;
-              }
-            }
-          })
-        }
-      }
-    })
+
   },
   // 全局数据
   globalData: {
@@ -32,6 +10,35 @@ App({
     isLocaAuthorize: false,
     isLoginAuthorize: false,
     cityName: '北京市'
+  },
+  getUser() {
+    let _this = this;
+    return new Promise((resolve, reject) => {
+      wx.login({
+        success(res) {
+          if (res.code) {
+            IdleHttp.request('/mobileapi/user/getSessionKeyByCode', {
+              code: res.code
+            }).then(result => {
+              if (result.data.responseHeader.code == 200) {
+                let resData = result.data.data;
+                if (resData.user) {
+                  _this.globalData.isLoginAuthorize = true;
+                  _this.globalData.openid = resData.openid;
+                  _this.globalData.appletCode = resData.appletCode;
+                  _this.globalData.user = resData.user;
+                  resolve();
+                } else {
+                  _this.globalData.openid = resData.openid;
+                  _this.globalData.appletCode = resData.appletCode;
+                  resolve();
+                }
+              }
+            })
+          }
+        }
+      })
+    })
   },
   // 判断用户是否授权登录
   loginAuthorize(_this, url) {
@@ -113,7 +120,6 @@ App({
         // 授权成功  获取地理位置
         let latitude = res.latitude;
         let longitude = res.longitude;
-        console.log(`纬度${latitude}---经度${longitude}`)
         _this.globalData.isLocaAuthorize = true;
         _this.getCityName(`${longitude},${latitude}`, resolve)
       },

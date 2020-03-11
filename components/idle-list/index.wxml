@@ -1,5 +1,5 @@
 <view class="staff-list">
-  <view class="boxSh item" bindtap="tapEvent" data-url="">
+  <view class="boxSh item" wx:for="{{resumeList}}" wx:key="index" bindtap="tapEvent" data-url="">
     <text class="status">已邀</text>
     <view class="posr">
       <view class="head">
@@ -9,20 +9,18 @@
     </view>
     <view class="info">
       <view class="mod">
-        <text class="name">王女士</text>
-        <text class="job">UI设计</text>
-        <text class="tj">顾问推荐</text>
-        <text class="price">15K</text>
+        <text class="name">{{item.labourerName}}</text>
+        <text class="job">{{item.postName}}</text>
+        <text class="tj" wx:if="{{item.recommend}}">顾问推荐</text>
+        <text class="price">{{item.personPrice}}{{item.serviceType == 1 ? '元/月' : '元/日'}}</text>
       </view>
       <view class="Mtp20 mod">
-        <text>3年经验 | 本科 | 26岁</text>
-        <text class="rate">竞争力 4.5</text>
-        <text class="xziconfont xzicon-star"></text>
+        <text>{{item.workYearCount}}年经验 | {{item.educationName}} | {{item.age}}岁</text>
+        <!-- <text class="rate">竞争力 4.5</text>
+        <text class="xziconfont xzicon-star"></text> -->
       </view>
-      <view class="Mtp20 mod">
-        <text class="tag">Java工程师</text>
-        <text class="tag">架构师</text>
-        <text class="tag">项目管理</text>
+      <view class="mod" style="flex-wrap:wrap;">
+        <text class="Mtp20 tag" wx:for="{{item.personLabelName}}" wx:for-item="label" wx:for-index="labIndex" wx:key="index" wx:if="{{labIndex < 3}}">{{label}}</text>
       </view>
     </view>
   </view>

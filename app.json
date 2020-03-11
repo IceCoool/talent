@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/enterprise/enterpriseList",
-    "pages/enterprise/search",
     "pages/Index/index",
+    "pages/enterprise/search",
+    "pages/enterprise/enterpriseList",
     "pages/Filter/selAll",
     "pages/AddIdle/addAsk",
     "pages/enterprise/authenticate",

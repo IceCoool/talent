@@ -24,29 +24,6 @@ const {
   signAppSecret
 } = conf[ENV];
 
-var refreshingToken = false
-var queueWaitingForToken = []
-
-const setRefreshingToken = (isRefreshing) => {
-  refreshingToken = isRefreshing
-  if (!isRefreshing) {
-    queueWaitingForToken.forEach(item => {
-      let {
-        url,
-        data,
-        success,
-        fail,
-        responseType
-      } = item
-      post(url, data, success, fail, responseType)
-    })
-  }
-  queueWaitingForToken = []
-}
-
-const isRefreshingToken = () => {
-  return refreshingToken
-}
 
 // 判断是否完整的url：规则为是否以http(s)://开始
 const isFullUrl = (url) => {
@@ -92,37 +69,7 @@ const genSign = (params) => {
   return params;
 }
 
-/**
- * 通用的get方法，
- * 传入的数据会是querystring，返回json数据
- */
-const getJson = (url, data, success, fail) => {
-  if (data != '' && data != undefined) {
-    data = {
-      data: JSON.stringify(data)
-    }
-  }
-  data = genSign(data || {})
-  // console.log(data)
-  wx.request({
-    url: fullUrl(url),
-    data: data,
-    header: {
-      'cookie': 'jfterminal=weixin_xcx_card;',
-      'Authorization': user.getToken().token
-    },
-    success: function(res) {
-      if (success) {
-        success(res.data);
-      }
-    },
-    fail: function(res) {
-      if (fail) {
-        fail(res);
-      }
-    }
-  });
-}
+
 
 /**
  * post, form格式, 后台接口实现多采用这种post方式
@@ -156,69 +103,6 @@ const post = (url, data, success, fail, responseType) => {
   });
 }
 
-/**
- * post json，目前好像后台接口没有采用这种方式的，此处先有备无患吧
- * 传输到后台的数据会被json序列化
- */
-const postJson = (url, data, success, fail) => {
-  if (data != '' && data != undefined) {
-    data = {
-      data: JSON.stringify(data)
-    }
-  }
-  data = genSign(data || {})
-  // console.log(data)
-  wx.request({
-    url: fullUrl(url),
-    header: {
-      'cookie': 'jfterminal=weixin_xcx_card',
-      'content-type': 'application/json',
-      'Authorization': user.getToken().token
-    },
-    method: 'POST',
-    data: data,
-    success: function(res) {
-      if (success) {
-        success(res.data);
-      }
-    },
-    fail: function(res) {
-      fail(res);
-    }
-  });
-}
-
-/**
- * 仅添加签名功能
- * @param params
- * @returns {Promise<unknown>}
- */
-const request = params => {
-  return new Promise((resolve, reject) => {
-    let data = params.data !== undefined ? genSign({
-      data: JSON.stringify(params.data)
-    }) : genSign({});
-    // console.log(data)
-    let task = wx.request({
-      url: fullUrl(params.url),
-      header: Object.assign({
-        'cookie': 'jfterminal=weixin_xcx_card',
-        'content-type': 'application/x-www-form-urlencoded',
-        'Authorization': user.getToken().token
-      }, params.header),
-      method: params.method || 'POST',
-      data,
-      success: function(res) {
-        res._data = res.data.data;
-        resolve(res);
-      },
-      fail: function(res) {
-        reject(res)
-      }
-    });
-    params.task.abort = task.abort.bind(task);
-  });
-}
 
 /**
  * upload File, 支持单个或多文件上传
@@ -228,6 +112,7 @@ const request = params => {
  */
 const uploadFiles = (url, filePaths, name, formData = '', success, fail) => {
   formData = genSign(formData)
+  console.log(formData)
   // 处理多URL情况
   var isUrlArray = false
   if (util.isArray(url)) {
@@ -277,73 +162,8 @@ const uploadFiles = (url, filePaths, name, formData = '', success, fail) => {
   });
 }
 
-/**
- * upload File, 单文件上传，返回uploadTask，主要用于大文件上传进度指示或者取消
- */
-const uploadFileWithTask = (url, filePath, name, formData = '', success, fail) => {
-  if (formData != '') {
-    formData = genSign({
-      data: JSON.stringify(formData)
-    })
-  } else {
-    formData = genSign({})
-  }
-  url = fullUrl(url)
-
-  return wx.uploadFile({
-    url: url,
-    header: {
-      'cookie': 'jfterminal=weixin_xcx_card',
-      'Authorization': user.getToken().token
-    },
-    filePath: filePath,
-    name: name,
-    formData: formData,
-    success: function(res) {
-      success && success(JSON.parse(res.data));
-    },
-    fail: function(err) {
-      fail && fail(err)
-    }
-  })
-}
-
-const downloadFile = (url, filePath, success, fail) => {
-  wx.downloadFile({
-    url: fullUrl(url),
-    header: {
-      'cookie': 'jfterminal=weixin_xcx_card',
-      'Authorization': user.getToken().token
-    },
-    filePath: filePath,
-    success: function(res) {
-      console.log(res)
-
-      if (res.statusCode == 200) {
-        success && success(res)
-      } else {
-        fail && fail()
-      }
-    },
-    fail: function(res) {
-
-      console.log(res)
-      fail && fail(res)
-    },
-  })
-}
-
 module.exports = {
-  getJson: getJson,
   post: post,
   uploadFiles: uploadFiles,
-  uploadFileWithTask,
-
-  postJson: postJson,
-  fullUrl: fullUrl,
-
-  request,
-  downloadFile,
-  setRefreshingToken,
-  isRefreshingToken,
+  fullUrl: fullUrl
 }

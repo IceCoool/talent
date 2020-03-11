@@ -1,7 +1,7 @@
 <view id="idle-filter" class="idle-filter">
   <view class="lf">
-    <text class="on Mrt30">推荐</text>
-    <text>最新</text>
+    <text class="Mrt30 {{queryType == 1 ? 'on':''}}" wx:if="{{hasRequest}}">推荐</text>
+    <text class="{{queryType == 2 ? 'on':''}}">最新</text>
     <text class="num"></text>
   </view>
   <view class="rt">

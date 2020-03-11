@@ -11,19 +11,18 @@ Page({
     showFxq: false,
     showMyXq: false,
     showLogin: false,
-    pageSize: 10,
-    pageStart: 1,
     cityName: '',
     cityCode: '',
-    hasRequest: false,
+    hasRequest: Boolean,
     resumePage: {
-      pageSize: 10,
+      pageSize: 1,
       pageStart: 1,
     },
     queryType: 1, // 1推荐  2最新  3报价正序  4报价倒叙
     resumeList: [],
     requestList: [],
-    finished: false
+    finished: false,
+    param: {}
   },
 
   /**
@@ -35,15 +34,20 @@ Page({
       this.setData({
         cityName: app.globalData.cityName
       });
-      this.init()
+      app.getUser().then(() => {
+        this.init()
+      })
     }).catch(() => {
       this.setData({
         cityName: app.globalData.cityName
       })
-      this.init()
+      app.getUser().then(() => {
+        this.init()
+      })
     });
   },
   init() {
+    wx.showLoading()
     let user = app.globalData.user;
     this.setData({
       user
@@ -55,18 +59,28 @@ Page({
       if (buid) {
         this.getRequestList(buid).then(() => {
           let queryType;
-          let param = {};
+          let param = this.data.param;
           let requestList = this.data.requestList;
-          requestList.length == 0 ? queryType = 2 : (queryType = 1 && (param.requireId = requestList[requestList.length - 1].requireId));
+          let hasRequest = true;
+          // requestList.length == 0 ? ((queryType = 2) && （hasRequest = false)) : ((queryType = 1) && (param.requireId = requestList[0].requireId));  //测试时注释掉
           this.setData({
-            queryType
+            queryType: 2,
+            // queryType,
+            // hasRequest,
+            hasRequest: false
           })
           this.getCityCode().then(() => {
-            param.workPlaceCode = this.data.cityCode;
-            param.queryType = queryType;
-            param.jfid = this.data.user.jfId;
+            // param.workPlaceCode = this.data.cityCode;//测试时注释掉  
+            param.workPlaceCode = 110000;
+            // param.queryType = queryType;
+            param.queryType = 2;
+            param.jfid = 2346870110;
+            // param.jfid = user.jfId;//测试时注释掉  
             param = Object.assign(param, {
               ...this.data.resumePage
+            })
+            this.setData({
+              param
             })
             this.getResumeList(param);
           });
@@ -100,9 +114,11 @@ Page({
       }).then(res => {
         let resData = res.data;
         if (resData.responseHeader.code == 200) {
-          this.setData({
-            requestList: resData.data.list
-          });
+          if (resData.data.totalCount != 0) {
+            this.setData({
+              requestList: resData.data.list
+            });
+          }
           resolve();
         }
       })
@@ -115,12 +131,18 @@ Page({
       let resData = res.data;
       let resumeList = this.data.resumeList;
       if (resData.responseHeader.code == 200) {
-        let pageStart = this.data.resumePage.pageStart;
+        wx.hideLoading()
+        let pageStart = params.pageStart;
         pageStart++;
-        resumeList = resumeList.concat(resData.data.list);
+        let list = resData.data.list;
+        list.forEach((item, index) => {
+          item.personLabelName = item.personLabelName.split(',')
+        })
+        resumeList = resumeList.concat(list);
         this.setData({
           resumeList,
           'resumePage.pageStart': pageStart,
+          'param.pageStart': pageStart,
           totalCount: resData.data.totalCount
         });
         if (this.data.totalCount == this.data.resumeList.length) {
@@ -148,20 +170,10 @@ Page({
     })
 
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-    wx.createSelectorQuery().select('#staff-filter').boundingClientRect().exec((res) => {
-      this.setData({
-        idleFilterTop: res[0].top
-      })
-    })
-  },
+
   // 页面滚动事件
   onPageScroll: function(event) {
-    const idleFilterTop = this.data.idleFilterTop
-    if (event.scrollTop >= idleFilterTop - 150 && this.requestList.length == 0) {
+    if (event.scrollTop >= 500 && this.data.requestList.length == 0) {
       this.setData({
         showFxq: true
       })
@@ -171,7 +183,7 @@ Page({
       })
     }
 
-    if (event.scrollTop >= idleFilterTop - 190 && this.requestList.length != 0) {
+    if (event.scrollTop >= 500 && this.data.requestList.length != 0) {
       this.setData({
         showMyXq: true
       })
@@ -189,33 +201,27 @@ Page({
     app.loginAuthorize(this, event.detail.url)
   },
   reload() {
+    this.setData({
+      requestList: [],
+      resumeList: [],
+      'param.pageStart': 1,
+      'resumePage.pageStart': 1,
+      finished: false
+    })
     this.onLoad();
-  },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
+    this.setData({
+      requestList: [],
+      resumeList: [],
+      'param.pageStart': 1,
+      'resumePage.pageStart': 1,
+      finished: false
+    })
     this.onLoad();
   },
 
@@ -223,7 +229,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    if (!this.data.finished) {
+      this.getResumeList(this.data.param);
+    }
   },
 
   /**

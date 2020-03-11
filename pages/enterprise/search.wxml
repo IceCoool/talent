@@ -17,7 +17,7 @@
       <view class="search-result-nothing-tip">您可以换个词再试试</view>
     </view>
     <view wx:else style="margin-top: 16px;">
-      <view class="search-result-item flex-h-center-between" wx:for="{{result}}" wx:key="index" bindtap="itemClick" data-item="{{item}}" data-buid="{{item.buId || item.id}}" data-type="{{type}}">
+      <view class="search-result-item flex-h-center-between" wx:for="{{result}}" wx:key="index" bindtap="itemClick" data-item="{{item}}" data-buid="{{item.buid || item.id}}" data-type="{{type}}">
         <view class="search-result-item-icon">{{item.name[0] || item.legal[0]}}</view>
         <view class="search-result-item-name">{{item.name || item.legal}}</view>
         <view class="search-result-item-arrow"></view>

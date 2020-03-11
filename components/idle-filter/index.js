@@ -10,6 +10,14 @@ Component({
     cityName: {
       type: String,
       value: ''
+    },
+    hasRequest: {
+      type: Boolean,
+      value: true
+    },
+    queryType: {
+      type: Number,
+      value: 1
     }
   },
 

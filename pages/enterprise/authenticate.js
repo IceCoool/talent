@@ -59,17 +59,21 @@ Page({
             comBuInfo: res.data.data,
             type: 'bu'
           });
-          this.getInfo()
+          this.getInfo();
         }
       })
     } else {
       let comSpInfo = JSON.parse(options.comInfo)
       this.setData({
-        buid: comSpInfo.id,
-        comSpInfo,
-        type: 'tyc'
-      })
-      this.getInfo()
+        comSpInfo
+      });
+      let param = {};
+      param.jfid = this.data.jfid;
+      param.buname = comSpInfo.name;
+      param.corporate = comSpInfo.legalPersonName;
+      param.buildTime = comSpInfo.estiblishTime;
+      param.rstCapital = comSpInfo.regCapital;
+      this.creat(param);
     }
 
     // wx.showLoading({
@@ -102,13 +106,25 @@ Page({
     this.getInfo()
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
+  //创建企业
+  creat(param) {
+    IdleHttp.request('/mobileapi/bu/saveBizUnit', {
+      ...param
+    }).then(res => {
+      console.log(res)
+      if (res.data.responseHeader.code == 200) {
+        wx.hideLoading();
+        this.setData({
+          buid: res.data.data.buid
+        })
+      } else {
+        wx.showToast({
+          title: res.responseHeader.message,
+          icon: 'none'
+        })
+      }
+    })
   },
-
   // 获取信息
   getInfo: function() {
     var url = '/mobileapi/bu/getBuAuth'
@@ -361,8 +377,6 @@ Page({
 
   // 提交
   submit: function() {
-    console.log("submit")
-
     if (!this.data.btnEnabled || this.isSubmiting) return
 
     let tip = ''
@@ -400,40 +414,41 @@ Page({
   saveInfo: function() {
     var url = '/mobileapi/bu/buVerify'
     var that = this
-    if (this.data.type == 'bu') {
-      var params = {
-        jfid: this.data.jfid,
-        buid: this.data.buid,
-        name: this.data.idCardInfo1.name,
-        idCardNumber: this.data.idCardInfo1.idNumber,
-        idCardFrontImage: this.data.idCardKey1,
-        idCardBackImage: this.data.idCardKey2,
-        buname: this.data.licenseInfo.buname,
-        creditCode: this.data.licenseInfo.creditCode,
-        registAddr: this.data.licenseInfo.registAddr,
-        licimg: this.data.licenseKey,
-        attach: this.data.others.join(','), //其它证明材料obs地址多个逗号分隔
-        verifyBuType: 1
-      }
-    } else {
-      var params = {
-        jfid: this.data.jfid,
-        buid: this.data.buid,
-        corporate: this.data.comSpInfo.legalPersonName,
-        buildTime: this.data.comSpInfo.estiblishTime,
-        rstCapital: this.data.comSpInfo.regCapital,
-        verifyBuType: 2,
-        name: this.data.idCardInfo1.name,
-        idCardNumber: this.data.idCardInfo1.idNumber,
-        idCardFrontImage: this.data.idCardKey1,
-        idCardBackImage: this.data.idCardKey2,
-        buname: this.data.comSpInfo.name,
-        creditCode: this.data.licenseInfo.creditCode,
-        registAddr: this.data.licenseInfo.registAddr,
-        licimg: this.data.licenseKey,
-        attach: this.data.others.join(','), //其它证明材料obs地址多个逗号分隔
-      }
+    // if (this.data.type == 'bu') {
+    var params = {
+      jfid: this.data.jfid,
+      buid: this.data.buid,
+      name: this.data.idCardInfo1.name,
+      idCardNumber: this.data.idCardInfo1.idNumber,
+      idCardFrontImage: this.data.idCardKey1,
+      idCardBackImage: this.data.idCardKey2,
+      buname: this.data.licenseInfo.buname,
+      creditCode: this.data.licenseInfo.creditCode,
+      registAddr: this.data.licenseInfo.registAddr,
+      licimg: this.data.licenseKey,
+      attach: this.data.others.join(',') //其它证明材料obs地址多个逗号分隔
+      // verifyBuType: 1
     }
+    // }
+    //  else {
+    //   var params = {
+    //     jfid: this.data.jfid,
+    //     buid: this.data.buid,
+    //     corporate: this.data.comSpInfo.legalPersonName,
+    //     buildTime: this.data.comSpInfo.estiblishTime,
+    //     rstCapital: this.data.comSpInfo.regCapital,
+    //     verifyBuType: 2,
+    //     name: this.data.idCardInfo1.name,
+    //     idCardNumber: this.data.idCardInfo1.idNumber,
+    //     idCardFrontImage: this.data.idCardKey1,
+    //     idCardBackImage: this.data.idCardKey2,
+    //     buname: this.data.comSpInfo.name,
+    //     creditCode: this.data.licenseInfo.creditCode,
+    //     registAddr: this.data.licenseInfo.registAddr,
+    //     licimg: this.data.licenseKey,
+    //     attach: this.data.others.join(','), //其它证明材料obs地址多个逗号分隔
+    //   }
+    // }
 
     http.post(url, params, function(res) {
       if (res.responseHeader && res.responseHeader.code == 200) {
@@ -443,15 +458,15 @@ Page({
           btnEnabled: false
         })
       } else {
-        if (that.data.type == 'tyc') {
-          let comSpInfo = that.data.comSpInfo;
-          that.setData({
-            type: 'bu',
-            buid: res.data.buid,
-            'comBuInfo.buName': comSpInfo.name,
-            'comBuInfo.auth': -2
-          })
-        }
+        // if (that.data.type == 'tyc') {
+        //   let comSpInfo = that.data.comSpInfo;
+        //   that.setData({
+        //     type: 'bu',
+        //     buid: res.data.buid,
+        //     'comBuInfo.buName': comSpInfo.name,
+        //     'comBuInfo.auth': -2
+        //   })
+        // }
         getApp().showError(res.responseHeader ? res.responseHeader.message : '')
       }
       that.isSubmiting = false

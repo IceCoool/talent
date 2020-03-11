@@ -7,7 +7,10 @@ Component({
     addGlobalClass: true,
   },
   properties: {
-
+    resumeList: {
+      type: Object,
+      value: []
+    }
   },
 
   /**
