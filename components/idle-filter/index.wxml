@@ -1,8 +1,22 @@
 <view id="idle-filter" class="idle-filter">
   <view class="lf">
-    <text class="Mrt30 {{queryType == 1 ? 'on':''}}" wx:if="{{hasRequest}}">推荐</text>
-    <text class="{{queryType == 2 ? 'on':''}}">最新</text>
-    <text class="num"></text>
+    <text class="Mrt30 {{queryType == 1 ? 'on':''}}" wx:if="{{hasRequest}}" data-type="1" bindtap="changeQuery">推荐</text>
+    <view class="{{queryType == 2 ? 'on':''}}" data-type="2" bindtap="changeQuery">
+      <text class="Mrt30">最新</text>
+      <text class="num"></text>
+    </view>
+    <view class="price" data-type="3" wx:if="{{queryType == 1 || queryType == 2}}" bindtap="changeQuery">
+      <text>报价</text>
+      <image src="/images/sort-no.png"></image>
+    </view>
+    <view class="price" data-type="4" wx:if="{{queryType == 3}}" bindtap="changeQuery">
+      <text>报价</text>
+      <image src="/images/sort-up.png"></image>
+    </view>
+    <view class="price" data-type="3" wx:if="{{queryType == 4}}" bindtap="changeQuery">
+      <text>报价</text>
+      <image src="/images/sort-down.png"></image>
+    </view>
   </view>
   <view class="rt">
     <view class="fil-type" data-url="/pages/Filter/selCity" bindtap="tapEvent">

@@ -22,7 +22,8 @@ Page({
     resumeList: [],
     requestList: [],
     finished: false,
-    param: {}
+    param: {},
+    isLoading: false
   },
 
   /**
@@ -47,7 +48,6 @@ Page({
     });
   },
   init() {
-    wx.showLoading()
     let user = app.globalData.user;
     this.setData({
       user
@@ -103,6 +103,7 @@ Page({
       });
     }
   },
+  // 获取需求列表
   getRequestList(buid) {
     return new Promise((resolve, reject) => {
       let param = {
@@ -124,34 +125,43 @@ Page({
       })
     })
   },
+  // 获取简历列表
   getResumeList(params) {
-    IdleHttp.request('/mobileapi/resume/queryResumeList', {
-      ...params
-    }).then(res => {
-      let resData = res.data;
-      let resumeList = this.data.resumeList;
-      if (resData.responseHeader.code == 200) {
-        wx.hideLoading()
-        let pageStart = params.pageStart;
-        pageStart++;
-        let list = resData.data.list;
-        list.forEach((item, index) => {
-          item.personLabelName = item.personLabelName.split(',')
-        })
-        resumeList = resumeList.concat(list);
-        this.setData({
-          resumeList,
-          'resumePage.pageStart': pageStart,
-          'param.pageStart': pageStart,
-          totalCount: resData.data.totalCount
-        });
-        if (this.data.totalCount == this.data.resumeList.length) {
-          this.setData({
-            finished: true
+    if (!this.data.isLoading) {
+      wx.showLoading();
+      this.setData({
+        isLoading: true
+      })
+      IdleHttp.request('/mobileapi/resume/queryResumeList', {
+        ...params
+      }).then(res => {
+        let resData = res.data;
+        let resumeList = this.data.resumeList;
+        if (resData.responseHeader.code == 200) {
+          wx.hideLoading()
+          let pageStart = params.pageStart;
+          pageStart++;
+          let list = resData.data.list;
+          list.forEach((item, index) => {
+            item.personLabelName = item.personLabelName.split(',')
           })
+          resumeList = resumeList.concat(list);
+          this.setData({
+            isLoading: false,
+            resumeList,
+            'resumePage.pageStart': pageStart,
+            'param.pageStart': pageStart,
+            totalCount: resData.data.totalCount
+          });
+          if (this.data.totalCount == this.data.resumeList.length) {
+            this.setData({
+              finished: true
+            })
+          }
         }
-      }
-    })
+      })
+    }
+
   },
   getCityCode() {
     return new Promise((resolve, reject) => {
@@ -170,7 +180,18 @@ Page({
     })
 
   },
-
+  changeQuery(event) {
+    let type = event.detail;
+    this.setData({
+      queryType: type,
+      resumeList: [],
+      finished: false,
+      'resumePage.pageStart': 1,
+      'param.pageStart': 1,
+      'param.queryType': type
+    });
+    this.getResumeList(this.data.param)
+  },
   // 页面滚动事件
   onPageScroll: function(event) {
     if (event.scrollTop >= 500 && this.data.requestList.length == 0) {

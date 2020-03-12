@@ -18,6 +18,14 @@
   font-weight: bold;
 }
 
+.idle-filter .lf .price{
+  display: flex;
+  align-items: center;
+}
+.idle-filter .lf .price image{
+  width: 32rpx;
+  height: 32rpx;
+}
 .idle-filter .fil-type {
   margin-left: 20rpx;
   padding: 0 16rpx;

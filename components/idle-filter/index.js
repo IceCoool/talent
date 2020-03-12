@@ -32,11 +32,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onChange(event) {
-      this.setData({
-        sortValue: event.detail
-      });
-      console.log(this.data.sortValue)
+    changeQuery(event) {
+      let type = event.currentTarget.dataset.type;
+      if (type != this.data.queryType) {
+        this.triggerEvent('changeQuery', type)
+      }
     },
     tapEvent(event) {
       let url = event.currentTarget.dataset.url;
