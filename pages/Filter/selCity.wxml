@@ -32,8 +32,3 @@
     </view>
   </van-index-bar>
 </view>
-
-<!-- <view class="oper-btns">
-  <text class="btn clear">清除</text>
-  <text class="btn sure">确定</text>
-</view> -->

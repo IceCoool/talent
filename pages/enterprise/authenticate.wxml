@@ -4,7 +4,7 @@
   <view class="info-top">
     <view class="name">
       <text>{{comBuInfo.buName}}</text>
-      <text class="status {{auth == 1 ?'on':''}}">{{utils.getAuthStatus(auth)}}</text>
+      <text class="status {{comBuInfo.auth == 1 ?'on':''}}">{{utils.getAuthStatus(comBuInfo.auth)}}</text>
     </view>
     <text class="num">{{comBuInfo.buScale}}</text>
   </view>
@@ -18,17 +18,17 @@
   </view>
 </view>
 
-<view class="auth-error" wx:if="{{auth == -1}}">
+<view class="auth-error" wx:if="{{auth == -1 && isInBu}}">
   <text>【温馨提示】企业认证未通过，请重新提交申请</text>
   <text>原因：企业营业执照图片有误</text>
 </view>
 
-<view class="auth-error" wx:if="{{auth == 0}}">
+<view class="auth-error" wx:if="{{auth == 0 && isInBu}}">
   <text>【温馨提示】企业认证提交成功</text>
   <text>请耐心等待客服审核</text>
 </view>
 
-<view class="auth-page-wrap" wx:if="{{auth == -1 || auth == -2 || auth == -3}}">
+<view class="auth-page-wrap" wx:if="{{isInBu && (auth == -1 || auth == -2 || auth == -3)}}">
   <!-- 营业执照 -->
   <view class="auth-section-title" style="margin-top: 14px;">{{mode == 1 ? '请上传' : ''}}营业执照</view>
   <!-- 图片部分 -->
@@ -129,8 +129,8 @@
   <view wx:if="{{mode == 1}}" class="submit-btn {{btnEnabled ? 'btn-enable' : 'btn-disable'}}" hover-class="{{btnEnabled ? 'btn-hover' : ''}}" bindtap="submit">提交</view>
 </view>
 
-<view class="oper-btns" wx:if="{{source == 'search' && auth == 1}}">
-  <text class="btn sure">申请加入</text>
+<view class="oper-btns" wx:if="{{source == 'search' && !isInBu}}">
+  <text class="btn sure" bindtap="join">申请加入</text>
 </view>
 
 <!-- 弹窗： 提交成功 -->

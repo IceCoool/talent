@@ -15,7 +15,6 @@ Page({
    */
   onLoad: function(options) {
     this.getList().then(list => {
-
       let promise = Promise.all(list.map((item, index) => {
         return new Promise((resolve, reject) => {
           IdleHttp.request('/mobileapi/bu/getBuAuth', {

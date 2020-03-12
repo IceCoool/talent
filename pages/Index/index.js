@@ -126,7 +126,8 @@ Page({
     })
   },
   // 获取简历列表
-  getResumeList(params) {
+  getResumeList(params, replace) {
+    replace = replace || false;
     if (!this.data.isLoading) {
       wx.showLoading();
       this.setData({
@@ -139,25 +140,38 @@ Page({
         let resumeList = this.data.resumeList;
         if (resData.responseHeader.code == 200) {
           wx.hideLoading()
-          let pageStart = params.pageStart;
-          pageStart++;
-          let list = resData.data.list;
-          list.forEach((item, index) => {
-            item.personLabelName = item.personLabelName.split(',')
-          })
-          resumeList = resumeList.concat(list);
-          this.setData({
-            isLoading: false,
-            resumeList,
-            'resumePage.pageStart': pageStart,
-            'param.pageStart': pageStart,
-            totalCount: resData.data.totalCount
-          });
-          if (this.data.totalCount == this.data.resumeList.length) {
+          if (resData.data.totalCount == 0) {
             this.setData({
+              isLoading: false,
+              resumeList: [],
               finished: true
             })
+          } else {
+            let pageStart = params.pageStart;
+            pageStart++;
+            let list = resData.data.list;
+            list.forEach((item, index) => {
+              item.personLabelName = item.personLabelName.split(',')
+            })
+            if (!replace) {
+              resumeList = resumeList.concat(list);
+            } else {
+              resumeList = list
+            }
+            this.setData({
+              isLoading: false,
+              resumeList,
+              'resumePage.pageStart': pageStart,
+              'param.pageStart': pageStart,
+              totalCount: resData.data.totalCount
+            });
+            if (this.data.totalCount == this.data.resumeList.length) {
+              this.setData({
+                finished: true
+              })
+            }
           }
+
         }
       })
     }
@@ -180,17 +194,17 @@ Page({
     })
 
   },
+  // 切换列表标签
   changeQuery(event) {
     let type = event.detail;
     this.setData({
       queryType: type,
-      resumeList: [],
       finished: false,
       'resumePage.pageStart': 1,
       'param.pageStart': 1,
       'param.queryType': type
     });
-    this.getResumeList(this.data.param)
+    this.getResumeList(this.data.param, true)
   },
   // 页面滚动事件
   onPageScroll: function(event) {

@@ -19,7 +19,7 @@
     </view>
   </view>
   <view class="rt">
-    <view class="fil-type" data-url="/pages/Filter/selCity" bindtap="tapEvent">
+    <view class="fil-type" data-url="/pages/Filter/selCity?cityCode={{cityCode}}" bindtap="tapEvent">
       <text>{{cityName}}</text>
       <text class="icon"></text>
     </view>

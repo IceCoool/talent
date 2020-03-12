@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/Index/index",
+    "pages/Filter/selAll",
     "pages/enterprise/search",
     "pages/enterprise/enterpriseList",
-    "pages/Filter/selAll",
     "pages/AddIdle/addAsk",
     "pages/enterprise/authenticate",
     "pages/demo/customer",

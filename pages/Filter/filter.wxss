@@ -145,6 +145,7 @@
   justify-content: space-between;
   align-items: center;
   background: #fff;
+  z-index: 9;
 }
 
 .oper-btns .btn {

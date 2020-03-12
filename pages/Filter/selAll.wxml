@@ -9,41 +9,51 @@
 <view class="boxSh fil-mod" style="min-height: 68%;margin-bottom: 180rpx;">
   <view class="item">
     <text class="item-title">服务类型</text>
-    <view class="item-list" value="{{sortValue}}">
-      <text class="label">不限</text>
-      <text class="label">岗位外包</text>
-      <text class="label">短期驻场</text>
+    <view class="item-list">
+      <text class="label {{serviceType==''?'on':''}}" data-name="serviceType" bindtap="clearSel">不限</text>
+      <text class="label {{serviceType==1?'on':''}}" data-type="1" bindtap="selService">岗位外包</text>
+      <text class="label {{serviceType==2?'on':''}}" data-type="2" bindtap="selService">短期驻场</text>
     </view>
   </view>
   <view class="item">
     <text class="item-title">学历要求</text>
-    <view class="item-list" value="{{sortValue}}">
-      <text class="label">不限</text>
-      <text class="label ">大专及以下</text>
-      <text class="label">本科及以上</text>
+    <view class="item-list">
+      <text class="label {{education==''?'on':''}}" data-name="education" bindtap="clearSel">不限</text>
+      <text class="label {{education==1?'on':''}}" data-type="1" bindtap="selEduc">大专及以下</text>
+      <text class="label {{education==2?'on':''}}" data-type="2" bindtap="selEduc">本科及以上</text>
     </view>
   </view>
-  <view class="item">
-    <text class="item-title">报价</text>
-    <view class="item-list" value="{{sortValue}}">
-      <text class="label">不限</text>
-      <text class="label ">3K以下</text>
-      <text class="label">3-5K</text>
+  <view class="item" wx:if="{{serviceType == 1}}">
+    <view>
+      <text class="item-title">报价</text>
+      <text>【月】</text>
+    </view>
+    <view class="item-list">
+      <text class="label {{priceRange==''?'on':''}}" data-name="priceRange" bindtap="clearSel">不限</text>
+      <text class="label {{priceRange==item.id?'on':''}}" wx:for="{{personPriceMonth}}" wx:key="index" data-id="{{item.id}}" data-lower="{{item.lower}}" data-upper="{{item.upper}}" bindtap="selPrice">{{item.name}}</text>
+    </view>
+  </view>
+  <view class="item" wx:if="{{serviceType == 2}}">
+    <view>
+      <text class="item-title">报价</text>
+      <text>【日】</text>
+    </view>
+    <view class="item-list">
+      <text class="label {{priceRange==''?'on':''}}" data-name="priceRange" bindtap="clearSel">不限</text>
+      <text class="label {{priceRange==item.id?'on':''}}" wx:for="{{personPriceDay}}" wx:key="index" data-id="{{item.id}}" data-lower="{{item.lower}}" data-upper="{{item.upper}}" bindtap="selPrice">{{item.name}}</text>
     </view>
   </view>
   <view class="item">
     <text class="item-title">经验要求</text>
-    <view class="item-list" value="{{sortValue}}">
-      <text class="label">不限</text>
-      <text class="label ">1年以内</text>
-      <text class="label">1-3年</text>
-      <text class="label">3-5年</text>
-      <text class="label">自定义区间</text>
-      <view class="custom">
+    <view class="item-list">
+      <text class="label {{workRange==''?'on':''}}" data-name="workRange" bindtap="clearSel">不限</text>
+      <text class="label {{workRange==item.id?'on':''}}" wx:for="{{workYear}}" wx:key="index" data-id="{{item.id}}" data-lower="{{item.lower}}" data-upper="{{item.upper}}" bindtap="selWork">{{item.name}}</text>
+      <text class="label {{workRange=='custom'?'on':''}}" bindtap="showCustom">自定义区间</text>
+      <view class="custom" wx:if="{{custom}}">
         <text>自定义区间</text>
-        <input class="inp" type="number" placeholder="最低工作经验" placeholder-class="placeholder"></input>
+        <input class="inp" type="number" placeholder="最低工作经验" placeholder-class="placeholder" value="{{workYearLowerLimit}}" data-custom="workYearLowerLimit" bindinput="customWork"></input>
         <text>-</text>
-        <input class="inp" type="number" placeholder="最高工作经验" placeholder-class="placeholder"></input>
+        <input class="inp" type="number" placeholder="最高工作经验" placeholder-class="placeholder" value="{{workYearUpperLimit}}" data-custom="workYearUpperLimit" bindinput="customWork"></input>
       </view>
     </view>
   </view>
@@ -51,11 +61,11 @@
     <text class="item-title">行业要求</text>
     <view class="item-list">
       <text class="label {{tradeCode.length == 0?'on':''}}" bindtap="clearCode">不限</text>
-      <text class="label {{utils.checkBoxStatus(tradeCode,item.itemCode)?'on':''}}" wx:for="{{jobList}}" wx:key="*this" data-code="{{item.itemCode}}" bindtap="selTradeFn">{{item.cnname}}</text>
+      <text class="label {{utils.checkBoxStatus(tradeCode,item.itemCode)?'on':''}}" wx:for="{{jobList}}" wx:key="index" data-code="{{item.itemCode}}" bindtap="selTradeFn">{{item.cnname}}</text>
     </view>
   </view>
 </view>
 <view class="oper-btns">
-  <text class="btn clear">清除</text>
-  <text class="btn sure">确定</text>
+  <text class="btn clear" bindtap="clearAll">清除</text>
+  <text class="btn sure" bindtap="goBack">确定</text>
 </view>

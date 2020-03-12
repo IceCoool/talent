@@ -102,12 +102,17 @@ Page({
     });
 
     let pages = getCurrentPages();
-    console.log(pages)
     let prevPage = pages[pages.length - 2];
     prevPage.setData({
       cityCode,
-      cityName
-    })
+      cityName,
+      finished: false,
+      'resumePage.pageStart': 1,
+      'param.pageStart': 1,
+      'param.workPlaceCode': cityCode
+    });
+    var param = prevPage.data.param;
+    prevPage.getResumeList && prevPage.getResumeList(param, true)
     wx.navigateBack()
   },
   onPageScroll(event) {

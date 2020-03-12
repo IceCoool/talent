@@ -36,7 +36,8 @@ Page({
 
     type: '',
     comBuInfo: {},
-    comSpInfo: {}
+    comSpInfo: {},
+    isInBu: true
   },
 
   /**
@@ -46,23 +47,38 @@ Page({
     this.setData({
       mode: options.mode || 1, // 默认是1编辑模式
       source: options.source || '',
-      jfid: getApp().globalData.user.jfId
+      // jfid: getApp().globalData.user.jfId
+      jfid: 2346870110
     })
     wx.showLoading()
     if (options.type == 'bu') {
-      IdleHttp.request('/mobileapi/bu/getBuInfo', {
-        buid: options.buid
-      }).then(res => {
-        if (res.data.responseHeader.code == 200) {
-          this.setData({
-            buid: options.buid,
-            comBuInfo: res.data.data,
-            type: 'bu'
-          });
-          this.getInfo();
-        }
-      })
+      // 平台存在企业  如果是从搜索处进来 先查用户是否在当前企业内
+      if (options.source == 'search') {
+        IdleHttp.request('/mobileapi/bu/verifyUserBuMember', {
+          jfid: 2346870110,
+          buid: options.buid
+        }).then(res => {
+          console.log(res)
+          if (res.data.responseHeader.code == 200) {
+            wx.hideLoading()
+            let isInBu = res.data.data.exist;
+            console.log(1111)
+            this.setData({
+              isInBu
+            })
+            this.getBuInfo(options, isInBu)
+          }else{
+            wx.showToast({
+              title: res.data.responseHeader.message,
+              icon: 'none'
+            })
+          }
+        })
+      } else {
+        this.getBuInfo(options, true)
+      }
     } else {
+      // 天眼查来源 先创建企业
       let comSpInfo = JSON.parse(options.comInfo)
       this.setData({
         comSpInfo
@@ -75,37 +91,22 @@ Page({
       param.rstCapital = comSpInfo.regCapital;
       this.creat(param);
     }
-
-    // wx.showLoading({
-    //   title: '',
-    // })
-    // // 刷新权限
-    // getApp().getBuRole(()=>{
-    //   const isManager = user.isManager()
-    //   var mode = this.data.mode
-    //   // 矫正mode，保证只有管理员可编辑
-    //   if (mode == 1 && !isManager) {
-    //     mode = 0
-    //   }
-    //   this.setData({
-    //     buid: user.getBuId(),
-    //     mode: mode
-    //   })
-
-    //   this.getInfo()
-    // })
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-    wx.showLoading({
-      title: '',
+  getBuInfo(options, isInBu) {
+    IdleHttp.request('/mobileapi/bu/getBuInfo', {
+      buid: options.buid
+    }).then(res => {
+      if (res.data.responseHeader.code == 200) {
+        this.setData({
+          buid: options.buid,
+          comBuInfo: res.data.data,
+          type: 'bu'
+        });
+        isInBu ? this.getInfo() : ''
+      }
     })
-    this.getInfo()
   },
-
   //创建企业
   creat(param) {
     IdleHttp.request('/mobileapi/bu/saveBizUnit', {
@@ -120,6 +121,23 @@ Page({
       } else {
         wx.showToast({
           title: res.responseHeader.message,
+          icon: 'none'
+        })
+      }
+    })
+  },
+  // 加入企业
+  join(){
+    IdleHttp.request('/mobileapi/bu/applyBuMember',{
+      jfId: 2346870110,
+      buId: this.data.buid,
+      realName: 'GG'
+    }).then(res=>{
+      if(res.data.responseHeader.code == 200){
+        this.onLoad()
+      }else{
+        wx.showToast({
+          title: res.data.responseHeader.message,
           icon: 'none'
         })
       }
@@ -427,28 +445,7 @@ Page({
       registAddr: this.data.licenseInfo.registAddr,
       licimg: this.data.licenseKey,
       attach: this.data.others.join(',') //其它证明材料obs地址多个逗号分隔
-      // verifyBuType: 1
     }
-    // }
-    //  else {
-    //   var params = {
-    //     jfid: this.data.jfid,
-    //     buid: this.data.buid,
-    //     corporate: this.data.comSpInfo.legalPersonName,
-    //     buildTime: this.data.comSpInfo.estiblishTime,
-    //     rstCapital: this.data.comSpInfo.regCapital,
-    //     verifyBuType: 2,
-    //     name: this.data.idCardInfo1.name,
-    //     idCardNumber: this.data.idCardInfo1.idNumber,
-    //     idCardFrontImage: this.data.idCardKey1,
-    //     idCardBackImage: this.data.idCardKey2,
-    //     buname: this.data.comSpInfo.name,
-    //     creditCode: this.data.licenseInfo.creditCode,
-    //     registAddr: this.data.licenseInfo.registAddr,
-    //     licimg: this.data.licenseKey,
-    //     attach: this.data.others.join(','), //其它证明材料obs地址多个逗号分隔
-    //   }
-    // }
 
     http.post(url, params, function(res) {
       if (res.responseHeader && res.responseHeader.code == 200) {
@@ -458,15 +455,6 @@ Page({
           btnEnabled: false
         })
       } else {
-        // if (that.data.type == 'tyc') {
-        //   let comSpInfo = that.data.comSpInfo;
-        //   that.setData({
-        //     type: 'bu',
-        //     buid: res.data.buid,
-        //     'comBuInfo.buName': comSpInfo.name,
-        //     'comBuInfo.auth': -2
-        //   })
-        // }
         getApp().showError(res.responseHeader ? res.responseHeader.message : '')
       }
       that.isSubmiting = false

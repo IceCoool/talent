@@ -11,6 +11,10 @@ Component({
       type: String,
       value: ''
     },
+    cityCode: {
+      type: String,
+      value: ''
+    },
     hasRequest: {
       type: Boolean,
       value: true
