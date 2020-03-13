@@ -1,7 +1,7 @@
 <van-popup show="{{ showLogin }}" bind:close="onClose" custom-class="login">
   <view class="login">
     <image src="/images/login-bg.png"></image>
-    <image class="login-btn" src="/images/login-btn.png" bindtap="aaa"></image>
+    <image class="login-btn" src="/images/login-btn.png"></image>
     <text class="close" bindtap="onClose">×</text>
     <button class="getUser-btn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"></button>
   </view>

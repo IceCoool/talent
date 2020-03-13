@@ -1,4 +1,4 @@
-const user = require('user.js')
+// const user = require('user.js')
 const util = require('utils.js')
 import md5 from 'md5'
 

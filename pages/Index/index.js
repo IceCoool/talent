@@ -7,7 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    idleFilterTop: Number,
     showFxq: false,
     showMyXq: false,
     showLogin: false,
@@ -53,41 +52,40 @@ Page({
       user
     })
     if (user) {
-      // 已登录
-      let buid;
-      buid = user.buId || user.buList[0].buId
-      if (buid) {
-        this.getRequestList(buid).then(() => {
-          let queryType;
-          let param = this.data.param;
-          let requestList = this.data.requestList;
-          let hasRequest = true;
-          // requestList.length == 0 ? ((queryType = 2) && （hasRequest = false)) : ((queryType = 1) && (param.requireId = requestList[0].requireId));  //测试时注释掉
-          this.setData({
-            queryType: 2,
-            // queryType,
-            // hasRequest,
-            hasRequest: false
-          })
-          this.getCityCode().then(() => {
-            // param.workPlaceCode = this.data.cityCode;//测试时注释掉  
-            param.workPlaceCode = 110000;
-            // param.queryType = queryType;
-            param.queryType = 2;
-            param.jfid = 2346870110;
-            // param.jfid = user.jfId;//测试时注释掉  
-            param = Object.assign(param, {
-              ...this.data.resumePage
-            })
-            this.setData({
-              param
-            })
-            this.getResumeList(param);
-          });
+      // let buid;    //未定下来需求列表是否要与企业挂钩
+      // buid = user.buId || user.buList[0].buId
+      // if (buid) {
+      this.getRequestList().then(() => {
+        let queryType;
+        let param = this.data.param;
+        let requestList = this.data.requestList;
+        let hasRequest = true;
+        requestList.length == 0 ? ((queryType = 2) && (hasRequest = false)) : ((queryType = 1) && (param.requireId = requestList[0].requireId)); //测试时注释掉
+        this.setData({
+          // queryType: 2,
+          queryType,
+          hasRequest
+          // hasRequest: false
         })
-      } else {
+        this.getCityCode().then(() => {
+          param.workPlaceCode = this.data.cityCode; //测试时注释掉
+          // param.workPlaceCode = 110000;
+          param.queryType = queryType;
+          // param.queryType = 2;
+          // param.jfid = 2346870110;
+          param.jfid = user.jfId; //测试时注释掉  
+          param = Object.assign(param, {
+            ...this.data.resumePage
+          })
+          this.setData({
+            param
+          })
+          this.getResumeList(param);
+        });
+      })
+      // } else {
 
-      }
+      // }
     } else {
       // 未登录
       this.getCityCode().then(() => {
@@ -97,18 +95,19 @@ Page({
         let param = {};
         param.workPlaceCode = this.data.cityCode;
         param.queryType = 2;
-        param = Object.assign(param, { ...this.data.resumePage
+        param = Object.assign(param, {
+          ...this.data.resumePage
         })
         this.getResumeList(param);
       });
     }
   },
   // 获取需求列表
-  getRequestList(buid) {
+  getRequestList() {
     return new Promise((resolve, reject) => {
       let param = {
-        creatorJfid: this.data.user.jfId,
-        creatorBuid: buid
+        creatorJfid: this.data.user.jfId
+        // creatorBuid: buid
       }
       IdleHttp.request('/mobileapi/requirement/queryMobileRequirementList', {
         ...param
@@ -171,7 +170,6 @@ Page({
               })
             }
           }
-
         }
       })
     }

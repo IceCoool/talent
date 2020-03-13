@@ -145,3 +145,15 @@
     </view>
   </view>
 </view>
+
+<!-- 弹窗： 提交成功 -->
+<view class="mask flex-v-center" wx:if="{{submitJoin}}">
+  <view class="modal-dialog">
+    <image class="modal-icon-badge" src="/images/modal-icon-badge.png"></image>
+    <view class="modal-title">提交成功，请等待管理员审核</view>
+    <view class="modal-btns" style="width: 100%;">
+      <!-- <view class="modal-btn modal-cancel" bindtap="contactCS">联系客服，加速审核</view> -->
+      <view class="modal-btn modal-ok" style="margin-top: 10px;" bindtap="check">确认</view>
+    </view>
+  </view>
+</view>

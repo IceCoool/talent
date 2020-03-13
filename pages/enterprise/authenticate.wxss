@@ -315,7 +315,7 @@ image {
 
 .modal-title {
   font-family: PingFangSC-Semibold;
-  font-size: 20px;
+  font-size: 32rpx;
   color: #333333;
   letter-spacing: 0;
   text-align: center;
@@ -325,7 +325,7 @@ image {
 
 .modal-content {
   font-family: PingFangSC-Regular;
-  font-size: 15px;
+  font-size: 28rpx;
   color: #AAAEB0;
   letter-spacing: 0;
   text-align: center;
@@ -334,7 +334,6 @@ image {
 
 .modal-btns {
   margin-top: 30px;
-
   font-family: PingFangSC-Medium, 'PingFang SC';
   font-size: 15px;
   text-align: center;

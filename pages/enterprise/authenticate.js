@@ -37,7 +37,8 @@ Page({
     type: '',
     comBuInfo: {},
     comSpInfo: {},
-    isInBu: true
+    isInBu: true,
+    submitJoin: false
   },
 
   /**
@@ -47,27 +48,25 @@ Page({
     this.setData({
       mode: options.mode || 1, // 默认是1编辑模式
       source: options.source || '',
-      // jfid: getApp().globalData.user.jfId
-      jfid: 2346870110
+      jfid: getApp().globalData.user.jfId
+      // jfid: 2346868925
     })
     wx.showLoading()
     if (options.type == 'bu') {
       // 平台存在企业  如果是从搜索处进来 先查用户是否在当前企业内
       if (options.source == 'search') {
         IdleHttp.request('/mobileapi/bu/verifyUserBuMember', {
-          jfid: 2346870110,
+          jfid: this.data.jfid,
           buid: options.buid
         }).then(res => {
-          console.log(res)
           if (res.data.responseHeader.code == 200) {
             wx.hideLoading()
             let isInBu = res.data.data.exist;
-            console.log(1111)
             this.setData({
               isInBu
             })
             this.getBuInfo(options, isInBu)
-          }else{
+          } else {
             wx.showToast({
               title: res.data.responseHeader.message,
               icon: 'none'
@@ -127,15 +126,17 @@ Page({
     })
   },
   // 加入企业
-  join(){
-    IdleHttp.request('/mobileapi/bu/applyBuMember',{
-      jfId: 2346870110,
+  join() {
+    IdleHttp.request('/mobileapi/bu/applyBuMember', {
+      jfId: this.data.jfid,
       buId: this.data.buid,
       realName: 'GG'
-    }).then(res=>{
-      if(res.data.responseHeader.code == 200){
-        this.onLoad()
-      }else{
+    }).then(res => {
+      if (res.data.responseHeader.code == 200) {
+        this.setData({
+          submitJoin: true
+        })
+      } else {
         wx.showToast({
           title: res.data.responseHeader.message,
           icon: 'none'
@@ -432,7 +433,6 @@ Page({
   saveInfo: function() {
     var url = '/mobileapi/bu/buVerify'
     var that = this
-    // if (this.data.type == 'bu') {
     var params = {
       jfid: this.data.jfid,
       buid: this.data.buid,

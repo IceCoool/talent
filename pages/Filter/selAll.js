@@ -1,5 +1,3 @@
-// pages/Filter/selAll.js
-// 
 const IdleHttp = require('../../utils/request.js')
 Page({
 
@@ -17,25 +15,100 @@ Page({
     personPriceMonth: [{
       id: 1,
       name: '3K以下',
-      lower: '11999',
-      upper: '12000'
+      lower: '0',
+      upper: '3000'
+    }, {
+      id: 2,
+      name: '3-5K',
+      lower: '3000',
+      upper: '5000'
+    }, {
+      id: 3,
+      name: '5-10K',
+      lower: '5000',
+      upper: '10000'
+    }, {
+      id: 4,
+      name: '10-20k',
+      lower: '10000',
+      upper: '20000'
+    }, {
+      id: 5,
+      name: '20-50K',
+      lower: '20000',
+      upper: '50000'
+    }, {
+      id: 6,
+      name: '50K以上',
+      lower: '50000',
+      upper: ''
     }],
     personPriceDay: [{
       id: 1,
-      name: '5K以下',
-      lower: '799',
-      upper: '801'
+      name: '200以下',
+      lower: '0',
+      upper: '200'
+    }, {
+      id: 2,
+      name: '200-300',
+      lower: '200',
+      upper: '300'
+    }, {
+      id: 3,
+      name: '300-400',
+      lower: '300',
+      upper: '400'
+    }, {
+      id: 4,
+      name: '400-500',
+      lower: '400',
+      upper: '500'
+    }, {
+      id: 5,
+      name: '500-600',
+      lower: '500',
+      upper: '600'
+    }, {
+      id: 6,
+      name: '600-800',
+      lower: '600',
+      upper: '800'
+    }, {
+      id: 7,
+      name: '800-1K',
+      lower: '800',
+      upper: '1000'
+    }, {
+      id: 8,
+      name: '1K以上',
+      lower: '1000',
+      upper: ''
     }],
     workYear: [{
       id: 1,
       name: '1年以内',
-      lower: '4',
-      upper: '8'
+      lower: '0',
+      upper: '1'
     }, {
       id: 2,
       name: '1-3年',
+      lower: '1',
+      upper: '3'
+    }, {
+      id: 3,
+      name: '3-5年',
+      lower: '3',
+      upper: '5'
+    }, {
+      id: 4,
+      name: '5-10年',
       lower: '5',
-      upper: '6'
+      upper: '10'
+    }, {
+      id: 5,
+      name: '10以上',
+      lower: '10',
+      upper: ''
     }],
     educationRange: {
       '1': '0,2',

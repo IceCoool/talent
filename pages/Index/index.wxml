@@ -47,7 +47,7 @@
       </navigator>
     </view>
     <view class="Mtp20 req-list boxSh">
-      <view class="item" wx:for="{{requestList}}" wx:key="idnex">
+      <view class="item" wx:for="{{requestList}}" wx:if="{{index < 3}}" wx:key="idnex">
         <view class="job">
           <text>{{item.postType}}</text>
           <text class="attr">{{item.serviceType}}</text>

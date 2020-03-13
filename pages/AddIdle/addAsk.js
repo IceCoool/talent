@@ -121,11 +121,16 @@ Page({
       return
     } else {
       let user = this.data.user;
-      let buid;
-      buid = user.buid || user.buList[0].buId
+      let buidParam = {};
+      if (user.buid){
+        buidParam.creatorBuid = user.buid
+      } else if (user.buList.length > 0){
+        buidParam.creatorBuid = user.buList[0].buId
+      }
       IdleHttp.request('/mobileapi/requirement/saveRequirement', {
         cityCode: this.data.cityCode,
-        creatorBuid: buid,
+        // creatorBuid: buid,
+        ...buidParam,
         creatorJfid: user.jfId,
         industryCode: this.data.tradeCode.join(','),
         postType: this.data.postType,
@@ -136,7 +141,7 @@ Page({
             title: '创建成功',
             icon: 'none'
           })
-          // wx.navigateBack()
+          wx.navigateBack()
         } else {
           wx.showToast({
             title: res.data.responseHeader.message,
