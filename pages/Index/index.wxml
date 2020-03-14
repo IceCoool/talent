@@ -65,7 +65,7 @@
   <!-- 推荐 最新 筛选 -->
   <van-sticky offset-top="{{ offsetTop }}">
     <!-- 68   104 -->
-    <idle-filter has-request="{{hasRequest}}" query-type="{{queryType}}" city-code="{{cityCode}}" city-name="{{cityName}}" id="staff-filter" ser-url="/pages/Filter/selAll" bindisLogin="compIsLogin" bindchangeQuery="changeQuery"></idle-filter>
+    <idle-filter has-request="{{hasRequest}}" query-type="{{queryType}}" city-code="{{cityCode}}" city-name="{{cityName}}" id="staff-filter" ser-url="/pages/Filter/selAll?record={{record}}" bindisLogin="compIsLogin" bindchangeQuery="changeQuery"></idle-filter>
   </van-sticky>
   <idle-list bindisLogin="compIsLogin" resume-list="{{resumeList}}"></idle-list>
   <view class="empty-box" wx:if="{{resumeList && resumeList.length == 0}}">

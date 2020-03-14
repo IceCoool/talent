@@ -19,7 +19,21 @@ Page({
     finished: false,
     param: {},
     isLoading: false,
-    offsetTop: 0
+    offsetTop: 0,
+    record: `{
+      "serviceType": "",
+      "educ": {
+        "id":"",
+        "value": ""
+       },
+      "priceRange": "",
+      "workRange": "",
+      "tradeCode": [],
+      "workYearLowerLimit": "",
+      "workYearUpperLimit": "",
+      "personPriceLowerLimit": "",
+      "personPriceUpperLimit": ""
+    }`
   },
 
   /**

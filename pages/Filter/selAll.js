@@ -117,23 +117,39 @@ Page({
     workYearLowerLimit: '',
     workYearUpperLimit: '',
     custom: false,
-    param: {}
+    param: {},
+    forbid: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let serviceType = this.data.serviceType;
+    let record = JSON.parse(options.record)
     let param = this.data.param;
-    serviceType = options.serviceType || '';
-    if (serviceType != '') {
+    if (options.forbid == 'yes') {
       this.setData({
-        forbid: true,
-        serviceType,
-        'param.serviceType': serviceType
+        forbid: true
       })
     }
+
+    this.setData({
+      serviceType: record.serviceType || '',
+      'param.serviceType': record.serviceType || '',
+      education: record.educ.id || '',
+      'param.educationRange': record.educ.value || '',
+      priceRange: record.priceRange || '',
+      'param.personPriceLowerLimit': record.personPriceLowerLimit || '',
+      'param.personPriceUpperLimit': record.personPriceUpperLimit || '',
+      workRange: record.workRange || '',
+      workYearLowerLimit: record.workYearLowerLimit || '',
+      workYearUpperLimit: record.workYearUpperLimit || '',
+      'param.workYearLowerLimit': record.workYearLowerLimit || '',
+      'param.workYearUpperLimit': record.workYearUpperLimit || '',
+      tradeCode: record.tradeCode || [],
+      'param.industryCode': record.tradeCode.join(',') || ''
+    })
+
     wx.showLoading()
     IdleHttp.request('/mobileapi/dictionary/topic', {
       topic: 'INDUSTRY_EXPERIENCE'
@@ -151,16 +167,38 @@ Page({
     let pages = getCurrentPages();
     let prevPage = pages[pages.length - 2];
     let param = this.data.param;
+    // 留存筛选记录
+    let record = {
+      serviceType: this.data.serviceType,
+      educ: {
+        id: this.data.education,
+        value: param.educationRange || ''
+      },
+      priceRange: this.data.priceRange || '',
+      workRange: this.data.workRange || '',
+      tradeCode: this.data.tradeCode || [],
+      workYearLowerLimit: param.workYearLowerLimit || '',
+      workYearUpperLimit: param.workYearUpperLimit || '',
+      personPriceLowerLimit: param.personPriceLowerLimit || '',
+      personPriceUpperLimit: param.personPriceUpperLimit || '',
+    }
+
+    prevPage.setData({
+      record: JSON.stringify(record)
+    })
+
+
+    // 设置筛选条件
     let prevParam = prevPage.data.param;
     let newParam = {};
-    if (prevParam.requireId){
+    if (prevParam.requireId) {
       newParam.requireId = prevParam.requireId
     }
     newParam.jfid = prevParam.jfid;
     newParam.queryType = prevParam.queryType;
     newParam.workPlaceCode = prevParam.workPlaceCode;
     newParam.pageStart = 1;
-    newParam = Object.assign(newParam,param)
+    newParam = Object.assign(newParam, param)
     prevPage.setData({
       finished: false,
       'resumePage.pageStart': 1,
@@ -301,7 +339,6 @@ Page({
   },
   clearAll() {
     this.setData({
-      serviceType: '',
       education: '',
       workRange: '',
       priceRange: '',
@@ -310,7 +347,16 @@ Page({
       workYearLowerLimit: '',
       workYearUpperLimit: '',
       param: {}
-    })
+    });
+    if(!this.data.forbid){
+      this.setData({
+        serviceType: ''
+      })
+    }else{
+      this.setData({
+        'param.serviceType': this.data.serviceType
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

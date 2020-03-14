@@ -1,7 +1,7 @@
 <view class="container">
   <van-sticky offset-top="{{ 0 }}">
     <!-- 筛选 -->
-    <idle-filter has-request="{{hasRequest}}" query-type="{{queryType}}" city-code="{{cityCode}}" city-name="{{cityName}}" id="staff-filter" bindisLogin="navTo" bindchangeQuery="changeQuery" ser-url="/pages/Filter/selAll"></idle-filter>
+    <idle-filter has-request="{{hasRequest}}" query-type="{{queryType}}" city-code="{{cityCode}}" city-name="{{cityName}}" id="staff-filter" bindisLogin="navTo" bindchangeQuery="changeQuery" ser-url="/pages/Filter/selAll?record={{record}}"></idle-filter>
   </van-sticky>
   <idle-list bindisLogin="navTo" resume-list="{{resumeList}}"></idle-list>
   <view class="empty-box" wx:if="{{resumeList && resumeList.length == 0}}">

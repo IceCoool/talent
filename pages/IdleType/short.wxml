@@ -45,7 +45,7 @@
       </view>
     </view>
     <!-- 筛选 -->
-    <idle-filter has-request="{{hasRequest}}" query-type="{{queryType}}" city-code="{{cityCode}}" city-name="{{cityName}}" id="staff-filter" bindisLogin="navTo" bindchangeQuery="changeQuery" ser-url="/pages/Filter/selAll?serviceType=2"></idle-filter>
+    <idle-filter has-request="{{hasRequest}}" query-type="{{queryType}}" city-code="{{cityCode}}" city-name="{{cityName}}" id="staff-filter" bindisLogin="navTo" bindchangeQuery="changeQuery" ser-url="/pages/Filter/selAll?record={{record}}&forbid=yes"></idle-filter>
   </van-sticky>
   <idle-list bindisLogin="navTo" resume-list="{{resumeList}}"></idle-list>
   <view class="empty-box" wx:if="{{resumeList && resumeList.length == 0}}">
