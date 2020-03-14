@@ -15,6 +15,10 @@ Component({
       type: String,
       value: ''
     },
+    serUrl: {
+      type: String,
+      value: ''
+    },
     hasRequest: {
       type: Boolean,
       value: true

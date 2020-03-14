@@ -39,7 +39,7 @@
 .idle-list {
   position: relative;
   top: -70rpx;
-  padding-bottom: 40rpx;
+  padding-bottom: 160rpx;
 }
 
 .idle-list .item-job {
@@ -173,18 +173,95 @@
   color: #ff9801;
 }
 
+
+.item-top .xzicon-selected{
+  font-size: 44rpx;
+  color: #939393;
+}
+
+.item-top .xzicon-selected.on{
+  color: #1780ff;
+}
+
 .oper-btns {
   position: fixed;
-  left: 20rpx;
-  right: 20rpx;
-  bottom: 30rpx;
-  height: 80rpx;
-  text-align: center;
-  line-height: 80rpx;
-  font-size: 32rpx;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 30rpx 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background: #fff; */
   z-index: 9;
+}
+
+.oper-btns .btn {
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 2em;
+  text-align: center;
+  font-size: 32rpx;
+}
+
+.oper-btns .clear {
+  margin-right: 20rpx;
+  width: 290rpx;
+  color: #1c7ddf;
+  background: rgba(230, 240, 255, 1);
+  box-shadow: 0px 6rpx 20rpx 8rpx rgba(75, 154, 232, 0.3);
+  border: 1px solid rgba(75, 154, 232, 1);
+}
+
+.oper-btns .sure {
+  flex: 1;
   color: #fff;
   background: linear-gradient(181deg, rgba(60, 180, 241, 1) 0%, rgba(28, 125, 223, 1) 100%);
   box-shadow: 0px 6rpx 20rpx 8rpx rgba(75, 154, 232, 0.5);
-  border-radius: 2em;
+  /* border: 1px solid rgba(75, 154, 232, 1); */
+}
+
+.oper-btns .sure.forbid{
+  background: #e5e5e5;
+  border-color: #e5e5e5;
+  box-shadow: none;
+}
+.dialog{
+  width: 606rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  color: #7E838C;
+}
+.dialog .content{
+  padding: 48rpx 0 78rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.dialog .content .title{
+  color: #141F33;
+  margin-bottom: 38rpx;
+}
+.dialog .content .num{
+  color: #1C7DDF;
+}
+.dialog .btns{
+  border-top: 1px solid #D8D8D8;
+  height: 98rpx;
+  line-height: 98rpx;
+  display: flex;
+  color: #141F33;
+}
+.dialog .btns .btn{
+  width: 50%;
+  text-align: center;
+}
+.dialog .btns .btn.sure{
+  border-left: 1px solid #D8D8D8;
+  color: #1C7DDF;
+}
+.van-popup--center.van-popup--round{
+  border-radius: 16rpx !important;
 }

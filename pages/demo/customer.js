@@ -1,15 +1,7 @@
 // pages/demo/customer.js
 var customer_info = {
-  "email": "461258697@qq.cn", //邮箱
-  "description": "某某某公司",
-  "organization_id": 1, //所属公司ID
-  "tags": "标签1,标签2", //标签 已英文号分割
-  "level": "normal", // 等级
   "cellphones": [
     ["", "17346520964"] //数组 [[电话ID, 电话文本]]
-  ],
-  "other_emails": [
-    ["", "2629136779@qq.cn"] //数组 [[邮箱ID, 邮箱]]
   ]
 }
 
@@ -30,7 +22,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(new Date('2018-09-08'))
+    
   },
 
   /**

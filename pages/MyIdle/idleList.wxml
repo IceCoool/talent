@@ -8,124 +8,38 @@
     <text class="txt">查看需求下的最新简历</text>
   </view>
 </view>
-<view class="container idle-list">
-  <view class="boxSh item-job">
+<view class="container idle-list" wx:if="{{requsetList.length > 0}}">
+  <view class="boxSh item-job" wx:for="{{requsetList}}" wx:key="index">
     <view class="job-name">
-      <text>设计师</text>
-      <text class="type">岗位外包</text>
-      <text class="tj">2 顾问推荐</text>
+      <text>{{item.postType}}</text>
+      <text class="type">{{item.serviceType}}</text>
+      <text class="tj" wx:if="{{item.manualResumeTotal!=0}}">{{item.manualResumeTotal}} 顾问推荐</text>
     </view>
     <view class="Mtp35 job-addr">
-      <text>北京 | 不限行业</text>
-      <text class="time">项目周期：半年内</text>
+      <text>{{item.cityName}} | {{item.industry}}</text>
+      <text class="time">项目周期：{{item.projectCycleCode}}</text>
     </view>
-    <view class="Mtp30 item-list">
-      <view class="item">
+    <view class="Mtp30 item-list" wx:if="{{item.resumeItemList && item.resumeItemList.length > 0}}">
+      <navigator url="/pages/Resume/index?resumeId={{resumeItem.resumeId}}&requireId={{item.requireId}}" class="item" wx:if="{{r_index < 3}}" wx:for="{{item.resumeItemList}}" wx:for-index="r_index" wx:for-item="resumeItem" wx:key="index" hover-class="none">
         <view class="head">
-          <image src="/images/city-bg.png"></image>
+          <image wx:if="{{resumeItem.sex == 0}}" src="/images/mine/boy_img.png"></image>
+          <image wx:if="{{resumeItem.sex == 1}}" src="/images/mine/boy_img.png"></image>
         </view>
         <view class="info">
-          <text class="bold">王女士</text>
-          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
-          <text class="Mtp5 match">98%匹配</text>
+          <text class="bold">{{resumeItem.labourerName}}</text>
+          <text class="Mtp15 desc">{{resumeItem.personLabelName}}</text>
+          <!-- <text class="Mtp5 match">98%匹配</text> -->
         </view>
-      </view>
-      <view class="item">
-        <view class="head">
-          <image src="/images/city-bg.png"></image>
-        </view>
-        <view class="info">
-          <text class="bold">王女士</text>
-          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
-          <text class="Mtp5 match">98%匹配</text>
-        </view>
-      </view>
-      <view class="item">
-        <view class="head">
-          <image src="/images/city-bg.png"></image>
-        </view>
-        <view class="info">
-          <text class="bold">王女士</text>
-          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
-          <text class="Mtp5 match">98%匹配</text>
-        </view>
-      </view>
-      <view class="item">
-        <view class="head">
-          <image src="/images/city-bg.png"></image>
-        </view>
-        <view class="info">
-          <text class="bold">王女士</text>
-          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
-          <text class="Mtp5 match">98%匹配</text>
-        </view>
-      </view>
-    </view>
-    <view class="all">
-      <navigator>
-        <text>查看全部</text>
-        <text class="xziconfont xzicon-jump"></text>
       </navigator>
     </view>
-  </view>
-  <view class="boxSh item-job">
-    <view class="job-name">
-      <text>设计师</text>
-      <text class="type">岗位外包</text>
-      <text class="tj">2 顾问推荐</text>
-    </view>
-    <view class="Mtp35 job-addr">
-      <text>北京 | 不限行业</text>
-      <text class="time">项目周期：半年内</text>
-    </view>
-    <view class="Mtp30 item-list">
-      <view class="item">
-        <view class="head">
-          <image src="/images/city-bg.png"></image>
-        </view>
-        <view class="info">
-          <text class="bold">王女士</text>
-          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
-          <text class="Mtp5 match">98%匹配</text>
-        </view>
-      </view>
-      <view class="item">
-        <view class="head">
-          <image src="/images/city-bg.png"></image>
-        </view>
-        <view class="info">
-          <text class="bold">王女士</text>
-          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
-          <text class="Mtp5 match">98%匹配</text>
-        </view>
-      </view>
-      <view class="item">
-        <view class="head">
-          <image src="/images/city-bg.png"></image>
-        </view>
-        <view class="info">
-          <text class="bold">王女士</text>
-          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
-          <text class="Mtp5 match">98%匹配</text>
-        </view>
-      </view>
-      <view class="item">
-        <view class="head">
-          <image src="/images/city-bg.png"></image>
-        </view>
-        <view class="info">
-          <text class="bold">王女士</text>
-          <text class="Mtp15 desc">5年工作经验5年工作经验</text>
-          <text class="Mtp5 match">98%匹配</text>
-        </view>
-      </view>
-    </view>
     <view class="all">
-      <navigator>
+      <navigator url="/pages/MyIdle/idleResume?requireId={{item.requireId}}">
         <text>查看全部</text>
         <text class="xziconfont xzicon-jump"></text>
       </navigator>
     </view>
   </view>
 </view>
-<text class="oper-btns">添加新需求</text>
+<view class="oper-btns">
+  <navigator class="btn sure" url="/pages/AddIdle/addAsk">添加新需求</navigator>
+</view>

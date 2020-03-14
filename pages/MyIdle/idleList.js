@@ -17,12 +17,20 @@ Page({
     this.setData({
       user: app.globalData.user
     })
+    wx.showLoading()
     IdleHttp.request('/mobileapi/requirement/queryMobileRequirementList', {
       creatorJfid: this.data.user.jfId
+      // creatorJfid: 2346870110
     }).then(res => {
       if (res.data.responseHeader.code == 200) {
+        wx.hideLoading()
         this.setData({
           requsetList: res.data.data.list
+        })
+      } else {
+        wx.showToast({
+          title: res.data.responseHeader.message,
+          icon: 'none'
         })
       }
     })

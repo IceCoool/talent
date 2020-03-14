@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/Index/index",
+    "pages/MyIdle/idleResume",
     "pages/enterprise/search",
     "pages/Filter/selAll",
     "pages/enterprise/enterpriseList",

@@ -1,6 +1,6 @@
   module.exports = {
     checkBoxStatus: function(checkedArr, name) {
-      if (checkedArr.indexOf(name) == -1) {
+      if (checkedArr.indexOf(name) == -1) {        
         return false;
       } else {
         return true;

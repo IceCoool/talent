@@ -63,12 +63,16 @@
     <image src="/images/index-ad.png"></image>
   </view>
   <!-- 推荐 最新 筛选 -->
-  <van-sticky offset-top="{{ 68 }}">
+  <van-sticky offset-top="{{ offsetTop }}">
     <!-- 68   104 -->
-    <idle-filter has-request="{{hasRequest}}" query-type="{{queryType}}" city-code="{{cityCode}}" city-name="{{cityName}}" id="staff-filter" bindisLogin="compIsLogin" bindchangeQuery="changeQuery"></idle-filter>
+    <idle-filter has-request="{{hasRequest}}" query-type="{{queryType}}" city-code="{{cityCode}}" city-name="{{cityName}}" id="staff-filter" ser-url="/pages/Filter/selAll" bindisLogin="compIsLogin" bindchangeQuery="changeQuery"></idle-filter>
   </van-sticky>
   <idle-list bindisLogin="compIsLogin" resume-list="{{resumeList}}"></idle-list>
-  <view style="padding-bottom: 20rpx;color:#939393;text-align:center;" wx:if="{{finished}}">到底啦~</view>
+  <view class="empty-box" wx:if="{{resumeList && resumeList.length == 0}}">
+    <image src="/images/empty.png"></image>
+    <text class="Mtp20">抱歉没有找到相关内容~</text>
+  </view>
+  <view style="padding-bottom: 20rpx;color:#939393;text-align:center;" wx:if="{{resumeList.length!=0 && finished}}">到底啦~</view>
 </view>
 
 <!-- 滚动显示发布需求 -->
@@ -78,19 +82,20 @@
 
 <!-- 滚动显示已发的需求 -->
 <view class="fixed-btn" id="my-xq" wx:if="{{showMyXq}}">
-  <navigator class="my-xq">
+  <view class="my-xq">
     <image src="/images/my-xq.png"></image>
     <view class="posa">
       <view>
+        <text class="Mrt5 xziconfont xzicon-need"></text>
         <text>我的需求</text>
-        <text></text>
+        <navigator style="margin-left: auto;" class="xziconfont xzicon-add" url="/pages/AddIdle/addAsk"></navigator>
       </view>
       <view class="btm">
-        <text>JAVA开发后台系统外包项目需求（5人）</text>
-        <text></text>
+        <text>{{requestList[0].postType}}</text>
+        <navigator style="margin-left: auto;" class="xziconfont xzicon-jump" url="/pages/MyIdle/idleList"></navigator>
       </view>
     </view>
-  </navigator>
+  </view>
 </view>
 
 <!-- 登录 -->

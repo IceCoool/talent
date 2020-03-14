@@ -1,0 +1,12 @@
+<view class="container">
+  <van-sticky offset-top="{{ 0 }}">
+    <!-- 筛选 -->
+    <idle-filter has-request="{{hasRequest}}" query-type="{{queryType}}" city-code="{{cityCode}}" city-name="{{cityName}}" id="staff-filter" bindisLogin="navTo" bindchangeQuery="changeQuery" ser-url="/pages/Filter/selAll"></idle-filter>
+  </van-sticky>
+  <idle-list bindisLogin="navTo" resume-list="{{resumeList}}"></idle-list>
+  <view class="empty-box" wx:if="{{resumeList && resumeList.length == 0}}">
+    <image src="/images/empty.png"></image>
+    <text class="Mtp20">抱歉没有找到相关内容~</text>
+  </view>
+  <view style="padding-bottom: 20rpx;color:#939393;text-align:center;" wx:if="{{resumeList.length!=0 && finished}}">到底啦~</view>
+</view>

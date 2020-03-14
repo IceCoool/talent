@@ -24,27 +24,33 @@
       </view>
     </view>
     <!-- 显示发布需求 -->
-    <view class="fixed-btn" id="fxq" wx:if="{{showFxq}}">
+    <view class="fixed-btn" id="fxq" wx:if="{{requestList.length==0}}">
       <navigator class="find" url="/pages/AddIdle/addAsk">发布用人需求，找人才</navigator>
     </view>
     <!-- 显示已发的需求 -->
-    <view class="fixed-btn" id="my-xq" wx:if="{{showMyXq}}">
-      <navigator class="my-xq">
+    <view class="fixed-btn" id="my-xq" wx:if="{{requestList.length!=0}}">
+      <view class="my-xq">
         <image src="/images/my-xq.png"></image>
         <view class="posa">
           <view>
+            <text class="Mrt5 xziconfont xzicon-need"></text>
             <text>我的需求</text>
-            <text></text>
+            <navigator style="margin-left: auto;" class="xziconfont xzicon-add" url="/pages/AddIdle/addAsk"></navigator>
           </view>
           <view class="btm">
-            <text>JAVA开发后台系统外包项目需求（5人）</text>
-            <text></text>
+            <text>{{requestList[0].postType}}</text>
+            <navigator style="margin-left: auto;" class="xziconfont xzicon-jump" url="/pages/MyIdle/idleList"></navigator>
           </view>
         </view>
-      </navigator>
+      </view>
     </view>
     <!-- 筛选 -->
-    <idle-filter></idle-filter>
+    <idle-filter has-request="{{hasRequest}}" query-type="{{queryType}}" city-code="{{cityCode}}" city-name="{{cityName}}" id="staff-filter" bindisLogin="navTo" bindchangeQuery="changeQuery" ser-url="/pages/Filter/selAll?serviceType=2"></idle-filter>
   </van-sticky>
-  <idle-list></idle-list>
+  <idle-list bindisLogin="navTo" resume-list="{{resumeList}}"></idle-list>
+  <view class="empty-box" wx:if="{{resumeList && resumeList.length == 0}}">
+    <image src="/images/empty.png"></image>
+    <text class="Mtp20">抱歉没有找到相关内容~</text>
+  </view>
+  <view style="padding-bottom: 20rpx;color:#939393;text-align:center;" wx:if="{{resumeList.length!=0 && finished}}">到底啦~</view>
 </view>

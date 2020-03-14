@@ -1,0 +1,5 @@
+/* pages/MyIdle/idleResume.wxss */
+@import '../IdleType/idleType.wxss';
+.idle-filter{
+  padding-top: 20rpx !important;
+}

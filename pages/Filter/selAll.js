@@ -124,6 +124,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let serviceType = this.data.serviceType;
+    let param = this.data.param;
+    serviceType = options.serviceType || '';
+    if (serviceType != '') {
+      this.setData({
+        forbid: true,
+        serviceType,
+        'param.serviceType': serviceType
+      })
+    }
     wx.showLoading()
     IdleHttp.request('/mobileapi/dictionary/topic', {
       topic: 'INDUSTRY_EXPERIENCE'
@@ -142,8 +152,15 @@ Page({
     let prevPage = pages[pages.length - 2];
     let param = this.data.param;
     let prevParam = prevPage.data.param;
-    prevParam.pageStart = 1;
-    let newParam = Object.assign(param, prevParam)
+    let newParam = {};
+    if (prevParam.requireId){
+      newParam.requireId = prevParam.requireId
+    }
+    newParam.jfid = prevParam.jfid;
+    newParam.queryType = prevParam.queryType;
+    newParam.workPlaceCode = prevParam.workPlaceCode;
+    newParam.pageStart = 1;
+    newParam = Object.assign(newParam,param)
     prevPage.setData({
       finished: false,
       'resumePage.pageStart': 1,
@@ -168,17 +185,18 @@ Page({
   },
   // 选择服务类型
   selService(event) {
-    let serviceType = event.currentTarget.dataset.type;
-    let param = this.data.param;
-    param.serviceType = serviceType;
-    delete param.personPriceLowerLimit;
-    delete param.personPriceUpperLimit;
-    this.setData({
-      serviceType,
-      param,
-      priceRange: ''
-    });
-
+    if (!this.data.forbid) {
+      let serviceType = event.currentTarget.dataset.type;
+      let param = this.data.param;
+      param.serviceType = serviceType;
+      delete param.personPriceLowerLimit;
+      delete param.personPriceUpperLimit;
+      this.setData({
+        serviceType,
+        param,
+        priceRange: ''
+      });
+    }
   },
   // 选择学历
   selEduc(event) {
@@ -227,13 +245,15 @@ Page({
     let param = this.data.param;
     switch (name) {
       case 'serviceType':
-        delete param.serviceType;
-        delete param.personPriceLowerLimit;
-        delete param.personPriceUpperLimit;
-        this.setData({
-          priceRange: '',
-          serviceType: ''
-        })
+        if (!this.data.forbid) {
+          delete param.serviceType;
+          delete param.personPriceLowerLimit;
+          delete param.personPriceUpperLimit;
+          this.setData({
+            priceRange: '',
+            serviceType: ''
+          })
+        }
         break;
       case 'education':
         delete param.educationRange;

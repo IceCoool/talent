@@ -1,12 +1,18 @@
 let md5 = require('./md5.js');
-let signAppSecret = '';
-let signAppKey = 'jfidlewechat';
-let baseUrl = 'https://apiidle.jfh.com';
+const ENV = require('./env.js');
+const {
+  baseUrl,
+  signAppKey,
+  signAppSecret
+} = ENV;
 
-__wxConfig.envVersion == 'release' ? signAppSecret = 'prod-br677r5bja4t5eyfu1s8tp25sp9izexl' : signAppSecret = 'it5z9oizcwkazqah1b5dos8iwerynj9x';
+// let signAppSecret = '';
+// let signAppKey = 'jfidlewechat';
+// let baseUrl = 'https://apiidle.jfh.com';
 
-__wxConfig.envVersion == 'develop' ? baseUrl = 'https://apiidledev.jfh.com' : baseUrl = 'https://apiidle.jfh.com';
+// __wxConfig.envVersion == 'release' ? signAppSecret = 'prod-br677r5bja4t5eyfu1s8tp25sp9izexl' : signAppSecret = 'it5z9oizcwkazqah1b5dos8iwerynj9x';
 
+// __wxConfig.envVersion == 'develop' ? baseUrl = 'https://apiidledev.jfh.com' : baseUrl = 'https://apiidle.jfh.com';
 
 const genSign = (params) => {
   if (params == null) {

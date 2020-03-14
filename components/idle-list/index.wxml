@@ -1,11 +1,12 @@
 <view class="staff-list">
-  <view class="boxSh item" wx:for="{{resumeList}}" wx:key="index" bindtap="tapEvent" data-url="">
-    <text class="status">已邀</text>
+  <view class="boxSh item" wx:for="{{resumeList}}" wx:key="index" bindtap="tapEvent" data-url="/pages/Resume/index?resumeId={{item.resumeId}}">
+    <text class="status" wx:if="{{item.resumeStatus}}">{{item.resumeStatus}}</text>
     <view class="posr">
       <view class="head">
-        <image></image>
+        <image wx:if="{{item.sex == 0}}" src="/images/mine/girl_img.png"></image>
+        <image wx:if="{{item.sex == 1}}" src="/images/mine/boy_img.png"></image>
       </view>
-      <text class="similar">88%匹配</text>
+      <!-- <text class="similar">88%匹配</text> -->
     </view>
     <view class="info">
       <view class="mod">
@@ -19,7 +20,7 @@
         <!-- <text class="rate">竞争力 4.5</text>
         <text class="xziconfont xzicon-star"></text> -->
       </view>
-      <view class="mod" style="flex-wrap:wrap;">
+      <view class="mod" style="flex-wrap:wrap;" wx:if="{{item.personLabelName && item.personLabelName.length>0}}">
         <text class="Mtp20 tag" wx:for="{{item.personLabelName}}" wx:for-item="label" wx:for-index="labIndex" wx:key="index" wx:if="{{labIndex < 3}}">{{label}}</text>
       </view>
     </view>

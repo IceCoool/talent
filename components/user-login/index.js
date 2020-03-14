@@ -44,8 +44,10 @@ Component({
               title: '注册成功',
               icon: 'none'
             })
-            app.globalData.user = res.data.data.user;
+            let userInfo = res.data.data.user
+            app.globalData.user = userInfo;
             app.globalData.isLoginAuthorize = true;
+            wx.setStorageSync('user', JSON.stringify(userInfo))
             this.triggerEvent('reload')
           } else {
             wx.showToast({

@@ -14,7 +14,7 @@ Page({
     cityCode: '',
     hasRequest: Boolean,
     resumePage: {
-      pageSize: 1,
+      pageSize: 10,
       pageStart: 1,
     },
     queryType: 1, // 1推荐  2最新  3报价正序  4报价倒叙
@@ -22,7 +22,8 @@ Page({
     requestList: [],
     finished: false,
     param: {},
-    isLoading: false
+    isLoading: false,
+    offsetTop: 0
   },
 
   /**
@@ -60,11 +61,13 @@ Page({
         let param = this.data.param;
         let requestList = this.data.requestList;
         let hasRequest = true;
-        requestList.length == 0 ? ((queryType = 2) && (hasRequest = false)) : ((queryType = 1) && (param.requireId = requestList[0].requireId)); //测试时注释掉
+        let offsetTop = 0;
+        requestList.length == 0 ? ((queryType = 2) && (hasRequest = false) && (offsetTop = 68)) : ((queryType = 1) && (param.requireId = requestList[0].requireId) && (offsetTop = 104)); //测试时注释掉
         this.setData({
           // queryType: 2,
           queryType,
-          hasRequest
+          hasRequest,
+          offsetTop
           // hasRequest: false
         })
         this.getCityCode().then(() => {
@@ -150,7 +153,9 @@ Page({
             pageStart++;
             let list = resData.data.list;
             list.forEach((item, index) => {
-              item.personLabelName = item.personLabelName.split(',')
+              if (item.personLabelName != '') {
+                item.personLabelName = item.personLabelName.split(',')
+              }
             })
             if (!replace) {
               resumeList = resumeList.concat(list);
@@ -171,9 +176,13 @@ Page({
             }
           }
         }
+      }).catch(res => {
+        wx.showToast({
+          title: '请求失败',
+          icon: 'none'
+        })
       })
     }
-
   },
   getCityCode() {
     return new Promise((resolve, reject) => {
@@ -263,7 +272,9 @@ Page({
    */
   onReachBottom: function() {
     if (!this.data.finished) {
-      this.getResumeList(this.data.param);
+      if (this.data.param.queryType && this.data.param.workPlaceCode) {
+        this.getResumeList(this.data.param);
+      }
     }
   },
 

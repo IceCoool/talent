@@ -23,7 +23,7 @@
       <text>{{cityName}}</text>
       <text class="icon"></text>
     </view>
-    <view class="fil-type" data-url="/pages/Filter/selAll" bindtap="tapEvent">
+    <view class="fil-type" data-url="{{serUrl}}" bindtap="tapEvent">
       <text>筛选</text>
       <text class="icon"></text>
     </view>

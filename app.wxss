@@ -49,3 +49,16 @@ image {
 .idle-checkbox .xzicon-unselected{
   color: #CCCCCC;
 }
+.empty-box{
+  padding: 50rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #999999;
+  font-size: 28rpx;
+}
+.empty-box image{
+  width: 182rpx;
+  height: 182rpx;
+}

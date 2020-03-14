@@ -55,6 +55,7 @@ Page({
               if (result.data.responseHeader.code == 200) {
                 let resData = result.data.data;
                 app.globalData.user = resData.user;
+                wx.setStorageSync('user', JSON.stringify(resData.user))
                 if (resData.user.buList && resData.user.buList.length == 0) {
                   wx.hideLoading()
                   wx.redirectTo({

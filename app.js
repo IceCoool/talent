@@ -14,30 +14,38 @@ App({
   getUser() {
     let _this = this;
     return new Promise((resolve, reject) => {
-      wx.login({
-        success(res) {
-          if (res.code) {
-            IdleHttp.request('/mobileapi/user/getSessionKeyByCode', {
-              code: res.code
-            }).then(result => {
-              if (result.data.responseHeader.code == 200) {
-                let resData = result.data.data;
-                if (resData.user) {
-                  _this.globalData.isLoginAuthorize = true;
-                  _this.globalData.openid = resData.openid;
-                  _this.globalData.appletCode = resData.appletCode;
-                  _this.globalData.user = resData.user;
-                  resolve();
-                } else {
-                  _this.globalData.openid = resData.openid;
-                  _this.globalData.appletCode = resData.appletCode;
-                  resolve();
+      let userInfo = wx.getStorageSync('user')
+      if (!userInfo) {
+        wx.login({
+          success(res) {
+            if (res.code) {
+              IdleHttp.request('/mobileapi/user/getSessionKeyByCode', {
+                code: res.code
+              }).then(result => {
+                if (result.data.responseHeader.code == 200) {
+                  let resData = result.data.data;
+                  if (resData.user) {
+                    _this.globalData.isLoginAuthorize = true;
+                    _this.globalData.openid = resData.openid;
+                    _this.globalData.appletCode = resData.appletCode;
+                    _this.globalData.user = resData.user;
+                    wx.setStorageSync('user', JSON.stringify(resData.user))
+                    resolve();
+                  } else {
+                    _this.globalData.openid = resData.openid;
+                    _this.globalData.appletCode = resData.appletCode;
+                    resolve();
+                  }
                 }
-              }
-            })
+              })
+            }
           }
-        }
-      })
+        })
+      } else {
+        _this.globalData.user = JSON.parse(userInfo);
+        _this.globalData.isLoginAuthorize = true;
+        resolve();
+      }
     })
   },
   // 判断用户是否授权登录
@@ -169,7 +177,7 @@ App({
         if (municipality.indexOf(addressInfo.province) != -1) {
           _this.globalData.cityName = addressInfo.province
         } else {
-          _this.globalData.cityName = addressInfo.province
+          _this.globalData.cityName = addressInfo.city
         }
         resolve()
       }
