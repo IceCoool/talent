@@ -9,7 +9,8 @@ Page({
     selJob: {
       cnname: '',
       itemCode: ''
-    }
+    },
+    searchList: [],
   },
 
   /**
@@ -36,8 +37,6 @@ Page({
       'selJob.cnname': cnname,
       'selJob.itemCode': code
     });
-  },
-  goBack() {
     let selJob = this.data.selJob;
     if (selJob.cnname == '') {
       wx.navigateBack()
@@ -61,6 +60,32 @@ Page({
       postType: selJob.itemCode
     });
     wx.navigateBack()
+  },
+  goBack() {
+    wx.navigateBack()
+  },
+  searchJob(event) {
+    let keyword = event.detail.value;
+    this.setData({
+      keyword
+    });
+    if (this.data.keyword == '') {
+      this.setData({
+        searchList: []
+      })
+      return;
+    }
+    IdleHttp.request('/mobileapi/dictionary/list', {
+      cnname: this.data.keyword,
+      level: 3,
+      topic: 'WT_HR'
+    }).then(res => {
+      if (res.data.responseHeader.code == 200) {
+        this.setData({
+          searchList: res.data.data.list
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

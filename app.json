@@ -1,7 +1,9 @@
 {
   "pages": [
+        "pages/Index/index",
+    "pages/AddIdle/selJob",
+
     "pages/Filter/selCity",
-    "pages/Index/index",
     "pages/MyIdle/idleResume",
     "pages/enterprise/search",
     "pages/Filter/selAll",
@@ -10,7 +12,6 @@
     "pages/enterprise/authenticate",
     "pages/demo/customer",
     "pages/AddIdle/selTrade",
-    "pages/AddIdle/selJob",
     "pages/Mine/collect",
     "pages/IdleType/short",
     "pages/IdleType/epiboly",

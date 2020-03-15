@@ -9,7 +9,9 @@ Page({
   data: {
     idleCitys: [],
     charIndex: [],
+    searchList: [],
     cityCode: '',
+    keyword: '',
     hotCity: [{
         cnname: '北京',
         itemCode: '110100'
@@ -119,6 +121,29 @@ Page({
     this.setData({
       scrollTop: event.scrollTop + 5
     });
+  },
+  searchCity(event) {
+    let keyword = event.detail.value;
+    this.setData({
+      keyword
+    });
+    if (this.data.keyword == '') {
+      this.setData({
+        searchList: []
+      })
+      return;
+    }
+    IdleHttp.request('/mobileapi/dictionary/list', {
+      cnname: this.data.keyword,
+      level: 2,
+      topic: 'LOC'
+    }).then(res => {
+      if (res.data.responseHeader.code == 200) {
+        this.setData({
+          searchList: res.data.data.list
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

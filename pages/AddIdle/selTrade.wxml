@@ -8,10 +8,10 @@
 </view>
 <view style="padding-bottom:100rpx;">
   <view class="boxSh fil-mod">
-    <view class="fil-inp">
+    <!-- <view class="fil-inp">
       <input class="inp" type="text" placeholder="输入行业名称搜索"></input>
       <text class="xziconfont xzicon-search"></text>
-    </view>
+    </view> -->
     <view class="item">
       <view class="item-list">
         <text class="label {{tradeCode.length == 0?'on':''}}" bindtap="clearCode">不限</text>

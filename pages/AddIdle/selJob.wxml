@@ -5,25 +5,23 @@
     <text class="txt">选择您需求的职位名称</text>
   </view>
 </view>
-<view style="padding-bottom:100rpx;">
+<view>
   <view class="boxSh fil-mod">
     <view class="fil-inp">
-      <input class="inp" type="text" placeholder="请输入职位名称搜索"></input>
+      <input class="inp" type="text" placeholder="请输入职位名称搜索"bindinput="searchJob" value="{{keyword}}"></input>
       <text class="xziconfont xzicon-search"></text>
+    </view>
+    <view class="search-list" wx:if="{{searchList.length != 0}}">
+      <view class="search-item" data-code="{{item.itemCode}}" data-name="{{item.cnname}}" wx:for="{{searchList}}" bindtap="onChange">{{item.cnname}}</view>
     </view>
     <block wx:for="{{jobList}}" wx:key="index">
       <view class="item" wx:for="{{item.children}}" wx:for-item="itemType" wx:key="index">
         <text class="item-title">{{itemType.cnname}}</text>
         <view class="item-list">
-          <text class="label {{selJob.itemCode == ''?'on':''}}" data-code="" bindtap="onChange">不限</text>
+          <text class="label {{selJob.itemCode == ''?'on':''}}" data-code="" bindtap="goBack">不限</text>
           <text class="label {{selJob.itemCode == jobItem.itemCode?'on':''}}" wx:for="{{itemType.children}}" wx:for-item="jobItem" data-code="{{jobItem.itemCode}}" data-name="{{jobItem.cnname}}" bindtap="onChange" wx:key="index">{{jobItem.cnname}}</text>
         </view>
       </view>
     </block>
-
   </view>
-</view>
-
-<view class="oper-btns">
-  <text class="btn sure" bindtap="goBack">完成</text>
 </view>

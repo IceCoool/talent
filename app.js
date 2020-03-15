@@ -8,6 +8,8 @@ App({
   globalData: {
     // 用户是否授权地理位置
     isLocaAuthorize: false,
+    longitude: '',
+    latitude: '',
     isLoginAuthorize: false,
     cityName: '北京市'
   },
@@ -128,6 +130,8 @@ App({
         // 授权成功  获取地理位置
         let latitude = res.latitude;
         let longitude = res.longitude;
+        _this.globalData.latitude = res.latitude;
+        _this.globalData.longitude = res.longitude;
         _this.globalData.isLocaAuthorize = true;
         _this.getCityName(`${longitude},${latitude}`, resolve)
       },

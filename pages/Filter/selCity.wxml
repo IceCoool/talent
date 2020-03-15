@@ -8,15 +8,17 @@
 </view>
 <view class="boxSh fil-mod" style="margin-bottom: 40rpx;">
   <view class="fil-inp">
-    <input class="inp" type="text" placeholder="请输入城市名称搜索"></input>
+    <input class="inp" type="text" placeholder="请输入城市名称搜索" bindinput="searchCity" value="{{keyword}}"></input>
     <text class="xziconfont xzicon-search"></text>
+  </view>
+  <view class="search-list" wx:if="{{searchList.length != 0}}">
+    <view class="search-item" data-code="{{item.itemCode}}" data-name="{{item.cnname}}" wx:for="{{searchList}}" bindtap="onChange">{{item.cnname}}</view>
   </view>
   <view class="local">
     <text class="xziconfont xzicon-position Mrt10"></text>
     <text>当前城市：</text>
     <text class="city">{{cityName}}</text>
   </view>
-
   <view class="item">
     <text class="item-title">热门城市</text>
     <view class="item-list">
