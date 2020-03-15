@@ -50,6 +50,24 @@ App({
       }
     })
   },
+  unbindUser() {
+    IdleHttp.request('/mobileapi/user/deletebindAppletUser', {
+      userId: this.globalData.user.userId
+    }).then(res => {
+      if (res.data.responseHeader.code == 200) {
+        wx.removeStorageSync('user');
+        this.globalData.user = null;
+        this.isLoginAuthorize = false;
+        wx.showToast({
+          title: '解绑成功',
+          icon: 'none'
+        })
+        wx.switchTab({
+          url: '/pages/Index/index'
+        })
+      }
+    })
+  },
   // 判断用户是否授权登录
   loginAuthorize(_this, url) {
     // _this 为当前页面的this

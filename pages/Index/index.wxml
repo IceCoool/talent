@@ -1,3 +1,4 @@
+<!-- <view bindtap="unbindUser">解绑用户</view> -->
 <view class="index-top posr">
   <image class="top-bg" style="height: 358rpx;" src="/images/index-banner.png"></image>
   <image class="top-bg" style="height: 428rpx;" src="/images/banner-bg.png"></image>
