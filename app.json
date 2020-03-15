@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/Filter/selCity",
     "pages/Index/index",
     "pages/MyIdle/idleResume",
     "pages/enterprise/search",
@@ -10,7 +11,6 @@
     "pages/demo/customer",
     "pages/AddIdle/selTrade",
     "pages/AddIdle/selJob",
-    "pages/Filter/selCity",
     "pages/Mine/collect",
     "pages/IdleType/short",
     "pages/IdleType/epiboly",
@@ -27,7 +27,7 @@
   },
   "tabBar": {
     "borderStyle": "black",
-    "color": "999",
+    "color": "#999",
     "selectedColor": "#333",
     "list": [
       {
@@ -51,7 +51,7 @@
     ]
   },
   "usingComponents": {
-    "van-popup": "/@vant/weapp/popup/index",
+    "van-popup": "/miniprogram_npm/@vant/weapp/popup/index",
     "user-login": "/components/user-login/index"
   },
   "sitemapLocation": "sitemap.json",

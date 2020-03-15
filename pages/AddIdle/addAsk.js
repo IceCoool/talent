@@ -121,16 +121,16 @@ Page({
       return
     } else {
       let user = this.data.user;
-      let buidParam = {};
-      if (user.buid){
-        buidParam.creatorBuid = user.buid
-      } else if (user.buList.length > 0){
-        buidParam.creatorBuid = user.buList[0].buId
-      }
+      // let buidParam = {};
+      // if (user.buid){
+      //   buidParam.creatorBuid = user.buid
+      // } else if (user.buList.length > 0){
+      //   buidParam.creatorBuid = user.buList[0].buId
+      // }
       IdleHttp.request('/mobileapi/requirement/saveRequirement', {
         cityCode: this.data.cityCode,
         // creatorBuid: buid,
-        ...buidParam,
+        // ...buidParam,
         creatorJfid: user.jfId,
         industryCode: this.data.tradeCode.join(','),
         postType: this.data.postType,

@@ -21,8 +21,8 @@ Page({
     })
     wx.showLoading()
     IdleHttp.request('/mobileapi/requirement/queryMobileRequirementList', {
-      creatorJfid: this.data.user.jfId
-      // creatorJfid: 2346870110
+      // creatorJfid: this.data.user.jfId
+      creatorJfid: 2346870110
     }).then(res => {
       if (res.data.responseHeader.code == 200) {
         wx.hideLoading()
@@ -67,6 +67,7 @@ Page({
         this.setData({
           show: false
         })
+        this.onLoad()
       } else {
         wx.showToast({
           title: res.data.responseHeader.message,

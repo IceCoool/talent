@@ -1,7 +1,7 @@
 /* components/login/index.wxss */
 
 .login {
-  position: relative;
+  position: absolute;
   width: 640rpx;
   height: 758rpx;
   border-radius: 52rpx;
