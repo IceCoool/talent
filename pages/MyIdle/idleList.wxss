@@ -59,7 +59,7 @@
 }
 
 .idle-list .item-job .lf {
-  padding-top: 8rpx;
+  padding-top: 5rpx;
 }
 
 .idle-list .item-job .rt {
@@ -175,8 +175,8 @@
 
 
 .item-top .xzicon-selected{
-  font-size: 44rpx;
-  color: #939393;
+  font-size: 39rpx;
+  color: #CCCCCC;
 }
 
 .item-top .xzicon-selected.on{

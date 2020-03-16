@@ -50,5 +50,5 @@
   </view>
 </view>
 <view class="oper-btns">
-  <text class="btn sure {{postType==''||tradeCode.length==0||projectCycleCode==''?'forbid':''}}" bindtap="cerateRequest">完成</text>
+  <text class="btn sure {{postType==''||projectCycleCode==''?'forbid':''}}" bindtap="cerateRequest">完成</text>
 </view>

@@ -117,7 +117,7 @@ Page({
   },
   // 创建需求
   cerateRequest() {
-    if (this.data.postType == '' || this.data.tradeCode.length == 0 || this.data.projectCycleCode == '') {
+    if (this.data.postType == '' || this.data.projectCycleCode == '') {
       return
     } else {
       let user = this.data.user;

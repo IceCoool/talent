@@ -28,7 +28,7 @@
 }
 
 .staff-list .item .head {
-  margin: 15rpx 24rpx 0 0;
+  margin: 10rpx 24rpx 0 0;
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
@@ -67,12 +67,13 @@
 }
 
 .staff-list .item .job {
-  margin-right: 20rpx;
+  margin: 8rpx 20rpx 0 0;
   font-size: 28rpx;
   color: #999;
 }
 
 .staff-list .item .tj {
+  margin-left: auto;
   width: 144rpx;
   height: 40rpx;
   text-align: center;
@@ -87,6 +88,7 @@
   margin-left: auto;
   font-size: 36rpx;
   color: #1c7ddf;
+  font-weight: 600;
 }
 
 .staff-list .item .rate {

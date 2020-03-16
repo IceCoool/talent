@@ -18,7 +18,6 @@
       <view class="item" wx:for="{{item.children}}" wx:for-item="itemType" wx:key="index">
         <text class="item-title">{{itemType.cnname}}</text>
         <view class="item-list">
-          <text class="label {{selJob.itemCode == ''?'on':''}}" data-code="" bindtap="goBack">不限</text>
           <text class="label {{selJob.itemCode == jobItem.itemCode?'on':''}}" wx:for="{{itemType.children}}" wx:for-item="jobItem" data-code="{{jobItem.itemCode}}" data-name="{{jobItem.cnname}}" bindtap="onChange" wx:key="index">{{jobItem.cnname}}</text>
         </view>
       </view>

@@ -97,7 +97,7 @@
 .fil-mod .item-list .label {
   margin: 24rpx 20rpx 0 0;
   padding: 0 15rpx;
-  width: 30%;
+  width: 31%;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -112,13 +112,17 @@
   border: 1px solid transparent;
 }
 
+.fil-mod .item-list .label:nth-of-type(3n) {
+  margin-right: 0;
+}
+
 .fil-mod .item-list .label.on {
   background: #e6f0ff;
   border-color: #4b9ae8;
   color: #4b9ae8;
 }
 
-.fil-mod .item-list .custom{
+.fil-mod .item-list .custom {
   margin: 24rpx 20rpx 0 0;
   display: flex;
   align-items: center;
@@ -127,7 +131,7 @@
   color: #939393;
 }
 
-.item-list .custom .inp{
+.item-list .custom .inp {
   width: 200rpx;
   height: 64rpx;
   line-height: 64rpx;
@@ -135,17 +139,19 @@
   border-radius: 8rpx;
   text-align: center;
 }
+
 .oper-btns {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 30rpx 20rpx;
+  padding: 20rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background: #fff; */
+  background: #fff;
   z-index: 9;
+  box-shadow: 0px -8rpx 12rpx 0px rgba(33, 113, 191, 0.1);
 }
 
 .oper-btns .btn {
@@ -173,7 +179,7 @@
   /* border: 1px solid rgba(75, 154, 232, 1); */
 }
 
-.oper-btns .sure.forbid{
+.oper-btns .sure.forbid {
   background: #e5e5e5;
   border-color: #e5e5e5;
   box-shadow: none;
@@ -187,23 +193,26 @@
 
 .van-index-bar__sidebar {
   top: 60% !important;
-  right: 36rpx !important;
+  right: 22rpx !important;
   color: #ccc;
 }
-.placeholder{
+
+.placeholder {
   font-size: 24rpx;
 }
-.search-list{
-  padding: 0 40rpx;
+
+.search-list {
+  padding: 0 30rpx;
   position: absolute;
   left: 0;
-  width: 100%;
-  background: #fff;
+  width: calc(100% - 80rpx);
+  background: #f8f8f8;
   z-index: 9;
   box-sizing: border-box;
-  box-shadow: 0px 4rpx 20rpx 4rpx rgba(75,154,232,0.16);
+  margin: 8rpx 40rpx;
+  border-radius: 12rpx;
 }
-.search-list .search-item{
+
+.search-list .search-item {
   line-height: 80rpx;
-  border-bottom: 1px solid #e8e8e8;
 }
