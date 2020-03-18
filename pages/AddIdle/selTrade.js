@@ -14,6 +14,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let selTrade = options.selTrade ? JSON.parse(options.selTrade) : [];
+    let tradeCode = options.tradeCode ? JSON.parse(options.tradeCode) : [];
+    this.setData({
+      selTrade,
+      tradeCode
+    })
     wx.showLoading()
     IdleHttp.request('/mobileapi/dictionary/topic', {
       topic: 'INDUSTRY_EXPERIENCE'

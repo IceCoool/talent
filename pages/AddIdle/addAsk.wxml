@@ -36,7 +36,7 @@
     <view class="item-list">
       <text class="label {{tradeCode.length == 0?'on':''}}" bindtap="clearCode">不限</text>
       <text class="label {{utils.checkBoxStatus(tradeCode,item.itemCode)?'on':''}}" wx:for="{{tradeList}}" wx:key="*this" data-code="{{item.itemCode}}" data-name="{{item.cnname}}" bindtap="selTrage">{{item.cnname}}</text>
-      <navigator class="label" url="/pages/AddIdle/selTrade">其他</navigator>
+      <text class="label" bindtap="goTrade">其他</text>
     </view>
   </view>
   <view class="item">

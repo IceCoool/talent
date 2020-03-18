@@ -150,6 +150,13 @@ Page({
       })
     }
   },
+  goTrade(){
+    let selTrade = JSON.stringify(this.data.selTrade)
+    let tradeCode = JSON.stringify(this.data.tradeCode)
+    wx.navigateTo({
+      url: `/pages/AddIdle/selTrade?selTrade=${selTrade}&tradeCode=${tradeCode}`,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

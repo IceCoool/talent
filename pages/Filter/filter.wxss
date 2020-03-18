@@ -56,6 +56,10 @@
   margin-left: auto;
   color: #ccc;
   font-size: 28rpx;
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
 }
 
 .fil-mod .local {
