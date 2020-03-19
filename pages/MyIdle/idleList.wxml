@@ -8,7 +8,7 @@
     <text class="txt">查看需求下的最新简历</text>
   </view>
 </view>
-<view class="container idle-list" wx:if="{{requsetList.length > 0}}">
+<view class="container idle-list" wx:if="{{requsetList && requsetList.length > 0}}">
   <view class="boxSh item-job" wx:for="{{requsetList}}" wx:key="index">
     <view class="job-name">
       <text>{{item.postType}}</text>
@@ -39,6 +39,10 @@
       </navigator>
     </view>
   </view>
+</view>
+<view class="empty-box" wx:if="{{requsetList && requsetList.length == 0}}" style="padding-top: 100rpx;">
+  <image src="/images/empty.png"></image>
+  <text class="Mtp20">抱歉没有找到相关内容~</text>
 </view>
 <view class="oper-btns">
   <navigator class="btn sure" url="/pages/AddIdle/addAsk">添加新需求</navigator>

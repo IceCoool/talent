@@ -118,7 +118,7 @@ Page({
   // 创建需求
   cerateRequest() {
     if (this.data.postType == '' || this.data.projectCycleCode == '') {
-      return
+      return;
     } else {
       let user = this.data.user;
       let buidParam = {};
@@ -140,6 +140,7 @@ Page({
             title: '创建成功',
             icon: 'none'
           })
+          this.reloadPrev()
           wx.navigateBack()
         } else {
           wx.showToast({
@@ -156,6 +157,11 @@ Page({
     wx.navigateTo({
       url: `/pages/AddIdle/selTrade?selTrade=${selTrade}&tradeCode=${tradeCode}`,
     })
+  },
+  reloadPrev(){
+    let pages = getCurrentPages();
+    let prevPage = pages[pages.length - 2];
+    prevPage.onLoad();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

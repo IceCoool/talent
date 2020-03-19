@@ -1,5 +1,5 @@
 <wxs module="utils" src="../../utils/utils.wxs"></wxs>
-<view class="container idle-list" style="position: static;" wx:if="{{requsetList.length > 0}}">
+<view class="container idle-list" style="position: static;" wx:if="{{requsetList && requsetList.length > 0}}">
   <view class="boxSh item-job {{utils.checkBoxStatus(selId,item.requireId)?'on':''}}" wx:for="{{requsetList}}" wx:key="index">
     <view class="item-top">
       <view class="lf Mrt20">
@@ -38,7 +38,11 @@
     </view>
   </view>
 </view>
-<view class="oper-btns">
+<view class="empty-box" wx:if="{{requsetList && requsetList.length == 0}}" style="padding-top: 200rpx;">
+  <image src="/images/empty.png"></image>
+  <text class="Mtp20">抱歉没有找到相关内容~</text>
+</view>
+<view class="oper-btns" wx:if="{{requsetList && requsetList.length > 0}}">
   <text class="btn clear" bindtap="clear">取消</text>
   <text class="btn sure" bindtap="showDialog">删除</text>
 </view>

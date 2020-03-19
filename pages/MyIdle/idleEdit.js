@@ -21,13 +21,14 @@ Page({
     })
     wx.showLoading()
     IdleHttp.request('/mobileapi/requirement/queryMobileRequirementList', {
-      // creatorJfid: this.data.user.jfId
-      creatorJfid: 2346870110
+      creatorJfid: this.data.user.jfId
+      // creatorJfid: 2346870110
     }).then(res => {
       if (res.data.responseHeader.code == 200) {
-        wx.hideLoading()
+        wx.hideLoading();
+        let list = res.data.data.totalCount == 0 ? [] : res.data.data.list;
         this.setData({
-          requsetList: res.data.data.list
+          requsetList: list
         })
       } else {
         wx.showToast({
@@ -55,7 +56,7 @@ Page({
     })
   },
   remove() {
-    wx.showLoading()
+    wx.showLoading();
     IdleHttp.request('/mobileapi/requirement/deleteRequirement', {
       ids: this.data.selId.join(',')
     }).then(res => {
@@ -65,9 +66,12 @@ Page({
           icon: 'none'
         })
         this.setData({
-          show: false
+          show: false,
+          selId: []
         })
-        this.onLoad()
+        setTimeout(() => {
+          this.onLoad();
+        }, 500)
       } else {
         wx.showToast({
           title: res.data.responseHeader.message,
